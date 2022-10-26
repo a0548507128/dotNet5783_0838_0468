@@ -1,8 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Transactions;
-namespace stage0
+namespace Stage0
 {
-     partial class program
+     partial class Program
     {
         static void Main(string[] args)
         {
