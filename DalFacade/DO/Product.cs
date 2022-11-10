@@ -4,7 +4,7 @@ namespace DO;
 public struct Product
 {
     public int ID { get; set; }
-    public int Name { get; set; }
+    public string Name { get; set; }
     public int Price { get; set; }
     public int Category { get; set; }
     public int InStock { get; set; }

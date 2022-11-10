@@ -8,12 +8,12 @@ namespace DO;
 public struct Order
 {
     public int ID { get; set; }
-    public int CustomerName { get; set; }
-    public int CustomerEmail { get; set; }
-    public int CustomerAdress { get; set; }
-    public int OrderDate { get; set; }
-    public int ShipDate { get; set; }
-    public int DeliveryrDate { get; set; }
+    public string CustomerName { get; set; }
+    public string CustomerEmail { get; set; }
+    public string CustomerAdress { get; set; }
+    public DateTime OrderDate { get; set; }
+    public DateTime ShipDate { get; set; }
+    public DateTime DeliveryrDate { get; set; }
 
     public override string ToString() => $@"
         Order ID={ID},
