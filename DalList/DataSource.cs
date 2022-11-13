@@ -60,7 +60,7 @@ static internal class DataSource
 
     #region initialize
     static private void s_Initialize(){
-
+         
     }
     #endregion
     #region config
