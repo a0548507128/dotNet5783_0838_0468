@@ -60,19 +60,19 @@ static internal class DataSource
 
     #region initialize
     static private void s_Initialize(){
-        //intilialize of users
-        (string, string, string)[] users = { 
-            ("avi", "avi@gmail", "amaram gaon"), 
-            ("avigail", "avigail@gmail", "kordovero-3"),
-            ("shira", "shira@gmail", "nachal shacham-9") };
-        //intilialize of products (10)
-        (string, double, Category, int)[] products = { 
-            ("rabit", 55, Enums.Category.Rodents, 80),
-        };
-        for(int i=0; i<20; i++)
-        {
+        ////intilialize of users
+        //(string, string, string)[] users = { 
+        //    ("avi", "avi@gmail", "amaram gaon"), 
+        //    ("avigail", "avigail@gmail", "kordovero-3"),
+        //    ("shira", "shira@gmail", "nachal shacham-9") };
+        ////intilialize of products (10)
+        //(string, double, Category, int)[] products = { 
+        //    ("rabit", 55, Enums.Category.Rodents, 80),
+        //};
+        //for(int i=0; i<20; i++)
+        //{
 
-        }
+        //}
         AddProduct("rabbit", 55, Category.Reptiles, 80);     
         AddProduct("small notebook", 30, Category.Reptiles, 0);       
         AddProduct("campuse notebook",67, Category.Reptiles, 35);      
