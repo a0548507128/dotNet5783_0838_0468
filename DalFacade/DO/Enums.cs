@@ -5,8 +5,8 @@ public struct Enums
 {
     public enum Category
     {
-        Rodents,
-        Reptiles,
+        Rodents, //מכרסמים
+        Reptiles, //זוחלים
         CatsAndDogs,
         Birds,
         Fish

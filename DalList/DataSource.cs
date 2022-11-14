@@ -7,6 +7,7 @@ namespace Dal;
 
 static internal class DataSource
 {
+    public static void Debug() { }
     static DataSource()
     {
         s_Initialize();
@@ -44,6 +45,17 @@ static internal class DataSource
         };
         Config._orderIndex++;
     }
+    static private void AddOrder(string CustomerName, string CustomerEmail, string CustomerAdress)
+    {
+        DateTime _today = DateTime.Now;
+        int daysAgo = new Random().Next(600);
+        DateTime NewOrderDate = _today.AddDays(-daysAgo);
+        int daysbetweenOrderToShip = new Random().Next(10);
+        DateTime newShipDate = NewOrderDate.AddDays(daysbetweenOrderToShip);
+        int daysbetweenDeliveryToShip = new Random().Next(7);
+        DateTime newDeliveryDate = newShipDate.AddDays(daysbetweenDeliveryToShip);
+        AddOrder(CustomerName, CustomerEmail, CustomerAdress, NewOrderDate, newShipDate, newDeliveryDate);
+    }
     static private void AddOrderItem(int ProductID, int OrderID, double Price, int Amount){
         OrderItems[Config._orderIndex] = new OrderItem()
         {
@@ -57,86 +69,107 @@ static internal class DataSource
 
     }
     #endregion
-
     #region initialize
     static private void s_Initialize(){
-        //////intilialize of users
-        ////(string, string, string)[] users = { 
-        ////    ("avi", "avi@gmail", "amaram gaon"), 
-        ////    ("avigail", "avigail@gmail", "kordovero-3"),
-        ////    ("shira", "shira@gmail", "nachal shacham-9") };
-        //////intilialize of products (10)
-        ////(string, double, Category, int)[] products = { 
-        ////    ("rabit", 55, Enums.Category.Rodents, 80),
-        ////};
-        ////for(int i=0; i<20; i++)
-        ////{
+        #region AddProduct
+        AddProduct("rabbit", 55, Category.Rodents, 80);//100000
+        AddProduct("hamster", 20, Category.Rodents, 50);//100001
+        AddProduct("snake", 60, Category.Reptiles, 35);//100002
+        AddProduct("turtle", 15, Category.Reptiles, 20);//100003
+        AddProduct("poodle dog", 9500, Category.CatsAndDogs, 20);//100004
+        AddProduct("Russian blue cat", 1200, Category.CatsAndDogs, 40);//100005
+        AddProduct("gold fish", 10, Category.Fish, 30);//100006
+        AddProduct("fighting fish", 17, Category.Fish, 0);//100007
+        AddProduct("Cockatiel parrot", 110, Category.Birds, 12);//100008
+        AddProduct("Jaco parrot",3000, Category.Birds, 6);//100009
+        #endregion
+        #region AddOrder
+        Random rnd = new Random();
+        AddOrder("Avi", "avi@gmail", "amaram gaon", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        AddOrder("Shira", "shira137@gmail", "nachal shacham");
+        AddOrder("Tamar", "tamar@gmail", "nachal micha");
+        AddOrder("Netanel", "n6517@gmail", "kordovaro");
+        AddOrder("Asher", "a123@gmail", "nachal shacham", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        AddOrder("Shira", "shira137@gmail", "nachal shacham", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        AddOrder("Avi", "avi@gmail", "amaram gaon");
+        AddOrder("Netanel", "n6517@gmail", "kordovaro", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        AddOrder("Asher", "a123@gmail", "nachal shacham");
+        AddOrder("Tamar", "tamar@gmail", "nachal micha", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        AddOrder("Avi", "avi@gmail", "amaram gaon", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        AddOrder("Shira", "shira137@gmail", "nachal shacham");
+        AddOrder("Tamar", "tamar@gmail", "nachal micha");
+        AddOrder("Netanel", "n6517@gmail", "kordovaro");
+        AddOrder("Asher", "a123@gmail", "nachal shacham", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        AddOrder("Shira", "shira137@gmail", "nachal shacham", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        AddOrder("Avi", "avi@gmail", "amaram gaon");
+        AddOrder("Netanel", "n6517@gmail", "kordovaro", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        AddOrder("Asher", "a123@gmail", "nachal shacham");
+        AddOrder("Tamar", "tamar@gmail", "nachal micha", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        #endregion
+        #region  AddOrderItem
+        AddOrderItem(100000, 1, 55, 2);
+        AddOrderItem(100001, 1, 20, 3);
+        AddOrderItem(100006, 1, 10, 5);
 
-        ////}
-        //AddProduct("rabbit", 55, Category.Reptiles, 80);     
-        //AddProduct("small notebook", 30, Category.Reptiles, 0);       
-        //AddProduct("campuse notebook",67, Category.Reptiles, 35);      
-        //AddProduct("rabbit", 55, Category.Reptiles, 80);     
-        //AddProduct("small notebook", 30, Category.Reptiles, 0);       
-        //AddProduct("campuse notebook", 67, Category.Reptiles, 35);      
-        //AddProduct("rabbit", 55, Category.Reptiles, 80);     
-        //AddProduct("small notebook", 30, Category.Reptiles, 0);       
-        //AddProduct("campuse notebook", 67, Category.Reptiles, 35);      
-        //AddProduct("rabbit", 55, Category.Reptiles, 80);     
-        //AddProduct("small notebook", 30, Category.Reptiles, 0);       
-        //AddProduct("campuse notebook", 67, Category.Reptiles, 35);
+        AddOrderItem(100004, 2, 9500, 2);
 
-        //////  addNewOrder()
-        ////AddOrder(100000, 200001, 6.9, 3,DeliveryrDate,h);
-        ////AddOrder(100002, 200001, 5.9, 1);
-        ////AddOrder(100009, 200001, 7, 7);
-        ////AddOrder(100010, 200001, 9.5, 2);
+        AddOrderItem(100002, 3, 60, 1);
 
-        ////AddOrder(100000, 200002, 6.9, 3);
-        ////AddOrder(100002, 200002, 5.9, 1);
-        ////AddOrder(100003, 200002, 4.9, 1);
-        ////AddOrder(100004, 200002, 9.9, 2);
+        AddOrderItem(100000, 4, 55, 1);
+        AddOrderItem(100003, 4, 15, 3);
+        AddOrderItem(100008, 4, 110, 1);
+        AddOrderItem(100001, 4, 20, 3);
 
-        ////AddOrder(100007, 200003, 6.9, 3);
-        ////AddOrder(100002, 200003, 5.9, 1);
-        ////AddOrder(100005, 200003, 5.6, 3);
-        ////AddOrder(100008, 200003, 17, 2);
+        AddOrderItem(100005, 5, 100005, 1);
 
-        ////AddOrder(100000, 200004, 6.9, 3);
-        ////AddOrder(100002, 200004, 5.9, 1);
-        ////AddOrder(100009, 200004, 7, 7);
-        ////AddOrder(100010, 200004, 9.5, 2);
+        AddOrderItem(100004, 6, 9500, 1);
+        AddOrderItem(100008, 6, 110, 1);
 
-        ////AddOrder(100000, 200005, 6.9, 3);
-        ////AddOrder(100002, 200005, 5.9, 1);
-        ////AddOrder(100003, 200005, 4.9, 1);
-        ////AddOrder(100004, 200005, 9.9, 2);
+        AddOrderItem(100000, 7, 55, 2);
+        AddOrderItem(100001, 7, 20, 3);
+        AddOrderItem(100006, 7, 10, 5);
 
-        ////AddOrder(100007, 200006, 6.9, 3);
-        ////AddOrder(100002, 200006, 5.9, 1);
-        ////AddOrder(100005, 200006, 5.6, 3);
-        ////AddOrder(100008, 200006, 17, 2);
+        AddOrderItem(100004, 8, 9500, 2);
 
-        ////AddOrder(100000, 200007, 6.9, 3);
-        ////AddOrder(100002, 200007, 5.9, 1);
-        ////AddOrder(100009, 200007, 7, 7);
-        ////AddOrder(100010, 200007, 9.5, 2);
+        AddOrderItem(100002, 9, 60, 1);
 
-        ////AddOrder(100000, 200008, 6.9, 3);
-        ////AddOrder(100002, 200008, 5.9, 1);
-        ////AddOrder(100003, 200008, 4.9, 1);
-        ////AddOrder(100004, 200008, 9.9, 2);
+        AddOrderItem(100000, 10, 55, 1);
+        AddOrderItem(100003, 10, 15, 3);
+        AddOrderItem(100008, 10, 110, 1);
+        AddOrderItem(100001, 10, 20, 3);
 
-        ////AddOrder(100007, 200009, 6.9, 3);
-        ////AddOrder(100002, 200009, 5.9, 1);
-        ////AddOrder(100005, 200009, 5.6, 3);
-        ////AddOrder(100008, 200009, 17, 2);
+        AddOrderItem(100005, 11, 100005, 1);
 
-        ////AddOrder(100000, 200010, 6.9, 3);
-        ////AddOrder(100002, 200010, 5.9, 1);
-        ////AddOrder(100009, 200010, 7, 7);
-        ////AddOrder(100010, 200010, 9.5, 2);
+        AddOrderItem(100000, 12, 55, 1);
+        AddOrderItem(100003, 12, 15, 3);
+        AddOrderItem(100008, 12, 110, 1);
+        AddOrderItem(100001, 12, 20, 3);
 
+        AddOrderItem(100000, 13, 55, 2);
+        AddOrderItem(100001, 13, 20, 3);
+        AddOrderItem(100006, 13, 10, 5);
+
+        AddOrderItem(100004, 14, 9500, 2);
+
+        AddOrderItem(100002, 15, 60, 1);
+
+        AddOrderItem(100000, 16, 55, 1);
+        AddOrderItem(100003, 16, 15, 3);
+        AddOrderItem(100008, 16, 110, 1);
+        AddOrderItem(100001, 16, 20, 3);
+
+        AddOrderItem(100005, 17, 100005, 1);
+
+        AddOrderItem(100004, 18, 9500, 1);
+        AddOrderItem(100008, 18, 110, 1);
+
+
+        AddOrderItem(100004, 19, 9500, 1);
+        AddOrderItem(100008, 19, 110, 1);
+
+        AddOrderItem(100004, 20, 9500, 1);
+        AddOrderItem(100008, 20, 110, 1);
+        #endregion
     }
     #endregion
     #region config
@@ -147,7 +180,7 @@ static internal class DataSource
         static internal int _orderItemIndex = 0;
         
         static private int _numOfProduct = 100000;
-        static private int _numOfOrder = 0;
+        static private int _numOfOrder = 1;
         static private int _numOfOrderItem = 0;
         static public int NumOfProduct { get { return _numOfProduct++; } }
         static public int NumOfOrder { get { return _numOfOrder++; } }
