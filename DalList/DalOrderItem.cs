@@ -1,19 +1,19 @@
-﻿
+﻿using DalApi;
 using DO;
 using static Dal.DataSource;
 
 namespace Dal;
 
-public class DalOrderItem
+internal class DalOrderItem:IOrderItem
 {
 
-    public int addOrderItem(OrderItem _o)
+    public int Add(OrderItem _o)
     {
         _o.ID = Config.NumOfOrderItem;
-        OrderItems[Config._orderItemIndex] = _o;
+        OrderItems.Add(_o);
         return _o.ID;
     }
-    public OrderItem GetOrderItem(int IdNum)
+    public OrderItem Get(int IdNum)
     {
 
         foreach (OrderItem o in OrderItems)
@@ -23,16 +23,15 @@ public class DalOrderItem
         }
         throw new Exception("this order-item does not exist");
     }
-    public OrderItem[] getAllOrderItems()
+    public List<OrderItem> getAllOrderItems()
     {
-        OrderItem[] _allOrderItems = new OrderItem[Config._orderItemIndex];
-        for (int i = 0; i < Config._orderItemIndex; i++)
+        List<OrderItem> _allOrderItems = new List<OrderItem>();
+        for (int i = 0; i < OrderItems.Count; i++)
         {
-            _allOrderItems[i] = _allOrderItems[i];
+            _allOrderItems[i] = OrderItems[i];
         }
         return _allOrderItems;
     }
-
     public OrderItem getOrderItemByPIDOID(int pid,int oid)
     {
         foreach(OrderItem o in OrderItems)
@@ -42,10 +41,10 @@ public class DalOrderItem
         }
         throw new Exception("this orderitem doesn't exist");
     }
-    public OrderItem[] getOrderItemByOrder(int oid) 
+    public List<OrderItem> getOrderItemByOrder(int oid) 
     {
         int j = 0;
-        OrderItem[] allOrderItems=new OrderItem[Config._orderItemIndex];
+       List<OrderItem> allOrderItems= new List<OrderItem>();
         foreach (OrderItem o in OrderItems)
         {
             if (o.OrderID == oid)
@@ -53,27 +52,26 @@ public class DalOrderItem
         }
         return allOrderItems;
     }
-    public void deleteOrderItem(int IdNum)
+    public void Delete(int IdNum)
     {
-        for (int i = 0; i < Config._orderItemIndex; i++)
+        for (int i = 0; i < OrderItems.Count; i++)
         {
             if (OrderItems[i].ID == IdNum)
             {
-                OrderItems[i] = OrderItems[Config._orderItemIndex - 1];
+                OrderItems.RemoveAt(IdNum);
                 return;
             }
         }
         throw new Exception("this order-item doesn't exist");
     }
-
-    public void updateOrderItem(OrderItem upOrderItem)
+    public int Update(OrderItem upOrderItem)
     {
-        for (int i = 0; i < Config._orderItemIndex; i++)
+        for (int i = 0; i < OrderItems.Count; i++)
         {
             if (OrderItems[i].ID == upOrderItem.ID)
             {
                 OrderItems[i] = upOrderItem;
-                return;
+                return upOrderItem.ID;
             }
         }
         throw new Exception("this order-item doesn't exist");

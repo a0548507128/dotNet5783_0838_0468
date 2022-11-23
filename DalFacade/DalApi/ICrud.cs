@@ -9,9 +9,9 @@ namespace DalApi
 {
     public interface ICrud<T>
     {
-        public T Add (T IdAdd);
-        public T Update (T IdUpdate);
-        public T Delete (T IdDelete);
+        public int Add (T IdAdd);
+        public int Update (T IdUpdate);
+        public void Delete (int IdDelete);
         public T Get (int IdGet);
 
     }

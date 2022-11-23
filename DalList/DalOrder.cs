@@ -1,19 +1,19 @@
-﻿
+﻿using DalApi;
 using DO;
 using static Dal.DataSource;
 
 namespace Dal;
 
-public class DalOrder
+internal class DalOrder:IOrder
 {
 
-    public int addOrder(Order _o)
+    public int Add(Order _o)
     {
         _o.ID = Config.NumOfOrder;
-        Orders[Config._orderIndex] = _o;
+        Orders.Add(_o);
         return _o.ID;
     }
-    public Order getOrder(int IdNum)
+    public Order Get(int IdNum)
     {
 
         foreach (Order o in Orders)
@@ -23,36 +23,36 @@ public class DalOrder
         }
         throw new Exception("this order does not exist");
     }
-    public Order[] getAllOrders()
+    public List<Order> getAllOrders()
     {
-        Order[] _allOrders = new Order[Config._orderIndex];
-        for (int i = 0; i < Config._orderIndex; i++)
+        List<Order> _allOrders = new List<Order>();
+        for (int i = 0; i < Orders.Count; i++)
         {
             _allOrders[i] = Orders[i];
         }
         return _allOrders;
     }
-    public void deleteOrders(int IdNum)
+    public void Delete(int IdNum)
     {
-        for (int i = 0; i < Config._orderIndex; i++)
+        for (int i = 0; i < Orders.Count; i++)
         {
             if (Orders[i].ID == IdNum)
             {
-                Orders[i] = Orders[Config._orderIndex - 1];
+                Orders.RemoveAt(IdNum);
                 return;
             }
         }
         throw new Exception("this order doesn't exist");
     }
 
-    public void updateOrder(Order upOrder)
+    public int Update(Order upOrder)
     {
-        for (int i = 0; i < Config._orderIndex; i++)
+        for (int i = 0; i < Orders.Count; i++)
         {
             if (Orders[i].ID == upOrder.ID)
             {
                 Orders[i] = upOrder;
-                return;
+                return upOrder.ID;
             }
         }
         throw new Exception("this order doesn't exist");

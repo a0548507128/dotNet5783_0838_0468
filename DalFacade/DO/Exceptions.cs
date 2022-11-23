@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalApi
+namespace DO
 {
     internal class EntityNotFound
     {
@@ -12,5 +12,6 @@ namespace DalApi
     }
     internal class DuplicateID
     {
+
     }
 }

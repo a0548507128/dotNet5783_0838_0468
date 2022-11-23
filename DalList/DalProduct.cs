@@ -1,19 +1,20 @@
-﻿using DO;
+﻿using DalApi;
+using DO;
 using System;
+using System.Collections.Immutable;
 
 namespace Dal;
 using static DataSource;
-public class DalProduct
+internal class DalProduct:IProduct
 {
-    public int addProduct(Product _p)
+    public int Add(Product _p)
     {
         _p.ID = Config.NumOfProduct;
-        Products[Config._productIndex] = _p;
+        Products.Add(_p);
         return _p.ID;
     }
-    public Product getProduct(int IdNum)
+    public Product Get(int IdNum)
     {
-
         foreach (Product p in Products)
         {
             if (p.ID == IdNum)
@@ -21,36 +22,32 @@ public class DalProduct
         }
         throw new Exception("this product does not exist");
     }
-    public Product[] getAllProduct()
+    public List<Product> getAllProduct()
     {
-        Product[] _allProducts = new Product[DataSource.Config._productIndex];
-        for (int i = 0; i < Config._productIndex; i++)
-        {
-            _allProducts[i] = Products[i];
-        }
+        List<Product> _allProducts = new List<Product>();
+        _allProducts = Products;
         return _allProducts;
     }
-    public void deleteProduct(int IdNum)
+    public void Delete(int IdNum)
     {
-        for (int i = 0; i < Config._productIndex; i++)
+        for (int i = 0; i < Products.Count; i++)
         {
             if (Products[i].ID == IdNum)
             {
-                Products[i] = Products[Config._productIndex - 1];
+                Products.RemoveAt(IdNum);
                 return;
             }
         }
         throw new Exception("this item doesn't exist");
     }
-
-    public void updateProduct(Product upProduct)
+    public int Update(Product upProduct)
     {
-        for (int i = 0; i < Config._productIndex; i++)
+        for (int i = 0; i < Products.Count; i++)
         {
             if (Products[i].ID == upProduct.ID)
             {
                 Products[i] = upProduct;
-                return;
+                return upProduct.ID;
             }
         }
         throw new Exception("this item doesn't exist");

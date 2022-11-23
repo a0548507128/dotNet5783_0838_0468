@@ -1,15 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DO;
 using Dal;
+using DalApi;
 
 namespace DalTest
 {
     public class Programm
     {
-        static private Product product = new Product();
-        static private Order order = new Order();
-        static private OrderItem orderItem = new OrderItem();
-
+        static private IEnumerable<Product> product = new List<Product> { };
+        static private IEnumerable<Order> order = new List<Order> { };
+        static private IEnumerable<OrderItem> orderItem = new List<OrderItem> { };
+        static private DalList ObjectDalList;
         public static void Main()
         {
 
@@ -95,7 +96,7 @@ namespace DalTest
                     product.InStock = parse;
                     try
                     {
-                        p.addProduct(product);
+                        p.Add(product);
                     }
                     catch (Exception e)
                     {
