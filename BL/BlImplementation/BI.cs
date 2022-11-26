@@ -1,13 +1,12 @@
-﻿using DO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalApi
+namespace BlImplementation
 {
-    public interface IOrderItem : ICrud<OrderItem>
+    internal class BI
     {
     }
 }

@@ -24,9 +24,4 @@
     <ProjectReference Include="..\DalList\DalList.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BLApi\" />
-    <Folder Include="BlImplementation\" />
-  </ItemGroup>
-
 </Project>
