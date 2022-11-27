@@ -19,8 +19,9 @@ public class Enums
 
     public enum EStatus
     {
-        Done,
-        Sent,
-        Provided
+        Done,//אושר
+        Sent,//נשלח
+        Provided//סופק
     };
+   
 }

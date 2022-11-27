@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace DO
-{
-    internal class EntityNotFound
+namespace DO;
+
+public class EntityNotFound:Exception
+{ 
+    public string RequestedItemNotFound { get; set; }
+
+    public EntityNotFound(string msg) : base(msg)
     {
-
     }
-    internal class DuplicateID
-    {
+}
+public class DuplicateID:Exception
+{
+    public string ItemAlreadyExists { get; set; }
 
+    public DuplicateID(string msg) : base(msg)
+    {
     }
 }

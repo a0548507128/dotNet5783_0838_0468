@@ -16,7 +16,7 @@ internal class Product : BlApi.IProduct
     private IDal dal = new DalList();
     public IEnumerable<BO.ProductForList> GetProductsList()
     {
-        IEnumerable<DO.Product> dalProductsList = Dal.DalProduct.getAllProduct();
+        IEnumerable<DO.Product> dalProductsList = dal.Product.getAllProduct();
         List<BO.ProductForList> blProductsList = new List<BO.ProductForList>();
         foreach (DO.Product productDal in dalProductsList)
         {
@@ -38,7 +38,7 @@ internal class Product : BlApi.IProduct
             DO.Product dalProduct = new DO.Product();
             try
             {
-                dalProduct = Dal.DalProduct.Get(productID);
+                dalProduct = dal.Product.Get(productID);
             }
             catch (DO.EntityNotFound e)
             {
@@ -64,7 +64,7 @@ internal class Product : BlApi.IProduct
             DO.Product productDal = new DO.Product();
             try
             {
-                productDal = Dal.DalProduct.Get(productID);
+                productDal = dal.Product.Get(productID);
             }
             catch (DO.EntityNotFound e)
             {
@@ -72,7 +72,7 @@ internal class Product : BlApi.IProduct
             }
 
             int amountInCart = 0;
-            foreach (BO.OrderItem oi in BO.Cart.ItemList)
+            foreach (BO.OrderItem oi in c.ItemList)
             {
                 if (oi.ID == productID)
                 {
@@ -101,7 +101,7 @@ internal class Product : BlApi.IProduct
     {
         if (product.ID <= 0 || product.Name == "" || product.Price <= 0 || product.InStock < 0)
             throw new Exception();
-        DO.Product productDal = new DO.Product()
+        DO.Product dalProduct = new DO.Product()
         {
             ID = product.ID,
             Name = product.Name,
@@ -111,7 +111,7 @@ internal class Product : BlApi.IProduct
         };
         try
         {
-            Dal.DalProduct.Add(productDal);
+            dal.Product.Add(dalProduct);
         }
         catch (DO.EntityNotFound e)
         {
@@ -120,16 +120,15 @@ internal class Product : BlApi.IProduct
     }
     public void DeleteProductManager(int productID)
     {
-        IEnumerable<BO.Order> ordersList = BO.Order.GetOrders();//fix???
-        foreach (BO.Order order in ordersList)
+        IEnumerable<DO.OrderItem> ordersItemList = dal.OrderItem.getAllOrderItems();
+        foreach (DO.OrderItem orderItem in ordersItemList)
         {
-            foreach (BO.OrderItem oi in BO.Order.ItemList)
-                if (oi.ID == productID)
+                if (orderItem.ProductID == productID)
                     throw new Exception();
         }
         try
         {
-            Dal.DalProduct.Delete(productID);
+            dal.Product.Delete(productID);
         }
         catch (DO.EntityNotFound e)
         {
@@ -152,7 +151,7 @@ internal class Product : BlApi.IProduct
 
         try
         {
-            Dal.DalProduct.Update(productDal);
+            dal.Product.Update(productDal);
         }
         catch (DO.EntityNotFound e)
         {
