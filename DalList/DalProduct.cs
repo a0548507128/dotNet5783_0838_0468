@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 
 namespace Dal;
 using static DataSource;
-internal class DalProduct:IProduct
+public class DalProduct:IProduct
 {
     public int Add(Product _p)
     {
@@ -24,8 +24,7 @@ internal class DalProduct:IProduct
     }
     public List<Product> getAllProduct()
     {
-        List<Product> _allProducts = new List<Product>();
-        _allProducts = Products;
+        List<Product> _allProducts = Products;
         return _allProducts;
     }
     public void Delete(int IdNum)

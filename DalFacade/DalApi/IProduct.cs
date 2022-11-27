@@ -9,5 +9,6 @@ namespace DalApi
 {
     public interface IProduct : ICrud<Product>
     {
+        public List<Product> getAllProduct();
     }
 }
