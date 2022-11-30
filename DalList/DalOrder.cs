@@ -23,7 +23,7 @@ internal class DalOrder:IOrder
         }
         throw new Exception("this order does not exist");
     }
-    public List<Order> getAllOrders()
+    public IEnumerable<Order> GetAll(Func<Order?, bool>? func = null)
     {
         List<Order> _allOrders = new List<Order>();
         for (int i = 0; i < Orders.Count; i++)

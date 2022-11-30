@@ -12,8 +12,8 @@ namespace BO;
 public class OrderForList
 {
     public int OrderID { get; set; }
-    public string CustomerName { get; set; }
-    public EStatus Status { get; set; }
+    public string? CustomerName { get; set; }
+    public EStatus? Status { get; set; }
     public int AmountOfItem { get; set; }
     public double TotalSum { get; set; }
 

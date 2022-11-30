@@ -9,6 +9,6 @@ namespace DalApi
 {
     public interface IProduct : ICrud<Product>
     {
-        public List<Product> getAllProduct();
+        public IEnumerable<Product>? GetAll(Func<Product?, bool>? func = null);
     }
 }

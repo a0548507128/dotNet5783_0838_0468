@@ -124,7 +124,7 @@ namespace DalTest
                         break;
                     }
                 case 3:
-                    foreach (Product myProduct in IDalVariable.Product.getAllProduct())
+                    foreach (Product myProduct in IDalVariable.Product.GetAll())
                     {
                         Console.WriteLine(myProduct);//אולי צריך את toString??
                     }
@@ -226,7 +226,7 @@ namespace DalTest
                     break;
 
                 case 3:
-                    foreach (Order myOrder in IDalVariable.Order.getAllOrders())
+                    foreach (Order myOrder in IDalVariable.Order.GetAll())
                     {
                         Console.WriteLine(myOrder);
                     }
@@ -334,7 +334,7 @@ namespace DalTest
                     break;
 
                 case 3:
-                    foreach (OrderItem myOrderItem in IDalVariable.OrderItem.getAllOrderItems())
+                    foreach (OrderItem myOrderItem in IDalVariable.OrderItem.GetAll())
                     {
                         Console.WriteLine(myOrderItem);
                     }

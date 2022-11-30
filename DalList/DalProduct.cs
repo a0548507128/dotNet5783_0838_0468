@@ -22,7 +22,7 @@ public class DalProduct:IProduct
         }
         throw new Exception("this product does not exist");
     }
-    public List<Product> getAllProduct()
+    public IEnumerable<Product> GetAll(Func<Product?, bool>? func = null)
     {
         List<Product> _allProducts = Products;
         return _allProducts;

@@ -16,9 +16,9 @@ static internal class DataSource
     #region arrays of entities
     static internal readonly Random rand = new Random();
 
-    static internal List<Product> Products = new List<Product>();
-    static internal List<Order> Orders = new List<Order>();
-    static internal List<OrderItem> OrderItems = new List<OrderItem>();
+    static internal List<Product>? Products = new List<Product>();
+    static internal List<Order>? Orders = new List<Order>();
+    static internal List<OrderItem>? OrderItems = new List<OrderItem>();
 
     static private void AddProduct(string Name, double Price, Category Category, int InStock){
         Products.Add(new Product()

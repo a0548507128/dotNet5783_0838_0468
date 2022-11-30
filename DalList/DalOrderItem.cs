@@ -23,7 +23,7 @@ internal class DalOrderItem:IOrderItem
         }
         throw new Exception("this order-item does not exist");
     }
-    public List<OrderItem> getAllOrderItems()
+    public IEnumerable<OrderItem> GetAll(Func<OrderItem?, bool>? func = null)
     {
         List<OrderItem> _allOrderItems = new List<OrderItem>();
         for (int i = 0; i < OrderItems.Count; i++)

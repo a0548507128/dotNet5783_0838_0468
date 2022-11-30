@@ -10,8 +10,8 @@ namespace DalApi
 {
     public interface IOrder : ICrud<Order>
     {
-        public OrderItem getOrderItemByPIDOID(int pid, int oid);
-        public List<Order> getAllOrders();
+        
+        public IEnumerable<Order>? GetAll(Func<Order?, bool>? func = null);
         public int Add(Order _o);
         public Order Get(int IdNum);
         public void Delete(int IdNum);
