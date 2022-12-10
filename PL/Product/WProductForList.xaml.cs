@@ -22,7 +22,7 @@ namespace PL
     public partial class WProductForList : Window
     {
         private BlApi.IBl bl = new BlImplementation.Bl();
-
+             
         public WProductForList()
         {
            
@@ -33,8 +33,8 @@ namespace PL
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selector = AttributeSelector.SelectedItem.ToString();
-            //ListOfProduct1.ItemsSource = bl.Product.;
+            DO.Enums.Category selector = (DO.Enums.Category)AttributeSelector.SelectedItem;
+            ListOfProduct1.ItemsSource = bl.Product.GetProductsList((x)=> x!.Value.Category == selector);
 
         }
     }

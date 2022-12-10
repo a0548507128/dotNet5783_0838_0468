@@ -8,7 +8,7 @@ internal class Order : BlApi.IOrder
 {
     private IDal dal = new DalList();
 
-    public IEnumerable<BO.OrderForList> GetOrderList(Func<DO.Order, bool>? predict = null)
+    public IEnumerable<BO.OrderForList> GetOrderList(Func<DO.Order?, bool>? predict = null)
     {
         IEnumerable<DO.Order?> orderList = new List<DO.Order?>();
         List<BO.OrderForList> ordersForList = new List<BO.OrderForList>();
@@ -16,15 +16,17 @@ internal class Order : BlApi.IOrder
         //IEnumerable<BO.OrderTracking> orderTracking = new List<BO.OrderTracking>();
         foreach (var item in orderList)
         {
-            ordersForList.Add(new BO.OrderForList()
+            if (item != null)
             {
-                OrderID = item.ID,
-                CustomerName = item.CustomerName,
-                Status = CheckStatus(item.OrderDate, item.ShipDate, item.DeliveryrDate),
-                AmountOfItem = GetAmountItems(item.ID),
-                TotalSum = CheckTotalSum(item.ID)
-            });
-
+                ordersForList.Add(new BO.OrderForList()
+                {
+                    OrderID = item.Value.ID,
+                    CustomerName = item.Value.CustomerName,
+                    Status = CheckStatus(item?.OrderDate, item?.ShipDate, item?.DeliveryrDate),
+                    AmountOfItem = GetAmountItems(item.Value.ID),
+                    TotalSum = CheckTotalSum(item.Value.ID)
+                });
+            }
         }
         return ordersForList;
     }
@@ -142,19 +144,19 @@ internal class Order : BlApi.IOrder
             case EStatus.Done:
                 ((List<BO.OrderTracking.StatusAndDate>)(orderTracking.listOfStatus)).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = o.OrderDate,
+                    Date = (DateTime)o.OrderDate,
                     Status = BO.Enums.EStatus.Done
                 });
                 break;
             case EStatus.Sent:
                 ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = o.OrderDate,
+                    Date = (DateTime)o.OrderDate,
                     Status = BO.Enums.EStatus.Done
                 });
                 ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = o.ShipDate,
+                    Date = (DateTime)o.ShipDate,
                     Status = BO.Enums.EStatus.Sent
 
                 });
@@ -162,18 +164,18 @@ internal class Order : BlApi.IOrder
             case EStatus.Provided:
                 ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = o.OrderDate,
+                    Date = (DateTime)o.OrderDate,
                     Status = BO.Enums.EStatus.Done
                 });
                 ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = o.ShipDate,
+                    Date = (DateTime)o.ShipDate,
                     Status = BO.Enums.EStatus.Sent
 
                 });
                 ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = o.DeliveryrDate,
+                    Date = (DateTime)o.DeliveryrDate,
                     Status = BO.Enums.EStatus.Provided
 
                 });
@@ -202,7 +204,7 @@ internal class Order : BlApi.IOrder
         };
         return newOrder;
     }
-    public EStatus CheckStatus(DateTime OrderDate, DateTime ShipDate, DateTime DeliveryDate)
+    public EStatus CheckStatus(DateTime? OrderDate, DateTime? ShipDate, DateTime? DeliveryDate)
     {
         DateTime today = DateTime.Now;
         if (today.Equals(OrderDate) && today.Equals(ShipDate) && today.Equals(DeliveryDate))
@@ -219,7 +221,8 @@ internal class Order : BlApi.IOrder
         int sum = 0;
         foreach (var item in orderItemList)
         {
-            sum += item.Amount;
+            if (item != null)
+                sum += item.Value.Amount;
         }
         return sum;
 
@@ -231,7 +234,8 @@ internal class Order : BlApi.IOrder
         double sum = 0;
         foreach (var item in orderItemList)
         {
-            sum = sum + item.Price * item.Amount;
+            if(item != null)
+                sum = sum + item.Value.Price * item.Value.Amount;
         }
         return sum;
     }
@@ -246,11 +250,11 @@ internal class Order : BlApi.IOrder
             BOorderItemList.Add(new BO.OrderItem()
             {
                 numInOrder = count++,
-                ID = item.ID,
-                Name = getOrderItemName(item.ProductID),
-                Price = item.Price,
-                Amount = item.Amount,
-                sumItem = item.Price * item.Amount
+                ID = item.Value.ID,
+                Name = getOrderItemName(item.Value.ProductID),
+                Price = item.Value.Price,
+                Amount = item.Value.Amount,
+                sumItem = item.Value.Price * item.Value.Amount
 
             });
         }

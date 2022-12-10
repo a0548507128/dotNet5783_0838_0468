@@ -23,25 +23,18 @@ public class DalProduct:IProduct
         }
         throw new Exception("this product does not exist");
     }
-    public IEnumerable<Product?> GetAll(Func<Product?, bool>? predict =null)
+    public IEnumerable<Product?> GetAll(Predicate<Product?>? predict = null)
     {
         List<Product?> _allProducts = new List<Product?>();
 
         if (predict == null)
         {
             _allProducts = Products;
-            //    foreach (Product p in Products)
-            //    {
-            //        _allProducts.Add(p);
-            //    }
         }
         else
         {
-            foreach (Product p in Products)
-            {
-                if (predict(p))
-                    _allProducts.Add(p);
-            }
+            _allProducts= Products.FindAll(x=>predict(x));
+            
         }
         return _allProducts;
 

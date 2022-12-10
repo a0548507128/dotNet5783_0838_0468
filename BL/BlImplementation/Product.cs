@@ -15,7 +15,7 @@ namespace BlImplementation;
 internal class Product : BlApi.IProduct
 {
     private IDal dal = new DalList();
-    public IEnumerable<BO.ProductForList> GetProductsList(Func<DO.Product?, bool>? predict = null)
+    public IEnumerable<BO.ProductForList?> GetProductsList(Func<DO.Product?, bool>? predict = null)
     {
         IEnumerable<DO.Product?> dalProductsList; 
         List<BO.ProductForList?> blProductsList = new ();
@@ -27,16 +27,19 @@ internal class Product : BlApi.IProduct
         {
             dalProductsList = dal.Product.GetAll(x=>predict(x));
         }
-        foreach (DO.Product productDal in dalProductsList)
-        { 
+        foreach (var productDal in dalProductsList)
+        {
+            if (productDal != null)
+            {
                 BO.ProductForList product = new BO.ProductForList()
                 {
-                    ID = productDal.ID,
-                    Name = productDal.Name,
-                    Price = productDal.Price,
-                    Category = (ECategory)productDal.Category
+                    ID = productDal.Value.ID,
+                    Name = productDal.Value.Name,
+                    Price = productDal.Value.Price,
+                    Category = (ECategory?)productDal.Value.Category
                 };
                 blProductsList.Add(product);
+            }
         }
         return blProductsList;
     }
@@ -58,7 +61,7 @@ internal class Product : BlApi.IProduct
                 ID = dalProduct.ID,
                 Name = dalProduct.Name,
                 Price = dalProduct.Price,
-                Category = (ECategory)dalProduct.Category,
+                Category = (ECategory?)dalProduct.Category,
                 InStock = dalProduct.InStock
             };
             return BLproduct;
@@ -81,9 +84,9 @@ internal class Product : BlApi.IProduct
             }
 
             int amountInCart = 0;
-            foreach (BO.OrderItem oi in c.ItemList)
+            foreach (var oi in c.ItemList)
             {
-                if (oi.ID == productID)
+                if (oi?.ID == productID)
                 {
                     amountInCart = oi.Amount;
                     break;
@@ -97,7 +100,7 @@ internal class Product : BlApi.IProduct
                 ID = productDal.ID,
                 Name = productDal.Name,
                 Price = productDal.Price,
-                Category = (ECategory)productDal.Category,
+                Category = (ECategory?)productDal.Category,
                 AmoutInYourCart = amountInCart,
                 InStock = (productDal.InStock)//לתקן!!!!
             };
@@ -115,7 +118,7 @@ internal class Product : BlApi.IProduct
             ID = product.ID,
             Name = product.Name,
             Price = product.Price,
-            Category = (DO.Enums.Category)product.Category,
+            Category = (DO.Enums.Category?)product.Category,
             InStock = product.InStock,
         };
         try
@@ -130,9 +133,10 @@ internal class Product : BlApi.IProduct
     public void DeleteProductManager(int productID)
     {
         IEnumerable<DO.OrderItem?> ordersItemList = dal.OrderItem.GetAll();
-        foreach (DO.OrderItem orderItem in ordersItemList)
+        foreach (var orderItem in ordersItemList)
         {
-                if (orderItem.ProductID == productID)
+            if(orderItem!=null)
+                if (orderItem.Value.ProductID == productID)
                     throw new Exception();
         }
         try
@@ -154,7 +158,7 @@ internal class Product : BlApi.IProduct
             ID = product.ID,
             Name = product.Name,
             Price = product.Price,
-            Category = (DO.Enums.Category)product.Category,
+            Category = (DO.Enums.Category?)product.Category,
             InStock = product.InStock,
         };
 

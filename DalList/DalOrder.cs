@@ -23,12 +23,22 @@ internal class DalOrder:IOrder
         }
         throw new Exception("this order does not exist");
     }
-    public IEnumerable<Order?> GetAll(Func<DO.Order?, bool>? predict = null)
+    public IEnumerable<Order?> GetAll(Predicate<Order?>? predict = null)
     {
-        List<Order?> _allOrders = new List<Order?>();
-        for (int i = 0; i < Orders.Count; i++)
+        //List<Order?> _allOrders = new List<Order?>();
+        //for (int i = 0; i < Orders.Count; i++)
+        //{
+        //    _allOrders[i] = Orders[i];
+        //}
+        //return _allOrders;
+        List<Order?> _allOrders = new ();
+        if (predict == null)
         {
-            _allOrders[i] = Orders[i];
+            _allOrders = Orders;
+        }
+        else
+        {
+            _allOrders = Orders.FindAll(x => predict(x));
         }
         return _allOrders;
     }

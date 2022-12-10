@@ -23,15 +23,20 @@ internal class DalOrderItem:IOrderItem
         }
         throw new Exception("this order-item does not exist");
     }
-    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? predict = null)
-    {
-        List<OrderItem?> _allOrderItems = new List<OrderItem?>();
-        for (int i = 0; i < OrderItems.Count; i++)
+    public IEnumerable<OrderItem?> GetAll(Predicate<OrderItem?>? predict = null)
+    { 
+        List<OrderItem?> _allOrderItems = new();
+        if (predict == null)
         {
-            _allOrderItems[i] = OrderItems[i];
+            _allOrderItems = OrderItems;
+        }
+        else
+        {
+            _allOrderItems = OrderItems.FindAll(x => predict(x));
         }
         return _allOrderItems;
     }
+
     public OrderItem getOrderItemByPIDOID(int pid,int oid)
     {
         foreach(OrderItem o in OrderItems)
@@ -41,17 +46,17 @@ internal class DalOrderItem:IOrderItem
         }
         throw new Exception("this orderitem doesn't exist");
     }
-    public List<OrderItem?> getOrderItemByOrder(int oid) 
-    {
-        int j = 0;
-       List<OrderItem?> allOrderItems= new List<OrderItem?>();
-        foreach (OrderItem o in OrderItems)
-        {
-            if (o.OrderID == oid)
-                allOrderItems[j++] = o;
-        }
-        return allOrderItems;
-    }
+   // public List<OrderItem?> getOrderItemByOrder(int oid) 
+    //{
+    //    int j = 0;
+    //   List<OrderItem?> allOrderItems= new List<OrderItem?>();
+    //    foreach (OrderItem o in OrderItems)
+    //    {
+    //        if (o.OrderID == oid)
+    //            allOrderItems[j++] = o;
+    //    }
+    //    return allOrderItems;
+    //}
     public void Delete(int IdNum)
     {
         for (int i = 0; i < OrderItems.Count; i++)
