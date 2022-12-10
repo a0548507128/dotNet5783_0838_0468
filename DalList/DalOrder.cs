@@ -23,9 +23,9 @@ internal class DalOrder:IOrder
         }
         throw new Exception("this order does not exist");
     }
-    public IEnumerable<Order> GetAll(Func<Order?, bool>? func = null)
+    public IEnumerable<Order?> GetAll(Func<DO.Order?, bool>? predict = null)
     {
-        List<Order> _allOrders = new List<Order>();
+        List<Order?> _allOrders = new List<Order?>();
         for (int i = 0; i < Orders.Count; i++)
         {
             _allOrders[i] = Orders[i];
@@ -36,7 +36,7 @@ internal class DalOrder:IOrder
     {
         for (int i = 0; i < Orders.Count; i++)
         {
-            if (Orders[i].ID == IdNum)
+            if (Orders[i]?.ID == IdNum)
             {
                 Orders.RemoveAt(IdNum);
                 return;
@@ -44,12 +44,11 @@ internal class DalOrder:IOrder
         }
         throw new Exception("this order doesn't exist");
     }
-
     public int Update(Order upOrder)
     {
         for (int i = 0; i < Orders.Count; i++)
         {
-            if (Orders[i].ID == upOrder.ID)
+            if (Orders[i]?.ID == upOrder.ID)
             {
                 Orders[i] = upOrder;
                 return upOrder.ID;

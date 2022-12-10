@@ -9,7 +9,7 @@ namespace BlApi;
 
 public interface IOrder
 {
-    public IEnumerable<OrderForList>? GetOrderList();//for manager
+    public IEnumerable<OrderForList?> GetOrderList(Func<DO.Order, bool>? predict = null);//for manager
     public BO.Order GetOrderDetails(int orderId);//for manager and customer
     public BO.Order OrderShippingUpdate(int numOrder);//for manager
     public BO.Order OrderDeliveryUpdate(int numOrder);//for manager

@@ -8,12 +8,12 @@ internal class Order : BlApi.IOrder
 {
     private IDal dal = new DalList();
 
-    public IEnumerable<BO.OrderForList> GetOrderList()
+    public IEnumerable<BO.OrderForList> GetOrderList(Func<DO.Order, bool>? predict = null)
     {
-        IEnumerable<DO.Order> orderList = new List<DO.Order>();
+        IEnumerable<DO.Order?> orderList = new List<DO.Order?>();
         List<BO.OrderForList> ordersForList = new List<BO.OrderForList>();
-        orderList = dal.Order.getAllOrders();
-        IEnumerable<BO.OrderTracking> orderTracking = new List<BO.OrderTracking>();
+        orderList = dal.Order.GetAll();
+        //IEnumerable<BO.OrderTracking> orderTracking = new List<BO.OrderTracking>();
         foreach (var item in orderList)
         {
             ordersForList.Add(new BO.OrderForList()
@@ -214,8 +214,8 @@ internal class Order : BlApi.IOrder
     }
     public int GetAmountItems(int id)
     {
-        IEnumerable<DO.OrderItem> orderItemList = new List<DO.OrderItem>();
-        orderItemList = dal.OrderItem.getAllOrderItems();
+        IEnumerable<DO.OrderItem?> orderItemList = new List<DO.OrderItem?>();
+        orderItemList = dal.OrderItem.GetAll();
         int sum = 0;
         foreach (var item in orderItemList)
         {
@@ -226,8 +226,8 @@ internal class Order : BlApi.IOrder
     }
     public double CheckTotalSum(int id)
     {
-        IEnumerable<DO.OrderItem> orderItemList = new List<DO.OrderItem>();
-        orderItemList = dal.OrderItem.getAllOrderItems();
+        IEnumerable<DO.OrderItem?> orderItemList = new List<DO.OrderItem?>();
+        orderItemList = dal.OrderItem.GetAll();
         double sum = 0;
         foreach (var item in orderItemList)
         {
@@ -237,9 +237,9 @@ internal class Order : BlApi.IOrder
     }
     public List<BO.OrderItem> GetAllItemsToOrder(int id)
     {
-        IEnumerable<DO.OrderItem> orderItemList = new List<DO.OrderItem>();
+        IEnumerable<DO.OrderItem?> orderItemList = new List<DO.OrderItem?>();
         List<BO.OrderItem> BOorderItemList = new List<BO.OrderItem>();
-        orderItemList = dal.OrderItem.getAllOrderItems();
+        orderItemList = dal.OrderItem.GetAll();
         int count = 0;
         foreach (var item in orderItemList)
         {

@@ -12,7 +12,7 @@ public class OrderTracking
 {
     public int ID { get; set; }
     public EStatus? Status { get; set; }
-    public IEnumerable<StatusAndDate>? listOfStatus { get; set; }
+    public IEnumerable<StatusAndDate?>? listOfStatus { get; set; }
 
     public class StatusAndDate
     {

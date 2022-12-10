@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace BlApi;
 
 public interface IProduct
 {
-    public IEnumerable<BO.ProductForList>? GetProductsList();
+    public IEnumerable<BO.ProductForList?> GetProductsList(Func<DO.Product?, bool>? predict = null);
     public BO.Product GetProductDetailsManager(int productID);
     public BO.ProductItem GetProductDetailsCustomer(int productID, BO.Cart c);
     public void AddProductManager(BO.Product product);

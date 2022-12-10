@@ -23,9 +23,9 @@ internal class DalOrderItem:IOrderItem
         }
         throw new Exception("this order-item does not exist");
     }
-    public IEnumerable<OrderItem> GetAll(Func<OrderItem?, bool>? func = null)
+    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? predict = null)
     {
-        List<OrderItem> _allOrderItems = new List<OrderItem>();
+        List<OrderItem?> _allOrderItems = new List<OrderItem?>();
         for (int i = 0; i < OrderItems.Count; i++)
         {
             _allOrderItems[i] = OrderItems[i];
@@ -41,10 +41,10 @@ internal class DalOrderItem:IOrderItem
         }
         throw new Exception("this orderitem doesn't exist");
     }
-    public List<OrderItem> getOrderItemByOrder(int oid) 
+    public List<OrderItem?> getOrderItemByOrder(int oid) 
     {
         int j = 0;
-       List<OrderItem> allOrderItems= new List<OrderItem>();
+       List<OrderItem?> allOrderItems= new List<OrderItem?>();
         foreach (OrderItem o in OrderItems)
         {
             if (o.OrderID == oid)
@@ -56,7 +56,7 @@ internal class DalOrderItem:IOrderItem
     {
         for (int i = 0; i < OrderItems.Count; i++)
         {
-            if (OrderItems[i].ID == IdNum)
+            if (OrderItems[i]?.ID == IdNum)
             {
                 OrderItems.RemoveAt(IdNum);
                 return;
@@ -68,7 +68,7 @@ internal class DalOrderItem:IOrderItem
     {
         for (int i = 0; i < OrderItems.Count; i++)
         {
-            if (OrderItems[i].ID == upOrderItem.ID)
+            if (OrderItems[i]?.ID == upOrderItem.ID)
             {
                 OrderItems[i] = upOrderItem;
                 return upOrderItem.ID;

@@ -1,6 +1,7 @@
 ﻿using DalApi;
 using DO;
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace Dal;
@@ -22,16 +23,34 @@ public class DalProduct:IProduct
         }
         throw new Exception("this product does not exist");
     }
-    public IEnumerable<Product> GetAll(Func<Product?, bool>? func = null)
+    public IEnumerable<Product?> GetAll(Func<Product?, bool>? predict =null)
     {
-        List<Product> _allProducts = Products;
+        List<Product?> _allProducts = new List<Product?>();
+
+        if (predict == null)
+        {
+            _allProducts = Products;
+            //    foreach (Product p in Products)
+            //    {
+            //        _allProducts.Add(p);
+            //    }
+        }
+        else
+        {
+            foreach (Product p in Products)
+            {
+                if (predict(p))
+                    _allProducts.Add(p);
+            }
+        }
         return _allProducts;
+
     }
     public void Delete(int IdNum)
     {
         for (int i = 0; i < Products.Count; i++)
         {
-            if (Products[i].ID == IdNum)
+            if (Products[i]?.ID == IdNum)
             {
                 Products.RemoveAt(IdNum);
                 return;
@@ -43,7 +62,7 @@ public class DalProduct:IProduct
     {
         for (int i = 0; i < Products.Count; i++)
         {
-            if (Products[i].ID == upProduct.ID)
+            if (Products[i]?.ID == upProduct.ID)
             {
                 Products[i] = upProduct;
                 return upProduct.ID;
@@ -52,3 +71,4 @@ public class DalProduct:IProduct
         throw new Exception("this item doesn't exist");
     }
 }
+

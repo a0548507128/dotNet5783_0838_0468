@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlApi;
+using BO;
 using Dal;
 using DalApi;
 using static BO.Enums;
@@ -14,20 +15,28 @@ namespace BlImplementation;
 internal class Product : BlApi.IProduct
 {
     private IDal dal = new DalList();
-    public IEnumerable<BO.ProductForList> GetProductsList()
+    public IEnumerable<BO.ProductForList> GetProductsList(Func<DO.Product?, bool>? predict = null)
     {
-        IEnumerable<DO.Product> dalProductsList = dal.Product.getAllProduct();
-        List<BO.ProductForList> blProductsList = new List<BO.ProductForList>();
-        foreach (DO.Product productDal in dalProductsList)
+        IEnumerable<DO.Product?> dalProductsList; 
+        List<BO.ProductForList?> blProductsList = new ();
+        if(predict== null)
         {
-            BO.ProductForList product = new BO.ProductForList()
-            {
-                ID = productDal.ID,
-                Name = productDal.Name,
-                Price = productDal.Price,
-                Category = (ECategory)productDal.Category
-            };
-            blProductsList.Add(product);
+            dalProductsList = dal.Product.GetAll();
+        }
+        else
+        {
+            dalProductsList = dal.Product.GetAll(x=>predict(x));
+        }
+        foreach (DO.Product productDal in dalProductsList)
+        { 
+                BO.ProductForList product = new BO.ProductForList()
+                {
+                    ID = productDal.ID,
+                    Name = productDal.Name,
+                    Price = productDal.Price,
+                    Category = (ECategory)productDal.Category
+                };
+                blProductsList.Add(product);
         }
         return blProductsList;
     }
@@ -120,7 +129,7 @@ internal class Product : BlApi.IProduct
     }
     public void DeleteProductManager(int productID)
     {
-        IEnumerable<DO.OrderItem> ordersItemList = dal.OrderItem.getAllOrderItems();
+        IEnumerable<DO.OrderItem?> ordersItemList = dal.OrderItem.GetAll();
         foreach (DO.OrderItem orderItem in ordersItemList)
         {
                 if (orderItem.ProductID == productID)

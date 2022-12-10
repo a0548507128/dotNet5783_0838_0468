@@ -23,5 +23,5 @@ public class Enums
         Sent,//נשלח
         Provided//סופק
     };
-   
+
 }

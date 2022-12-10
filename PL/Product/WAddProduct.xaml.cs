@@ -1,5 +1,4 @@
-﻿using BO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddProduct.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WAddProduct : Window
     {
-        public MainWindow()
+        public WAddProduct()
         {
             InitializeComponent();
-        }
-
-        private void Admin_Click(object sender, RoutedEventArgs e)
-        {
-            new WProductForList().Show();
+            
         }
     }
 }
