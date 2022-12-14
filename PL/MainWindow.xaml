@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Name="Admin" Content="Admin" HorizontalAlignment="Center" Margin="0,197,0,0" VerticalAlignment="Top" Click="Admin_Click"/>
+        Title="MainWindow" Height="450" Width="800"
+        Background="Pink">
 
+    <Grid>
+        <!--<Image Source="/Image/2.png"/>-->
+        <Button Name="Admin" Content="Admin" HorizontalAlignment="Center" Margin="0,197,0,0" VerticalAlignment="Top" Click="Admin_Click"/>
+       
     </Grid>
 </Window>

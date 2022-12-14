@@ -26,14 +26,23 @@ namespace PL
         public WAddProduct()
         {
             InitializeComponent();
-          
+            AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.ECategory));
         }
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
-            //BO.Product p;
-            //bl.Product.AddProductManager(p);
-            
+           
+            BO.Product p = new()
+            {
+                ID = int.Parse(id.Text),
+                Price = double.Parse(price.Text),
+                InStock = int.Parse(inStock.Text),
+                Name = name.Text,
+                Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
+            };
+
+            bl.Product.AddProductManager(p);
+
         }
 
     }

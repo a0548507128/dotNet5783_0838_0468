@@ -14,7 +14,7 @@
             <Label Content="ID"/>
             <TextBox TextWrapping="Wrap"  Width="120" Name="id"/>
             <Label Content="Category"/>
-            <TextBox TextWrapping="Wrap"  Width="120" Name="category"/>
+            <ComboBox Name="AttributeSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" />
             <Label Content="Name"/>
             <TextBox TextWrapping="Wrap"  Width="120" Name="name"/>
             <Label Content="Price"/>
