@@ -37,5 +37,10 @@ namespace PL
             ListOfProduct1.ItemsSource = bl.Product.GetProductsList((x)=> x!.Value.Category == selector);
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new WAddProduct().Show();
+        }
     }
 }

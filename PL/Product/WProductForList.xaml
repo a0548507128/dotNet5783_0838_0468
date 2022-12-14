@@ -15,7 +15,6 @@
             </Grid.ColumnDefinitions >
             <ComboBox Name="AttributeSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="AttributeSelector_SelectionChanged"/>
             <Label Content="category:" HorizontalAlignment="Left" Margin="48,0,0,0" VerticalAlignment="Center" Grid.Column="0"/>
-
         </Grid>
         <ListView Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListOfProduct1">
             <ListView.View>
@@ -24,6 +23,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="Button_Click"/>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>

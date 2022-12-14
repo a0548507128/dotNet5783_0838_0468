@@ -6,7 +6,29 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="AddProduct" Height="450" Width="800">
-    <Grid>
-        
+
+    <Grid Name="MainGrid">
+
+        <ListView Margin="274,0,274,0" >
+            
+            <Label Content="ID"/>
+            <TextBox TextWrapping="Wrap"  Width="120" Name="id"/>
+            <Label Content="Category"/>
+            <TextBox TextWrapping="Wrap"  Width="120" Name="category"/>
+            <Label Content="Name"/>
+            <TextBox TextWrapping="Wrap"  Width="120" Name="name"/>
+            <Label Content="Price"/>
+            <TextBox TextWrapping="Wrap"  Width="120" Name="price"/>
+            <Label Content="In Stock" />
+            <TextBox TextWrapping="Wrap"  Width="120" Name="inStock"/>
+
+        </ListView>
+        <Button Content="Add" Grid.Row="1" HorizontalAlignment="Left" Margin="709,5,0,5" Padding="5" Width="34" Click="Button_Click_Add"  />
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="395*"/>
+            <RowDefinition Height="Auto" MinHeight="28.038"/>
+        </Grid.RowDefinitions>
     </Grid>
+
 </Window>
