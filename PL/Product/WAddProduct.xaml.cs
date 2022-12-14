@@ -40,7 +40,6 @@ namespace PL
             if (s == "update")
             {
                 addUpdate.Content = "update";
-
             }
             id.Text = Convert.ToString(i);
             AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.ECategory));
@@ -59,7 +58,7 @@ namespace PL
                     Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
                 };
                 bl.Product.AddProductManager(p);
-                this.Close();
+                
             }
             if(addUpdate.Content == "update")
             {
@@ -73,9 +72,10 @@ namespace PL
                     Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
                 };
                 bl.Product.UpdateProductManager(p);
-                this.Close();
+               
             }
-           
+            MessageBox.Show("ffff");
+            this.Close();
         }
 
 

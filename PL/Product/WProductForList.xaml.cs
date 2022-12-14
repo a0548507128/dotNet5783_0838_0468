@@ -34,7 +34,6 @@ namespace PL
         {
             DO.Enums.Category selector = (DO.Enums.Category)AttributeSelector.SelectedItem;
             ListOfProduct1.ItemsSource = bl.Product.GetProductsList((x)=> x!.Value.Category == selector);
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -43,7 +42,7 @@ namespace PL
             ListOfProduct1.ItemsSource = bl.Product.GetProductsList();
         }
 
-        private void ListOfProduct1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListOfProduct1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int id = 0;
             if(ListOfProduct1.SelectedItem is BO.ProductForList list)
