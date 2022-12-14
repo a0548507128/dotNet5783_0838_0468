@@ -12,18 +12,19 @@
         <ListView Margin="274,0,274,0" >
 
             <Label Content="ID"/>
-            <TextBox TextWrapping="Wrap"  Width="120" Name="id"/>
+            <TextBox TextWrapping="Wrap" Width="120" Name="id" Text=""/>
             <Label Content="Category"/>
-            <ComboBox Name="AttributeSelector" Grid.Column="1" Width="119" />
+            <ComboBox Name="AttributeSelector" Grid.Column="1" Width="119" Height="19" />
             <Label Content="Name"/>
-            <TextBox TextWrapping="Wrap"  Width="120" Name="name"/>
+            <TextBox TextWrapping="Wrap"  Width="120" Name="name" Text=""/>
             <Label Content="Price"/>
-            <TextBox TextWrapping="Wrap"  Width="120" Name="price"/>
+            <TextBox TextWrapping="Wrap"  Width="120" Name="price" Text=""/>
             <Label Content="In Stock" />
-            <TextBox TextWrapping="Wrap"  Width="120" Name="inStock"/>
+            <TextBox TextWrapping="Wrap"  Width="120" Name="inStock" Text=""/>
+            <!--<TextBox TextWrapping="Wrap" Text="TextBox" Width="120"/>-->
 
         </ListView>
-        <Button Content="Add" Grid.Row="1" HorizontalAlignment="Left" Margin="709,5,0,5" Padding="5" Width="34" Click="Button_Click_Add"  />
+        <Button Content="" Grid.Row="1" HorizontalAlignment="Left" Margin="666,5,0,5" Padding="5" Width="85" Click="Button_Click_Add_update"  Name="addUpdate"/>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="395*"/>

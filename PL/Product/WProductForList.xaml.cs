@@ -39,8 +39,21 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new WAddProduct().ShowDialog();
+            new WAddProduct("add").ShowDialog();
             ListOfProduct1.ItemsSource = bl.Product.GetProductsList();
+        }
+
+        private void ListOfProduct1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int id = 0;
+            if(ListOfProduct1.SelectedItem is BO.ProductForList list)
+            {
+                id=list.ID;
+            }
+            new WAddProduct("update", id).ShowDialog();
+            ListOfProduct1.ItemsSource = bl.Product.GetProductsList();
+
+
         }
     }
 }
