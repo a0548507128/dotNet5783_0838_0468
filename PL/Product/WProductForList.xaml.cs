@@ -25,7 +25,6 @@ namespace PL
              
         public WProductForList()
         {
-           
             InitializeComponent();
             ListOfProduct1.ItemsSource = bl.Product.GetProductsList();
             AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.ECategory));
@@ -40,7 +39,8 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new WAddProduct().Show();
+            new WAddProduct().ShowDialog();
+            ListOfProduct1.ItemsSource = bl.Product.GetProductsList();
         }
     }
 }

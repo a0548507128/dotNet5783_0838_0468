@@ -31,7 +31,6 @@ namespace PL
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
-           
             BO.Product p = new()
             {
                 ID = int.Parse(id.Text),
@@ -42,7 +41,7 @@ namespace PL
             };
 
             bl.Product.AddProductManager(p);
-
+            this.Close();
         }
 
     }

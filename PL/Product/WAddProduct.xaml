@@ -10,11 +10,11 @@
     <Grid Name="MainGrid">
 
         <ListView Margin="274,0,274,0" >
-            
+
             <Label Content="ID"/>
             <TextBox TextWrapping="Wrap"  Width="120" Name="id"/>
             <Label Content="Category"/>
-            <ComboBox Name="AttributeSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" />
+            <ComboBox Name="AttributeSelector" Grid.Column="1" Width="119" />
             <Label Content="Name"/>
             <TextBox TextWrapping="Wrap"  Width="120" Name="name"/>
             <Label Content="Price"/>
