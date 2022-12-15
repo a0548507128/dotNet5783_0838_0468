@@ -51,8 +51,6 @@ namespace PL
             }
             new WAddProduct("update", id).ShowDialog();
             ListOfProduct1.ItemsSource = bl.Product.GetProductsList();
-
-
         }
     }
 }

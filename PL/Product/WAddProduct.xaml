@@ -9,26 +9,28 @@
 
     <Grid Name="MainGrid">
 
-        <ListView Margin="274,0,274,0" >
+        <ListView  Name="listViewAdd" Margin="274,0,274,0" >
 
             <Label Content="ID"/>
-            <TextBox TextWrapping="Wrap" Width="120" Name="id" Text=""/>
+            <TextBox   TextWrapping="Wrap" Width="120" Name="id" Text="" TextChanged="id_TextChanged" />
             <Label Content="Category"/>
             <ComboBox Name="AttributeSelector" Grid.Column="1" Width="119" Height="19" />
             <Label Content="Name"/>
-            <TextBox TextWrapping="Wrap"  Width="120" Name="name" Text=""/>
+            <TextBox TextWrapping="Wrap"  Width="120" Name="name" Text="" TextChanged="name_TextChanged"/>
             <Label Content="Price"/>
-            <TextBox TextWrapping="Wrap"  Width="120" Name="price" Text=""/>
+            <TextBox TextWrapping="Wrap"  Width="120" Name="price" Text="" TextChanged="price_TextChanged"/>
             <Label Content="In Stock" />
-            <TextBox TextWrapping="Wrap"  Width="120" Name="inStock" Text=""/>
+            <TextBox TextWrapping="Wrap"  Width="120" Name="inStock" Text="" TextChanged="inStock_TextChanged"/>
+
             <!--<TextBox TextWrapping="Wrap" Text="TextBox" Width="120"/>-->
 
         </ListView>
         <Button Content="" Grid.Row="1" HorizontalAlignment="Left" Margin="666,5,0,5" Padding="5" Width="85" Click="Button_Click_Add_update"  Name="addUpdate"/>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="395*"/>
-            <RowDefinition Height="Auto" MinHeight="28.038"/>
+            <RowDefinition Height="198*"/>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="19*"/>
         </Grid.RowDefinitions>
     </Grid>
 

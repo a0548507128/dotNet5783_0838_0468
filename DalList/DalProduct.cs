@@ -10,10 +10,17 @@ public class DalProduct:IProduct
 {
     public int Add(Product _p)
     {
-        _p.ID = Config.NumOfProduct;
-        Products.Add(_p);
+        //_p.ID = Config.NumOfProduct;
+        try 
+        {
+            Get(_p.ID);
+            throw new DuplicateID("product already exist");//נראלי יש שם עוד כמה דברים לסדר
+        }
+        catch(DO.EntityNotFound) {
+            Products.Add(_p);
+        }
         return _p.ID;
-    }
+    }// 
     public Product Get(int IdNum)
     {
         foreach (Product p in Products)
@@ -21,7 +28,7 @@ public class DalProduct:IProduct
             if (p.ID == IdNum)
                 return p;
         }
-        throw new Exception("this product does not exist");
+        throw new EntityNotFound("this product does not exist");
     }
     public IEnumerable<Product?> GetAll(Predicate<Product?>? predict = null)
     {
@@ -61,7 +68,7 @@ public class DalProduct:IProduct
                 return upProduct.ID;
             }
         }
-        throw new Exception("this item doesn't exist");
+        throw new EntityNotFound("this product doesn't exist");
     }
 }
 

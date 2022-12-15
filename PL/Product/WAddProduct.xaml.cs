@@ -1,4 +1,5 @@
 ﻿using BlImplementation;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -42,43 +43,130 @@ namespace PL
                 addUpdate.Content = "update";
             }
             id.Text = Convert.ToString(i);
+            id.IsReadOnly=true; 
             AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.ECategory));
+       
         }
 
         private void Button_Click_Add_update(object sender, RoutedEventArgs e)
         {
-            if (addUpdate.Content == "add")
+            try
             {
-                BO.Product p = new()
+                if (addUpdate.Content == "add")
                 {
-                    ID = int.Parse(id.Text),
-                    Price = double.Parse(price.Text),
-                    InStock = int.Parse(inStock.Text),
-                    Name = name.Text,
-                    Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
-                };
-                bl.Product.AddProductManager(p);
-                
+                    BO.Product p = new()
+                    {
+                        ID = int.Parse(id.Text),
+                        Price = double.Parse(price.Text),
+                        InStock = int.Parse(inStock.Text),
+                        Name = name.Text,
+                        Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
+                    };
+                    bl.Product.AddProductManager(p);
+
+                }
+                if (addUpdate.Content == "update")
+                {
+
+                    BO.Product p = new()
+                    {
+                        ID = int.Parse(id.Text),
+                        Price = double.Parse(price.Text),
+                        InStock = int.Parse(inStock.Text),
+                        Name = name.Text,
+                        Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
+                    };
+                    bl.Product.UpdateProductManager(p);
+
+                }
+                this.Close();
             }
-            if(addUpdate.Content == "update")
+            catch (NegativeIdException ex)
             {
-               
-                BO.Product p = new()
+                Label myLabel = new Label()
                 {
-                    ID = int.Parse(id.Text),
-                    Price = double.Parse(price.Text),
-                    InStock = int.Parse(inStock.Text),
-                    Name = name.Text,
-                    Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
+                    Content = ex.Message,
+                    Name="lblid"
                 };
-                bl.Product.UpdateProductManager(p);
-               
+                Grid.SetRow(myLabel, 3); //put the label under the invalid textBox
+                MainGrid.Children.Add(myLabel);
             }
-            MessageBox.Show("ffff");
-            this.Close();
+            catch (EmptyNameException ex)
+            {
+                Label myLabel = new Label()
+                {
+                    Content = ex.Message,
+                    Name = "lblname"
+                };
+                Grid.SetRow(myLabel, 3); //put the label under the invalid textBox
+                MainGrid.Children.Add(myLabel);
+            }
+            catch (NegativePriceException ex)
+            {
+                Label myLabel = new Label()
+                {
+                    Content = ex.Message,
+                    Name = "lblprice"
+                };
+                Grid.SetRow(myLabel, 3); //put the label under the invalid textBox
+                MainGrid.Children.Add(myLabel);
+            }
+            catch (NegativeStockException ex)
+            {
+                Label myLabel = new Label()
+                {
+                    Content = ex.Message,
+                    Name = "lblInStock"
+                };
+                Grid.SetRow(myLabel, 3); //put the label under the invalid textBox
+                MainGrid.Children.Add(myLabel);
+            }
+            catch (ItemAlreadyExistsException ex)
+            {
+                Label myLabel = new Label()
+                {
+                    Content = ex.Message,
+                    Name = "alreadyExist"
+                };
+                Grid.SetRow(myLabel, 3); //put the label under the invalid textBox
+                MainGrid.Children.Add(myLabel);
+            }
         }
 
+        private void id_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            removeLabel("lblid");
+            removeLabel("alreadyExist");
+            
 
+        }
+        private void removeLabel(string getterName)
+        {
+            var child1 = MainGrid.Children.OfType<Control>().Where(x => x.Name == getterName).FirstOrDefault();
+            if (child1 != null)
+                MainGrid.Children.Remove(child1);
+        }
 
+        private void inStock_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            removeLabel("lblInStock");
+
+        }
+
+        private void price_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            removeLabel( "lblprice");
+
+        }
+
+        private void name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            removeLabel("lblname");
+
+        }
     }
+
+
+
 }
+

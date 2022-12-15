@@ -8,6 +8,7 @@ using BlApi;
 using BO;
 using Dal;
 using DalApi;
+using DO;
 using static BO.Enums;
 
 namespace BlImplementation;
@@ -111,8 +112,15 @@ internal class Product : BlApi.IProduct
     }
     public void AddProductManager(BO.Product product)
     {
-        if (product.ID <= 0 || product.Name == "" || product.Price <= 0 || product.InStock < 0)
-            throw new Exception();
+        if (product.ID <= 0)
+            throw new NegativeIdException("ERROR: Negative Id");
+        if (product.Name == "")
+            throw new EmptyNameException("ERROR: Empty Name");
+        if ( product.Price <= 0)
+            throw new NegativePriceException("ERROR: Negative Price");
+        if (product.InStock < 0)
+            throw new NegativeStockException("ERROR: Negative InStock");
+
         DO.Product dalProduct = new DO.Product()
         {
             ID = product.ID,
@@ -125,9 +133,9 @@ internal class Product : BlApi.IProduct
         {
             dal.Product.Add(dalProduct);
         }
-        catch (DO.EntityNotFound e)
+        catch (DO.DuplicateID e)
         {
-            //throw new Exception();
+            throw new ItemAlreadyExistsException(e.Message);
         }
     }
     public void DeleteProductManager(int productID)
@@ -168,7 +176,7 @@ internal class Product : BlApi.IProduct
         }
         catch (DO.EntityNotFound e)
         {
-            //throw new Exception();
+            throw new BO.ProductNotExistsException(e.Message);
         }
     }
 }
