@@ -3,6 +3,7 @@ using BO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.Cryptography.Pkcs;
 using System.Text;
@@ -15,6 +16,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
+using System.Text.RegularExpressions;
 using static DO.Enums;
 
 namespace PL
@@ -42,8 +45,12 @@ namespace PL
             {
                 addUpdate.Content = "update";
             }
+            BO.Product p = bl.Product.GetProductDetailsManager(i);
             id.Text = Convert.ToString(i);
-            id.IsReadOnly=true; 
+            id.IsReadOnly = true;
+            name.Text = p.Name;
+            price.Text = Convert.ToString(p.Price);
+            inStock.Text = Convert.ToString(p.InStock);
             AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.ECategory));
        
         }
