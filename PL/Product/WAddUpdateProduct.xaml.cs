@@ -25,11 +25,11 @@ namespace PL
     /// <summary>
     /// Interaction logic for AddProduct.xaml
     /// </summary>
-    public partial class WAddProduct : Window
+    public partial class WAddUpdateProduct : Window
     {
         private BlApi.IBl bl = new BlImplementation.Bl();
 
-        public WAddProduct(string s)
+        public WAddUpdateProduct(string s)
         {
             InitializeComponent();
             if (s == "add")
@@ -38,7 +38,7 @@ namespace PL
             }
             AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.ECategory));
         }
-        public WAddProduct(string s, int i)
+        public WAddUpdateProduct(string s, int i)
         {
             InitializeComponent();
             if (s == "update")
@@ -139,14 +139,6 @@ namespace PL
                 MainGrid.Children.Add(myLabel);
             }
         }
-
-        private void id_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            removeLabel("lblid");
-            removeLabel("alreadyExist");
-            
-
-        }
         private void removeLabel(string getterName)
         {
             var child1 = MainGrid.Children.OfType<Control>().Where(x => x.Name == getterName).FirstOrDefault();
@@ -154,26 +146,23 @@ namespace PL
                 MainGrid.Children.Remove(child1);
         }
 
+        private void id_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            removeLabel("lblid");
+            removeLabel("alreadyExist");
+        }
         private void inStock_TextChanged(object sender, TextChangedEventArgs e)
         {
             removeLabel("lblInStock");
-
         }
-
         private void price_TextChanged(object sender, TextChangedEventArgs e)
         {
             removeLabel( "lblprice");
-
         }
-
         private void name_TextChanged(object sender, TextChangedEventArgs e)
         {
             removeLabel("lblname");
-
         }
     }
-
-
-
 }
 

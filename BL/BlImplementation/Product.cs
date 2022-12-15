@@ -158,8 +158,14 @@ internal class Product : BlApi.IProduct
     }
     public void UpdateProductManager(BO.Product product)
     {
-        if (product.ID <= 0 || product.Name == "" || product.Price <= 0 || product.InStock < 0)
-            throw new Exception();
+        if (product.ID <= 0)
+            throw new NegativeIdException("ERROR: Negative Id");
+        if (product.Name == "")
+            throw new EmptyNameException("ERROR: Empty Name");
+        if (product.Price <= 0)
+            throw new NegativePriceException("ERROR: Negative Price");
+        if (product.InStock < 0)
+            throw new NegativeStockException("ERROR: Negative InStock");
 
         DO.Product productDal = new DO.Product()
         {

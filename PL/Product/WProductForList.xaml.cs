@@ -40,7 +40,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new WAddProduct("add").ShowDialog();
+            new WAddUpdateProduct("add").ShowDialog();
             ListOfProduct1.ItemsSource = bl.Product.GetProductsList();
         }
 
@@ -51,7 +51,7 @@ namespace PL
             {
                 id=list.ID;
             }
-            new WAddProduct("update", id).ShowDialog();
+            new WAddUpdateProduct("update", id).ShowDialog();
             ListOfProduct1.ItemsSource = bl.Product.GetProductsList();
         }
     }

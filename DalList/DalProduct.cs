@@ -14,13 +14,13 @@ public class DalProduct:IProduct
         try 
         {
             Get(_p.ID);
-            throw new DuplicateID("product already exist");//נראלי יש שם עוד כמה דברים לסדר
+            throw new DuplicateID("product already exist");
         }
         catch(DO.EntityNotFound) {
             Products.Add(_p);
         }
         return _p.ID;
-    }// 
+    }
     public Product Get(int IdNum)
     {
         foreach (Product p in Products)
