@@ -6,7 +6,7 @@ namespace DalTest
 {
     public class Programm
     {
-        static IDal IDalVariable = new Dal.DalList();
+        DalApi.IDal? dal = DalApi.Factory.Get();
 
         static private Product product = new Product();
         static private Order order = new Order();

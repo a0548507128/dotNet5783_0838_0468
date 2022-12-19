@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using BlApi;
 using BO;
-using Dal;
 using DalApi;
 using DO;
 using static BO.Enums;
@@ -15,7 +14,7 @@ namespace BlImplementation;
 
 internal class Product : BlApi.IProduct
 {
-    private IDal dal = new DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
     public IEnumerable<BO.ProductForList?> GetProductsList(Func<DO.Product?, bool>? predict = null)
     {
         IEnumerable<DO.Product?> dalProductsList; 
@@ -112,6 +111,8 @@ internal class Product : BlApi.IProduct
     }
     public void AddProductManager(BO.Product product)
     {
+        if (product.ID == null || product.Price == null || product.InStock == null)
+            throw new ProductInUseException("ERROR: empty field");
         if (product.ID <= 0)
             throw new NegativeIdException("ERROR: Negative Id");
         if (product.Name == "")
@@ -120,7 +121,7 @@ internal class Product : BlApi.IProduct
             throw new NegativePriceException("ERROR: Negative Price");
         if (product.InStock < 0)
             throw new NegativeStockException("ERROR: Negative InStock");
-
+        
         DO.Product dalProduct = new DO.Product()
         {
             ID = product.ID,
@@ -158,6 +159,8 @@ internal class Product : BlApi.IProduct
     }
     public void UpdateProductManager(BO.Product product)
     {
+        if (product.ID == null || product.Price == null || product.InStock == null)
+            throw new ProductInUseException("ERROR: empty field");
         if (product.ID <= 0)
             throw new NegativeIdException("ERROR: Negative Id");
         if (product.Name == "")
@@ -166,7 +169,7 @@ internal class Product : BlApi.IProduct
             throw new NegativePriceException("ERROR: Negative Price");
         if (product.InStock < 0)
             throw new NegativeStockException("ERROR: Negative InStock");
-
+       
         DO.Product productDal = new DO.Product()
         {
             ID = product.ID,

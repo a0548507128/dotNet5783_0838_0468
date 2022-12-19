@@ -1,14 +1,13 @@
 ﻿
 using BlApi;
 using BO;
-using Dal;
 using DalApi;
 
 namespace BlImplementation;
 
 internal class Cart:ICart
 {
-    private IDal dal = new DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
 
     public BO.Cart AddProduct(BO.Cart c, int productID)
     {

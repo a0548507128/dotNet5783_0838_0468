@@ -3,10 +3,10 @@ using BlApi;
 
 namespace BlImplementation;
 
-sealed public class Bl : IBl
+sealed internal class Bl : IBl
 {
     public ICart Cart => new Cart();
-    public BlApi.IOrder Order => new Order();
-    public BlApi.IProduct Product => new Product();
+    public IOrder Order => new Order();
+    public IProduct Product => new Product();
 
 }

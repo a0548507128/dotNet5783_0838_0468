@@ -23,8 +23,8 @@ namespace PL
     /// </summary>
     public partial class WProductForList : Window
     {
-        private BlApi.IBl bl = new BlImplementation.Bl();
-             
+        BlApi.IBl? bl = BlApi.Factory.Get();
+
         public WProductForList()
         {
             InitializeComponent();
@@ -35,13 +35,13 @@ namespace PL
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DO.Enums.Category selector = (DO.Enums.Category)AttributeSelector.SelectedItem;
-            ListOfProduct1.ItemsSource = bl.Product.GetProductsList((x)=> x!.Value.Category == selector);
+            ListOfProduct1.ItemsSource = bl?.Product.GetProductsList((x)=> x!.Value.Category == selector);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new WAddUpdateProduct("add").ShowDialog();
-            ListOfProduct1.ItemsSource = bl.Product.GetProductsList();
+            ListOfProduct1.ItemsSource = bl?.Product.GetProductsList();
         }
 
         private void ListOfProduct1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -52,7 +52,7 @@ namespace PL
                 id=list.ID;
             }
             new WAddUpdateProduct("update", id).ShowDialog();
-            ListOfProduct1.ItemsSource = bl.Product.GetProductsList();
+            ListOfProduct1.ItemsSource = bl?.Product.GetProductsList();
         }
     }
 }

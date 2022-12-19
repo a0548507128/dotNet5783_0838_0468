@@ -27,7 +27,7 @@ namespace PL
     /// </summary>
     public partial class WAddUpdateProduct : Window
     {
-        private BlApi.IBl bl = new BlImplementation.Bl();
+        BlApi.IBl? bl = BlApi.Factory.Get();
 
         public WAddUpdateProduct(string s)
         {
@@ -57,36 +57,36 @@ namespace PL
 
         private void Button_Click_Add_update(object sender, RoutedEventArgs e)
         {
+            
             try
             {
+                BO.Product p = new()
+                {
+                    ID = int.Parse(id.Text),
+                    Price = double.Parse(price.Text),
+                    InStock = int.Parse(inStock.Text),
+                    Name = name.Text,
+                    Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
+                };
                 if (addUpdate.Content == "add")
                 {
-                    BO.Product p = new()
-                    {
-                        ID = int.Parse(id.Text),
-                        Price = double.Parse(price.Text),
-                        InStock = int.Parse(inStock.Text),
-                        Name = name.Text,
-                        Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
-                    };
-                    bl.Product.AddProductManager(p);
-
+                    bl?.Product.AddProductManager(p);
                 }
                 if (addUpdate.Content == "update")
                 {
-
-                    BO.Product p = new()
-                    {
-                        ID = int.Parse(id.Text),
-                        Price = double.Parse(price.Text),
-                        InStock = int.Parse(inStock.Text),
-                        Name = name.Text,
-                        Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
-                    };
-                    bl.Product.UpdateProductManager(p);
-
+                    bl?.Product.UpdateProductManager(p);
                 }
                 this.Close();
+            }
+            catch (ProductInUseException ex)
+            {
+                Label myLabel = new Label()
+                {
+                    Content = ex.Message,
+                    Name = "emptyField"
+                };
+                Grid.SetRow(myLabel, 3);
+                MainGrid.Children.Add(myLabel);
             }
             catch (NegativeIdException ex)
             {
@@ -138,6 +138,8 @@ namespace PL
                 Grid.SetRow(myLabel, 3); //put the label under the invalid textBox
                 MainGrid.Children.Add(myLabel);
             }
+            
+
         }
         private void removeLabel(string getterName)
         {
@@ -145,7 +147,6 @@ namespace PL
             if (child1 != null)
                 MainGrid.Children.Remove(child1);
         }
-
         private void id_TextChanged(object sender, TextChangedEventArgs e)
         {
             removeLabel("lblid");
@@ -162,6 +163,10 @@ namespace PL
         private void name_TextChanged(object sender, TextChangedEventArgs e)
         {
             removeLabel("lblname");
+        }
+        private void empty_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            removeLabel("emptyField");
         }
     }
 }

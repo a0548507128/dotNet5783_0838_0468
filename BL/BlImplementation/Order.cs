@@ -1,4 +1,4 @@
-﻿using Dal;
+﻿
 using DalApi;
 using static BO.Enums;
 
@@ -6,7 +6,7 @@ namespace BlImplementation;
 
 internal class Order : BlApi.IOrder
 {
-    private IDal dal = new DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
 
     public IEnumerable<BO.OrderForList> GetOrderList(Func<DO.Order?, bool>? predict = null)
     {
