@@ -11,12 +11,12 @@ internal class Cart:ICart
 
     public BO.Cart AddProduct(BO.Cart c, int productID)
     {
-        bool exist = c.ItemList.Exists(e => e.ID == productID);
+        bool exist = c.ItemList.Exists(e => e?.ID == productID);
         if (exist)
         {
-            BO.OrderItem BOI = c.ItemList.Find(e => e.ID == productID);
-            DO.Product DP = dal.Product.Get(productID);
-            if (BOI.Amount < DP.InStock)
+            BO.OrderItem? BOI = c.ItemList.Find(e => e?.ID == productID);
+            DO.Product? DP = dal?.Product.Get(productID);
+            if (BOI?.Amount < DP?.InStock)
             {
                 BOI.Amount++;
                 BOI.sumItem += BOI.Price;
@@ -32,7 +32,7 @@ internal class Cart:ICart
         {
             try
             {
-                DO.Product DP = dal.Product.Get(productID);
+                DO.Product DP = (DO.Product)dal.Product.Get(productID);
                 if (DP.InStock > 0)
                 {
                    
@@ -63,7 +63,7 @@ internal class Cart:ICart
     }
     public BO.Cart UpdateAmountProduct(BO.Cart cart, int productID, int newAmount) 
     {
-        bool exist = cart.ItemList.Exists(e => e.ID == productID);
+        bool exist = cart.ItemList.Exists(e => e?.ID == productID);
         if (!exist)
         {
             throw new BO.ItemNotInCartException("item not in cart") { ItemNotInCart = productID.ToString() };
@@ -76,9 +76,9 @@ internal class Cart:ICart
         else if (newAmount == 0)
         {
             cart.TotalSum -= BOI.sumItem;
-            cart.ItemList.RemoveAll(e => e.ID == productID);
+            cart.ItemList.RemoveAll(e => e?.ID == productID);
         }
-        else if (BOI.Amount < newAmount)
+        else if (BOI?.Amount < newAmount)
         {
             for (int i = 0; i < (newAmount - BOI.Amount); i++)
             {
@@ -114,7 +114,7 @@ internal class Cart:ICart
         {
             try
             {
-                DO.Product DP = dal.Product.Get(item.ID);
+                DO.Product DP = (DO.Product)dal.Product.Get(item.ID);
                 if (item.Amount < 0)
                 {
                     throw new BO.NegativeAmountException("negative amount")
@@ -179,7 +179,7 @@ internal class Cart:ICart
         {
             foreach (var item in cart.ItemList)
             {
-                DO.Product p = dal.Product.Get(item.ID);
+                DO.Product p = (DO.Product)dal.Product.Get(item.ID);
                 p.InStock -= item.Amount;
                 dal.Product.Update(p);
             }

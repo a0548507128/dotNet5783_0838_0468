@@ -21,11 +21,11 @@ public class DalProduct:IProduct
         }
         return _p.ID;
     }
-    public Product Get(int IdNum)
+    public Product? Get(int IdNum)
     {
-        foreach (Product p in Products)
+        foreach (Product? p in Products)
         {
-            if (p.ID == IdNum)
+            if (p?.ID == IdNum)
                 return p;
         }
         throw new EntityNotFound("this product does not exist");

@@ -13,7 +13,7 @@ namespace DalApi
         public int Add (T IdAdd);
         public int Update (T IdUpdate);
         public void Delete (int IdDelete);
-        public T Get (int IdGet);
+        public T? Get (int IdGet);
         public IEnumerable<T?> GetAll (Predicate<T?>? predict = null);
     }
 }

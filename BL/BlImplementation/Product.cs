@@ -50,7 +50,7 @@ internal class Product : BlApi.IProduct
             DO.Product dalProduct = new DO.Product();
             try
             {
-                dalProduct = dal.Product.Get(productID);
+                dalProduct = (DO.Product)dal.Product.Get(productID);
             }
             catch (DO.EntityNotFound e)
             {
@@ -76,7 +76,7 @@ internal class Product : BlApi.IProduct
             DO.Product productDal = new DO.Product();
             try
             {
-                productDal = dal.Product.Get(productID);
+                productDal = (DO.Product)dal.Product.Get(productID);
             }
             catch (DO.EntityNotFound e)
             {
@@ -111,7 +111,7 @@ internal class Product : BlApi.IProduct
     }
     public void AddProductManager(BO.Product product)
     {
-        if (product.ID == null || product.Price == null || product.InStock == null)
+        if (product?.ID == null || product?.Price == null || product?.InStock == null)
             throw new ProductInUseException("ERROR: empty field");
         if (product.ID <= 0)
             throw new NegativeIdException("ERROR: Negative Id");
@@ -159,7 +159,7 @@ internal class Product : BlApi.IProduct
     }
     public void UpdateProductManager(BO.Product product)
     {
-        if (product.ID == null || product.Price == null || product.InStock == null)
+        if (product?.ID == null || product?.Price == null || product?.InStock == null)
             throw new ProductInUseException("ERROR: empty field");
         if (product.ID <= 0)
             throw new NegativeIdException("ERROR: Negative Id");

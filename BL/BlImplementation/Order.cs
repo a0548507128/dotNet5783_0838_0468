@@ -8,10 +8,10 @@ internal class Order : BlApi.IOrder
 {
     DalApi.IDal? dal = DalApi.Factory.Get();
 
-    public IEnumerable<BO.OrderForList> GetOrderList(Func<DO.Order?, bool>? predict = null)
+    public IEnumerable<BO.OrderForList?> GetOrderList(Func<DO.Order?, bool>? predict = null)
     {
         IEnumerable<DO.Order?> orderList = new List<DO.Order?>();
-        List<BO.OrderForList> ordersForList = new List<BO.OrderForList>();
+        List<BO.OrderForList?> ordersForList = new List<BO.OrderForList?>();
         orderList = dal.Order.GetAll();
         //IEnumerable<BO.OrderTracking> orderTracking = new List<BO.OrderTracking>();
         foreach (var item in orderList)
@@ -41,7 +41,7 @@ internal class Order : BlApi.IOrder
             DO.Order o = new DO.Order();
             try
             {
-                o = dal.Order.Get(id);
+                o = (DO.Order)dal.Order.Get(id);
             }
             catch (DO.EntityNotFound)
             {
@@ -58,7 +58,7 @@ internal class Order : BlApi.IOrder
         DO.Order o = new DO.Order();
         try
         {
-            o = dal.Order.Get(numOrder);
+            o = (DO.Order)dal.Order.Get(numOrder);
         }
         catch (DO.EntityNotFound)
         {
@@ -90,7 +90,7 @@ internal class Order : BlApi.IOrder
         DO.Order o = new DO.Order();
         try
         {
-            o = dal.Order.Get(numOrder);
+            o = (DO.Order)dal.Order.Get(numOrder);
         }
         catch
         {
@@ -126,10 +126,10 @@ internal class Order : BlApi.IOrder
     }
     public BO.OrderTracking OrderTracking(int numOrder)
     {
-        DO.Order o = new DO.Order();
+        DO.Order? o = new DO.Order();
         try
         {
-            o = dal.Order.Get(numOrder);
+            o = (DO.Order)dal.Order.Get(numOrder);
         }
         catch (DO.EntityNotFound)
         {
@@ -138,25 +138,25 @@ internal class Order : BlApi.IOrder
         }
         BO.OrderTracking orderTracking = new BO.OrderTracking();
         orderTracking.ID = numOrder;
-        orderTracking.Status = CheckStatus(o.OrderDate, o.ShipDate, o.DeliveryrDate);
+        orderTracking.Status = CheckStatus(o?.OrderDate, o?.ShipDate, o?.DeliveryrDate);
         switch (orderTracking.Status)
         {
             case EStatus.Done:
                 ((List<BO.OrderTracking.StatusAndDate>)(orderTracking.listOfStatus)).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = (DateTime)o.OrderDate,
+                    Date = (DateTime)o?.OrderDate,
                     Status = BO.Enums.EStatus.Done
                 });
                 break;
             case EStatus.Sent:
                 ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = (DateTime)o.OrderDate,
+                    Date = (DateTime)o?.OrderDate,
                     Status = BO.Enums.EStatus.Done
                 });
                 ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = (DateTime)o.ShipDate,
+                    Date = (DateTime)o?.ShipDate,
                     Status = BO.Enums.EStatus.Sent
 
                 });
@@ -164,18 +164,18 @@ internal class Order : BlApi.IOrder
             case EStatus.Provided:
                 ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = (DateTime)o.OrderDate,
+                    Date = (DateTime)o?.OrderDate,
                     Status = BO.Enums.EStatus.Done
                 });
                 ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = (DateTime)o.ShipDate,
+                    Date = (DateTime)o?.ShipDate,
                     Status = BO.Enums.EStatus.Sent
 
                 });
                 ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
                 {
-                    Date = (DateTime)o.DeliveryrDate,
+                    Date = (DateTime)o?.DeliveryrDate,
                     Status = BO.Enums.EStatus.Provided
 
                 });
@@ -239,10 +239,10 @@ internal class Order : BlApi.IOrder
         }
         return sum;
     }
-    public List<BO.OrderItem> GetAllItemsToOrder(int id)
+    public List<BO.OrderItem?> GetAllItemsToOrder(int id)
     {
         IEnumerable<DO.OrderItem?> orderItemList = new List<DO.OrderItem?>();
-        List<BO.OrderItem> BOorderItemList = new List<BO.OrderItem>();
+        List<BO.OrderItem?> BOorderItemList = new List<BO.OrderItem?>();
         orderItemList = dal.OrderItem.GetAll();
         int count = 0;
         foreach (var item in orderItemList)
@@ -264,7 +264,7 @@ internal class Order : BlApi.IOrder
     public string getOrderItemName(int productId)
     {
         DO.Product product = new DO.Product();
-        product = dal.Product.Get(productId);
+        product = (DO.Product)dal.Product.Get(productId);
         return product.Name;
     }
     #endregion

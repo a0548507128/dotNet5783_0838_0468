@@ -68,14 +68,15 @@ namespace PL
                     Name = name.Text,
                     Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
                 };
-                if (addUpdate.Content == "add")
-                {
-                    bl?.Product.AddProductManager(p);
-                }
-                if (addUpdate.Content == "update")
-                {
-                    bl?.Product.UpdateProductManager(p);
-                }
+                    if ((string)addUpdate.Content == "add")
+                    {
+                        bl?.Product.AddProductManager(p);
+                    }
+                    if ((string)addUpdate.Content == "update")
+                    {
+                        bl?.Product.UpdateProductManager(p);
+                    }
+                
                 this.Close();
             }
             catch (ProductInUseException ex)

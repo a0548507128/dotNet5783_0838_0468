@@ -13,12 +13,12 @@ internal class DalOrder:IOrder
         Orders.Add(_o);
         return _o.ID;
     }
-    public Order Get(int IdNum)
+    public Order? Get(int IdNum)
     {
 
-        foreach (Order o in Orders)
+        foreach (Order? o in Orders)
         {
-            if (o.ID == IdNum)
+            if (o?.ID == IdNum)
                 return o;
         }
         throw new Exception("this order does not exist");

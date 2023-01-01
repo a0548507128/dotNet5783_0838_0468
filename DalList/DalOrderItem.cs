@@ -13,12 +13,12 @@ internal class DalOrderItem:IOrderItem
         OrderItems.Add(_o);
         return _o.ID;
     }
-    public OrderItem Get(int IdNum)
+    public OrderItem? Get(int IdNum)
     {
-
-        foreach (OrderItem o in OrderItems)
+       
+        foreach (OrderItem? o in OrderItems)
         {
-            if (o.ID == IdNum)
+            if (o?.ID == IdNum)
                 return o;
         }
         throw new Exception("this order-item does not exist");
@@ -37,11 +37,11 @@ internal class DalOrderItem:IOrderItem
         return _allOrderItems;
     }
 
-    public OrderItem getOrderItemByPIDOID(int pid,int oid)
+    public OrderItem? getOrderItemByPIDOID(int pid,int oid)
     {
-        foreach(OrderItem o in OrderItems)
+        foreach(OrderItem? o in OrderItems)
         {
-            if(o.ProductID==pid&&o.OrderID==o.OrderID)
+            if(o?.ProductID==pid&&o?.OrderID==o?.OrderID)
                 return o;
         }
         throw new Exception("this orderitem doesn't exist");

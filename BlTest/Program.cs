@@ -42,9 +42,9 @@ namespace BlTest
                         cartMethod();
                         break;
 
-                    case 3://order
-                        orderMethod();
-                        break;
+                    //case 3://order
+                    //    orderMethod();
+                    //    break;
                 }
             }
         }
