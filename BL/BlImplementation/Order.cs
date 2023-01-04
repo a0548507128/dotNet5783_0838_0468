@@ -11,23 +11,34 @@ internal class Order : BlApi.IOrder
     public IEnumerable<BO.OrderForList?> GetOrderList(Func<DO.Order?, bool>? predict = null)
     {
         IEnumerable<DO.Order?> orderList = new List<DO.Order?>();
-        List<BO.OrderForList?> ordersForList = new List<BO.OrderForList?>();
+        IEnumerable<BO.OrderForList?> ordersForList = new List<BO.OrderForList?>();
         orderList = dal.Order.GetAll();
         //IEnumerable<BO.OrderTracking> orderTracking = new List<BO.OrderTracking>();
-        foreach (var item in orderList)
-        {
-            if (item != null)
-            {
-                ordersForList.Add(new BO.OrderForList()
-                {
-                    OrderID = item.Value.ID,
-                    CustomerName = item.Value.CustomerName,
-                    Status = CheckStatus(item?.OrderDate, item?.ShipDate, item?.DeliveryrDate),
-                    AmountOfItem = GetAmountItems(item.Value.ID),
-                    TotalSum = CheckTotalSum(item.Value.ID)
-                });
-            }
-        }
+        //foreach (var item in orderList)
+        //{
+        //    if (item != null)
+        //    {
+        //        ordersForList.Add(new BO.OrderForList()
+        //        {
+        //            OrderID = item.Value.ID,
+        //            CustomerName = item.Value.CustomerName,
+        //            Status = CheckStatus(item?.OrderDate, item?.ShipDate, item?.DeliveryrDate),
+        //            AmountOfItem = GetAmountItems(item.Value.ID),
+        //            TotalSum = CheckTotalSum(item.Value.ID)
+        //        });
+        //    }
+        //}
+        ordersForList = from DO.Order order in orderList
+                        where (predict == null || predict(order))
+                        select new BO.OrderForList()
+                        {
+                            OrderID = order.ID,
+                            CustomerName = order.CustomerName,
+                            Status = CheckStatus(order.OrderDate, order.ShipDate, order.DeliveryrDate),
+                            AmountOfItem = GetAmountItems(order.ID),
+                            TotalSum = CheckTotalSum(order.ID)
+                        };
+
         return ordersForList;
     }
     public BO.Order GetOrderDetails(int id)
@@ -218,12 +229,15 @@ internal class Order : BlApi.IOrder
     {
         IEnumerable<DO.OrderItem?> orderItemList = new List<DO.OrderItem?>();
         orderItemList = dal.OrderItem.GetAll();
-        int sum = 0;
-        foreach (var item in orderItemList)
-        {
-            if (item != null)
-                sum += item.Value.Amount;
-        }
+        //int sum = 0;
+        //foreach (var item in orderItemList)
+        //{
+        //    if (item != null)
+        //        sum = item.Value.Amount+1;
+        //}
+        int sum = orderItemList.FirstOrDefault(item => item == null)?.Amount+1 ?? 0;
+        if (sum == 0)
+            throw new Exception();
         return sum;
 
     }
@@ -234,9 +248,10 @@ internal class Order : BlApi.IOrder
         double sum = 0;
         foreach (var item in orderItemList)
         {
-            if(item != null)
+            if (item != null)
                 sum = sum + item.Value.Price * item.Value.Amount;
         }
+
         return sum;
     }
     public List<BO.OrderItem?> GetAllItemsToOrder(int id)

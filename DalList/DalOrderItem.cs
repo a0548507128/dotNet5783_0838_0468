@@ -1,5 +1,6 @@
 ﻿using DalApi;
 using DO;
+using System;
 using static Dal.DataSource;
 
 namespace Dal;
@@ -15,13 +16,16 @@ internal class DalOrderItem:IOrderItem
     }
     public OrderItem? Get(int IdNum)
     {
-       
-        foreach (OrderItem? o in OrderItems)
-        {
-            if (o?.ID == IdNum)
-                return o;
-        }
-        throw new Exception("this order-item does not exist");
+
+        //foreach (OrderItem? o in OrderItems)
+        //{
+        //    if (o?.ID == IdNum)
+        //        return o;
+        //}
+        OrderItem? o = OrderItems.FirstOrDefault(OrderItem => OrderItem?.ID == IdNum);
+        if (o == null)
+            throw new Exception("this order-item does not exist");
+        return o;
     }
     public IEnumerable<OrderItem?> GetAll(Predicate<OrderItem?>? predict = null)
     { 
@@ -36,27 +40,33 @@ internal class DalOrderItem:IOrderItem
         }
         return _allOrderItems;
     }
-
     public OrderItem? getOrderItemByPIDOID(int pid,int oid)
     {
-        foreach(OrderItem? o in OrderItems)
-        {
-            if(o?.ProductID==pid&&o?.OrderID==o?.OrderID)
-                return o;
-        }
-        throw new Exception("this orderitem doesn't exist");
+        //foreach(OrderItem? o in OrderItems)
+        //{
+        //    if(o?.ProductID==pid&&o?.OrderID==o?.OrderID)
+        //        return o;
+        //}
+        OrderItem? o = OrderItems.FirstOrDefault(OrderItem => OrderItem?.ProductID == pid&& OrderItem?.OrderID == oid);
+        if (o == null)
+            throw new Exception("this orderitem doesn't exist");
+        return o;
     }
-   // public List<OrderItem?> getOrderItemByOrder(int oid) 
-    //{
-    //    int j = 0;
-    //   List<OrderItem?> allOrderItems= new List<OrderItem?>();
-    //    foreach (OrderItem o in OrderItems)
-    //    {
-    //        if (o.OrderID == oid)
-    //            allOrderItems[j++] = o;
-    //    }
-    //    return allOrderItems;
-    //}
+    public List<OrderItem?> getOrderItemByOrder(int oid)
+    {
+        int j = 0;
+        List<OrderItem?> allOrderItems = new List<OrderItem?>();
+        //foreach (OrderItem? o in OrderItems)
+        //{
+        //    if (o?.OrderID == oid)
+        //        allOrderItems[j++] = o;
+        //}
+        var v = from o in OrderItems
+                where o?.OrderID == oid
+                select allOrderItems[j++] = o;
+
+        return allOrderItems;
+    }
     public void Delete(int IdNum)
     {
         for (int i = 0; i < OrderItems.Count; i++)

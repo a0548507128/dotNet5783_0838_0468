@@ -23,12 +23,15 @@ public class DalProduct:IProduct
     }
     public Product? Get(int IdNum)
     {
-        foreach (Product? p in Products)
-        {
-            if (p?.ID == IdNum)
-                return p;
-        }
-        throw new EntityNotFound("this product does not exist");
+        //foreach (Product? p in Products)
+        //{
+        //    if (p?.ID == IdNum)
+        //        return p;
+        //}
+        Product? p = Products.FirstOrDefault(Product => Product?.ID == IdNum);
+        if (p == null)
+            throw new EntityNotFound("this product does not exist");
+        return p;
     }
     public IEnumerable<Product?> GetAll(Predicate<Product?>? predict = null)
     {
@@ -48,15 +51,18 @@ public class DalProduct:IProduct
     }
     public void Delete(int IdNum)
     {
-        for (int i = 0; i < Products.Count; i++)
-        {
-            if (Products[i]?.ID == IdNum)
-            {
-                Products.RemoveAt(IdNum);
-                return;
-            }
-        }
-        throw new Exception("this item doesn't exist");
+        Products.Remove((Products.FirstOrDefault(item => item?.ID == IdNum))
+            ?? throw new Exception("this item doesn't exist"));
+
+        //for (int i = 0; i < Products.Count; i++)
+        //{
+        //    if (Products[i]?.ID == IdNum)
+        //    {
+        //        Products.RemoveAt(IdNum);
+        //        return;
+        //    }
+        //}
+        //throw new Exception("this item doesn't exist");
     }
     public int Update(Product upProduct)
     {

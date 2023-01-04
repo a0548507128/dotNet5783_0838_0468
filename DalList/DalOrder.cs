@@ -15,22 +15,19 @@ internal class DalOrder:IOrder
     }
     public Order? Get(int IdNum)
     {
-
-        foreach (Order? o in Orders)
-        {
-            if (o?.ID == IdNum)
-                return o;
-        }
-        throw new Exception("this order does not exist");
+            //foreach (Order? o in Orders)
+            //{
+            //    if (o?.ID == IdNum)
+            //        return o;
+            //}'
+            Order? o = Orders.FirstOrDefault(Order => Order?.ID == IdNum);
+            if (o == null)
+                throw new Exception("this order does not exist");
+            return o;
+        
     }
     public IEnumerable<Order?> GetAll(Predicate<Order?>? predict = null)
     {
-        //List<Order?> _allOrders = new List<Order?>();
-        //for (int i = 0; i < Orders.Count; i++)
-        //{
-        //    _allOrders[i] = Orders[i];
-        //}
-        //return _allOrders;
         List<Order?> _allOrders = new ();
         if (predict == null)
         {

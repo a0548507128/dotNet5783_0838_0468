@@ -17,8 +17,8 @@ internal class Product : BlApi.IProduct
     DalApi.IDal? dal = DalApi.Factory.Get();
     public IEnumerable<BO.ProductForList?> GetProductsList(Func<DO.Product?, bool>? predict = null)
     {
-        IEnumerable<DO.Product?> dalProductsList; 
-        List<BO.ProductForList?> blProductsList = new ();
+        IEnumerable<DO.Product?> dalProductsList;
+        IEnumerable<BO.ProductForList?> blProductsList= new List<BO.ProductForList?>();
         if(predict== null)
         {
             dalProductsList = dal.Product.GetAll();
@@ -27,20 +27,28 @@ internal class Product : BlApi.IProduct
         {
             dalProductsList = dal.Product.GetAll(x=>predict(x));
         }
-        foreach (var productDal in dalProductsList)
-        {
-            if (productDal != null)
-            {
-                BO.ProductForList product = new BO.ProductForList()
-                {
-                    ID = productDal.Value.ID,
-                    Name = productDal.Value.Name,
-                    Price = productDal.Value.Price,
-                    Category = (ECategory?)productDal.Value.Category
-                };
-                blProductsList.Add(product);
-            }
-        }
+        //foreach (var productDal in dalProductsList)
+        //{
+        //    if (productDal != null)
+        //    {
+        //        blProductsList.Add(new BO.ProductForList()
+        //        {
+        //            ID = productDal.Value.ID,
+        //            Name = productDal.Value.Name,
+        //            Price = productDal.Value.Price,
+        //            Category = (ECategory?)productDal.Value.Category
+        //        });
+        //    }
+        //}
+        blProductsList = from productDal in dalProductsList
+                        where (productDal != null|| predict(productDal))
+                        select new BO.ProductForList()
+                        {
+                            ID = productDal.Value.ID,
+                            Name = productDal.Value.Name,
+                            Price = productDal.Value.Price,
+                            Category = (ECategory?)productDal.Value.Category
+                        };
         return blProductsList;
     }
     public BO.Product GetProductDetailsManager(int productID)
@@ -82,16 +90,17 @@ internal class Product : BlApi.IProduct
             {
                 //throw new Exception(e);
             }
-
-            int amountInCart = 0;
-            foreach (var oi in c.ItemList)
-            {
-                if (oi?.ID == productID)
-                {
-                    amountInCart = oi.Amount;
-                    break;
-                }
-            }
+           
+            //int amountInCart = 0;
+            //foreach (var oi in c.ItemList)
+            //{
+            //    if (oi?.ID == productID)
+            //    {
+            //        amountInCart = oi.Amount;
+            //        break;
+            //    }
+            //}
+            int amountInCart = c.ItemList.FirstOrDefault(oi => oi?.ID == productID)?.Amount ?? 0;
             if (amountInCart == 0)
                 throw new Exception();
 
@@ -102,7 +111,7 @@ internal class Product : BlApi.IProduct
                 Price = productDal.Price,
                 Category = (ECategory?)productDal.Category,
                 AmoutInYourCart = amountInCart,
-                InStock = (productDal.InStock)//לתקן!!!!
+                InStock = (productDal.InStock)
             };
             return product;
         }
