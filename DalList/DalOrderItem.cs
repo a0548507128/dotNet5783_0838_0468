@@ -69,16 +69,20 @@ internal class DalOrderItem:IOrderItem
     }
     public void Delete(int IdNum)
     {
-        for (int i = 0; i < OrderItems.Count; i++)
-        {
-            if (OrderItems[i]?.ID == IdNum)
-            {
-                OrderItems.RemoveAt(IdNum);
-                return;
-            }
-        }
-        throw new Exception("this order-item doesn't exist");
+        OrderItems.Remove((OrderItems.FirstOrDefault(item => item?.ID == IdNum))
+           ?? throw new Exception("this order-item doesn't exist"));
+
+        //for (int i = 0; i < OrderItems.Count; i++)
+        //{
+        //    if (OrderItems[i]?.ID == IdNum)
+        //    {
+        //        OrderItems.RemoveAt(IdNum);
+        //        return;
+        //    }
+        //}
+        //throw new Exception("this order-item doesn't exist");
     }
+
     public int Update(OrderItem upOrderItem)
     {
         for (int i = 0; i < OrderItems.Count; i++)

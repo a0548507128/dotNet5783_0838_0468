@@ -41,15 +41,17 @@ internal class DalOrder:IOrder
     }
     public void Delete(int IdNum)
     {
-        for (int i = 0; i < Orders.Count; i++)
-        {
-            if (Orders[i]?.ID == IdNum)
-            {
-                Orders.RemoveAt(IdNum);
-                return;
-            }
-        }
-        throw new Exception("this order doesn't exist");
+        Orders.Remove((Orders.FirstOrDefault(item => item?.ID == IdNum))
+           ?? throw new Exception("this order doesn't exist"));
+        //for (int i = 0; i < Orders.Count; i++)
+        //{
+        //    if (Orders[i]?.ID == IdNum)
+        //    {
+        //        Orders.RemoveAt(IdNum);
+        //        return;
+        //    }
+        //}
+        //throw new Exception("this order doesn't exist");
     }
     public int Update(Order upOrder)
     {

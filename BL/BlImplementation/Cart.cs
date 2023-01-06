@@ -2,6 +2,9 @@
 using BlApi;
 using BO;
 using DalApi;
+using System.Linq;
+using System.Runtime.Intrinsics.Arm;
+using static BO.Enums;
 
 namespace BlImplementation;
 
@@ -109,30 +112,49 @@ internal class Cart:ICart
         {
             throw new BO.AdressIsNullException("adress is null") { AdressIsNull = customerAdress.ToString() };
         }
-       // checkEmail(customerEmail);
-        foreach (var item in cart.ItemList)
-        {
-            try
-            {
-                DO.Product DP = (DO.Product)dal.Product.Get(item.ID);
-                if (item.Amount < 0)
-                {
-                    throw new BO.NegativeAmountException("negative amount")
-                    {
-                        NegativeAmount = item.Amount.ToString()
-                    };
-                }
-                if (item.Amount > DP.InStock)
-                {
-                    throw new BO.NotEnoughInStockException("Not enough in stock") { NotEnoughInStock = item.Amount.ToString() };
-                }
+        // checkEmail(customerEmail);
+       var ii =(from i in cart.ItemList
+               where i is not null && i.Amount<0
+               select i).FirstOrDefault();
 
-            }
-            catch (DO.EntityNotFound)
+
+        //foreach (var item in cart.ItemList)
+        //{
+        try
+        {
+            DO.Product DP = (DO.Product)dal.Product.Get(ii.ID);
+            if ((from i in cart.ItemList
+                 where i is not null && i.Amount < 0
+                 select i).FirstOrDefault() is not null)
             {
-                throw new BO.ItemInCartNotExistsAsProductException("item in cart not exists as product") { ItemInCartNotExistsAsProduct = item.ToString() };
+                throw new BO.NegativeAmountException("negative amount")
+                {
+                    NegativeAmount = 0.ToString()
+                };
+                if ((from i in cart.ItemList
+                     where i is not null && i.Amount < 0
+                     select i).FirstOrDefault() is not null)
+                {
+                    throw new BO.NotEnoughInStockException("Not enough in stock") { NotEnoughInStock = ii.Amount.ToString() };
+                }
+                //if (item.Amount < 0)
+                //{
+                //    throw new BO.NegativeAmountException("negative amount")
+                //    {
+                //        NegativeAmount = item.Amount.ToString()
+                //    };
+                //}
+                //if (item.Amount > DP.InStock)
+                //{
+                //    throw new BO.NotEnoughInStockException("Not enough in stock") { NotEnoughInStock = item.Amount.ToString() };
+                //}
             }
         }
+        catch (DO.EntityNotFound)
+        {
+            throw new BO.ItemInCartNotExistsAsProductException("item in cart not exists as product") { ItemInCartNotExistsAsProduct = ii.ToString() };
+        }
+        
 
         #endregion
 
@@ -153,18 +175,28 @@ internal class Cart:ICart
             int orderID = dal.Order.Add(o);
             try
             {
-                foreach (var item in cart.ItemList)
-                {
-                    dal.OrderItem.Add(new DO.OrderItem()
+                var addOrderItem = cart.ItemList
+                    .Where(orderToAdd => orderToAdd is not null)
+                    .Select(orderToAdd => dal.OrderItem.Add(new DO.OrderItem()
                     {
                         ID = 0,
-                        ProductID = item.ID,
+                        ProductID = orderToAdd.ID,
                         OrderID = orderID,
-                        Price = item.Price,
-                        Amount = item.Amount
-                    });
+                        Price = orderToAdd.Price,
+                        Amount = orderToAdd.Amount
+                    }));
+                //foreach (var item in cart.ItemList)
+                //{
+                //    dal.OrderItem.Add(new DO.OrderItem()
+                //    {
+                //        ID = 0,
+                //        ProductID = item.ID,
+                //        OrderID = orderID,
+                //        Price = item.Price,
+                //        Amount = item.Amount
+                //    });
 
-                }
+                //}
             }
             catch (DO.DuplicateID)
             {

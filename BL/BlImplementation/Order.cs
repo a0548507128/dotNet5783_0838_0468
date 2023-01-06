@@ -246,34 +246,49 @@ internal class Order : BlApi.IOrder
         IEnumerable<DO.OrderItem?> orderItemList = new List<DO.OrderItem?>();
         orderItemList = dal.OrderItem.GetAll();
         double sum = 0;
-        foreach (var item in orderItemList)
-        {
-            if (item != null)
-                sum = sum + item.Value.Price * item.Value.Amount;
-        }
+        var newSum = (orderItemList
+            .Where(item => item.Equals(true))
+            .Select(item => sum = sum + item.Value.Price * item.Value.Amount)).First();
+        return newSum;
+        //foreach (var item in orderItemList)
+        //{
+        //    if (item != null)
+        //        sum = sum + item.Value.Price * item.Value.Amount;
+        //}
 
-        return sum;
+        //return sum;
     }
     public List<BO.OrderItem?> GetAllItemsToOrder(int id)
     {
         IEnumerable<DO.OrderItem?> orderItemList = new List<DO.OrderItem?>();
-        List<BO.OrderItem?> BOorderItemList = new List<BO.OrderItem?>();
+        IEnumerable<BO.OrderItem?> BOorderItemList = new List<BO.OrderItem?>();
         orderItemList = dal.OrderItem.GetAll();
         int count = 0;
-        foreach (var item in orderItemList)
-        {
-            BOorderItemList.Add(new BO.OrderItem()
-            {
-                numInOrder = count++,
-                ID = item.Value.ID,
-                Name = getOrderItemName(item.Value.ProductID),
-                Price = item.Value.Price,
-                Amount = item.Value.Amount,
-                sumItem = item.Value.Price * item.Value.Amount
+        BOorderItemList = from item in orderItemList
+                          where (item != null)
+                         select new BO.OrderItem()
+                         {
+                             numInOrder = count++,
+                             ID = item.Value.ID,
+                             Name = getOrderItemName(item.Value.ProductID),
+                             Price = item.Value.Price,
+                             Amount = item.Value.Amount,
+                             sumItem = item.Value.Price * item.Value.Amount
+                         };
+        //foreach (var item in orderItemList)
+        //{
+        //    BOorderItemList.Add(new BO.OrderItem()
+        //    {
+        //        numInOrder = count++,
+        //        ID = item.Value.ID,
+        //        Name = getOrderItemName(item.Value.ProductID),
+        //        Price = item.Value.Price,
+        //        Amount = item.Value.Amount,
+        //        sumItem = item.Value.Price * item.Value.Amount
 
-            });
-        }
-        return BOorderItemList;
+        //    });
+        //}
+        return (List<BO.OrderItem?>)BOorderItemList;
 
     }
     public string getOrderItemName(int productId)
