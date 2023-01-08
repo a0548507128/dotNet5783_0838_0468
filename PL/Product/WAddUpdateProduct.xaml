@@ -5,16 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="AddProduct" Height="450" Width="800">
+        Title="AddProduct" Height="450" Width="800"
+         DataContext="{Binding RelativeSource={RelativeSource self}}">
 
-    <Grid Name="MainGrid">
+    <Grid Name="MainGrid" DataContext="{Binding ProductToUpOrAdd}">
 
         <ListView  Name="listViewAdd" Margin="274,0,274,0" >
 
             <Label Content="ID"/>
             <TextBox   TextWrapping="Wrap" Width="120" Name="id" Text="" TextChanged="id_TextChanged" />
             <Label Content="Category"/>
-            <ComboBox Name="AttributeSelector" Grid.Column="1" Width="119" Height="19" />
+            <ComboBox Name="AttributeSelector" Grid.Column="1" Width="119" Height="19" SelectedItem="{Binding Category,Mode=TwoWay}" />
             <Label Content="Name"/>
             <TextBox TextWrapping="Wrap"  Width="120" Name="name" Text="" TextChanged="name_TextChanged"/>
             <Label Content="Price"/>
@@ -25,7 +26,7 @@
             <!--<TextBox TextWrapping="Wrap" Text="TextBox" Width="120"/>-->
 
         </ListView>
-        <Button Content="" Grid.Row="1" HorizontalAlignment="Left" Margin="666,5,0,10" Padding="5" Width="85" Click="Button_Click_Add_update"  Name="addUpdate"/>
+        <Button Content="{Binding Source={x:Static local:WAddUpdateProduct.MyContent}}" Grid.Row="1" HorizontalAlignment="Left" Margin="666,5,0,10" Padding="5" Width="85" Click="Button_Click_Add_update"  Name="addUpdate" />
 
         <Grid.RowDefinitions>
             <RowDefinition Height="351*"/>

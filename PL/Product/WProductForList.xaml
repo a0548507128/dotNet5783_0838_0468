@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="exhibition" Height="640" Width="800">
+        Title="exhibition" Height="640" Width="800"
+        DataContext = "{Binding RelativeSource={RelativeSource Self}}" >
+    
     <Grid Name="MainGrid">
         
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
@@ -13,10 +15,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name="AttributeSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="AttributeSelector_SelectionChanged"/>
+            <ComboBox Name="AttributeSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="AttributeSelector_SelectionChanged" SelectedItem="{Binding selectedCategory }" ItemsSource="{Binding Categories}"/>
             <Label Content="category:" HorizontalAlignment="Left" Margin="48,0,0,0" VerticalAlignment="Center" Grid.Column="0"/>
         </Grid>
-        <ListView Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListOfProduct1" MouseDoubleClick="ListOfProduct1_MouseDoubleClick">
+        <ListView Grid.Row="1"  x:Name="ListOfProduct1" MouseDoubleClick="ListOfProduct1_MouseDoubleClick" SelectedValue="{Binding updateProduct}" ItemsSource="{Binding ListOfProduct}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

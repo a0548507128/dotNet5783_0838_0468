@@ -27,32 +27,55 @@ namespace PL
     /// </summary>
     public partial class WAddUpdateProduct : Window
     {
+        #region property
         BlApi.IBl? bl = BlApi.Factory.Get();
-
-        public WAddUpdateProduct(string s)
+        public static string MyContent { get; set; } = "add";
+        public BO.Product ProductToUpOrAdd
         {
-            InitializeComponent();
-            if (s == "add")
-            {
-                addUpdate.Content = "add";
-            }
-            AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.ECategory));
+            get { return (BO.Product)GetValue(ProductToUpOrAddProperty); }
+            set { SetValue(ProductToUpOrAddProperty, value); }
         }
-        public WAddUpdateProduct(string s, int i)
+        public static readonly DependencyProperty ProductToUpOrAddProperty = DependencyProperty.Register(nameof(ProductToUpOrAdd),
+                                                                                                        typeof(BO.Product),
+                                                                                                       typeof(WAddUpdateProduct));
+        public System.Array Categories { get; set; } = Enum.GetValues(typeof(BO.Enums.ECategory));
+        #endregion
+        public WAddUpdateProduct()
         {
+            ProductToUpOrAdd = new();
+            MyContent = "add";
             InitializeComponent();
-            if (s == "update")
+            //if (s == "add")
+            //{
+            //    addUpdate.Content = "add";
+            //}
+            // AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.ECategory));
+        }
+        public WAddUpdateProduct( int i)
+        {
+            ProductToUpOrAdd = new();
+
+            if (bl != null)
             {
-                addUpdate.Content = "update";
+                ProductToUpOrAdd = bl.Product.GetProductDetailsManager(i);
             }
-            BO.Product p = bl.Product.GetProductDetailsManager(i);
+
+            MyContent = "update";
+           
+            InitializeComponent();
             id.Text = Convert.ToString(i);
             id.IsReadOnly = true;
-            name.Text = p.Name;
-            price.Text = Convert.ToString(p.Price);
-            inStock.Text = Convert.ToString(p.InStock);
+            name.Text = ProductToUpOrAdd.Name;
+            price.Text = Convert.ToString(ProductToUpOrAdd.Price);
+            inStock.Text = Convert.ToString(ProductToUpOrAdd.InStock);
             AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.ECategory));
-       
+            //if (s == "update")
+            //{
+            //    addUpdate.Content = "update";
+            //}
+            //BO.Product p = bl.Product.GetProductDetailsManager(i);
+
+
         }
 
         private void Button_Click_Add_update(object sender, RoutedEventArgs e)
@@ -60,21 +83,21 @@ namespace PL
             
             try
             {
-                BO.Product p = new()
-                {
-                    ID = int.Parse(id.Text),
-                    Price = double.Parse(price.Text),
-                    InStock = int.Parse(inStock.Text),
-                    Name = name.Text,
-                    Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
-                };
+                //BO.Product p = new()
+                //{
+                //    ID = int.Parse(id.Text),
+                //    Price = double.Parse(price.Text),
+                //    InStock = int.Parse(inStock.Text),
+                //    Name = name.Text,
+                //    Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
+                //};
                     if ((string)addUpdate.Content == "add")
                     {
-                        bl?.Product.AddProductManager(p);
+                        bl?.Product.AddProductManager(ProductToUpOrAdd);
                     }
                     if ((string)addUpdate.Content == "update")
                     {
-                        bl?.Product.UpdateProductManager(p);
+                        bl?.Product.UpdateProductManager(ProductToUpOrAdd);
                     }
                 
                 this.Close();
