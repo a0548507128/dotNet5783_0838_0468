@@ -1,0 +1,14 @@
+﻿<Window x:Class="PL.Wmanager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="Wmanager" Height="450" Width="800"
+        Background="LightBlue">
+    <Grid>
+        <Button Name="ProductList" Content="Product List" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" Width="360" Height="35" Click="ProductList_Click"/>
+        <Button Name="OrderList" Content="Order List" HorizontalAlignment="Center" VerticalAlignment="Top" Width="360" Height="35" Margin="0,130,0,0" Click="OrderList_Click" />
+    </Grid>
+</Window>

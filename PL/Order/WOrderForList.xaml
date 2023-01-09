@@ -1,0 +1,26 @@
+﻿<Window x:Class="PL.WOrderForList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="WOrderForList" Height="450" Width="800"
+         DataContext = "{Binding RelativeSource={RelativeSource Self}}">
+    <Grid>
+
+        <ListView  x:Name="ListOfOrder" Grid.RowSpan="2" MouseDoubleClick="ListOfOrder_MouseDoubleClick" ItemsSource="{Binding ListOfOrder1}" >
+            <!--SelectedValue="" ItemsSource=""-->
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>

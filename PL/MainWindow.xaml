@@ -10,7 +10,9 @@
 
     <Grid>
         <!--<Image Source="/Image/2.png"/>-->
-        <Button Name="Admin" Content="Admin" HorizontalAlignment="Center" Margin="0,197,0,0" VerticalAlignment="Top" Click="Admin_Click"/>
-       
+        <Button Name="manager" Content="manager" HorizontalAlignment="Center" Margin="0,64,0,0" VerticalAlignment="Top" Click="Admin_Click" Width="360" Height="35"/>
+        <Button Name="NewOrder" Content="new order" HorizontalAlignment="Center" Margin="0,122,0,0" VerticalAlignment="Top"  Width="360" Height="33" Click="NewOrder_Click"/>
+        <Button Name="OrderTracking" Content="order tracking" HorizontalAlignment="Center" Margin="0,183,0,0" VerticalAlignment="Top" Width="360" Height="34" Click="OrderTracking_Click"/>
+
     </Grid>
 </Window>

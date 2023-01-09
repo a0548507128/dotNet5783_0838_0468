@@ -28,7 +28,17 @@ namespace PL
 
         private void Admin_Click(object sender, RoutedEventArgs e)
         {
-            new WProductForList().Show();
+            new Wmanager().Show();
+        }
+
+        private void OrderTracking_Click(object sender, RoutedEventArgs e)
+        {
+            new WOrderTracking().Show();
+        }
+
+        private void NewOrder_Click(object sender, RoutedEventArgs e)
+        {
+            new WNewOrder().Show();
         }
     }
 }

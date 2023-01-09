@@ -100,7 +100,7 @@ internal class Product : BlApi.IProduct
             //        break;
             //    }
             //}
-            int amountInCart = c.ItemList.FirstOrDefault(oi => oi?.ID == productID)?.Amount ?? 0;
+            int amountInCart = c.ItemList?.FirstOrDefault(oi => oi?.ID == productID)?.Amount ?? 0;
             if (amountInCart == 0)
                 throw new Exception();
 
@@ -197,6 +197,8 @@ internal class Product : BlApi.IProduct
             throw new BO.ProductNotExistsException(e.Message);
         }
     }
+
+
 }
 
 
