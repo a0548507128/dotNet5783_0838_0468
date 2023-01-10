@@ -19,6 +19,7 @@ namespace PL
     /// </summary>
     public partial class WOrderDetails : Window
     {
+        BlApi.IBl? bl = BlApi.Factory.Get();
         public BO.Order DelailsOfOrder
         {
             get { return (BO.Order)GetValue(DelailsOfOrderProperty); }
@@ -30,7 +31,13 @@ namespace PL
         public WOrderDetails(int id)
         {
             DelailsOfOrder=new();
+            if (bl != null)
+            {
+                DelailsOfOrder = bl.Order.GetOrderDetails(id);
+            }
             InitializeComponent();
         }
+
+       
     }
 }

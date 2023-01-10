@@ -265,7 +265,7 @@ internal class Order : BlApi.IOrder
         IEnumerable<BO.OrderItem?> BOorderItemList = new List<BO.OrderItem?>();
         orderItemList = dal.OrderItem.GetAll();
         int count = 0;
-        BOorderItemList = from item in orderItemList
+        BOorderItemList = (from item in orderItemList
                           where (item != null)
                          select new BO.OrderItem()
                          {
@@ -275,7 +275,7 @@ internal class Order : BlApi.IOrder
                              Price = item.Value.Price,
                              Amount = item.Value.Amount,
                              sumItem = item.Value.Price * item.Value.Amount
-                         };
+                         }).ToList();
         //foreach (var item in orderItemList)
         //{
         //    BOorderItemList.Add(new BO.OrderItem()

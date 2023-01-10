@@ -8,6 +8,25 @@
         Title="WOrderDetails" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource self}}">
     <Grid>
-        
+        <Label Content="id" HorizontalAlignment="Left" Margin="273,53,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,61,0,0" TextWrapping="Wrap" Text="{Binding DelailsOfOrder.ID,Mode=TwoWay}" IsReadOnly="True" VerticalAlignment="Top" Width="149"/>
+        <Label Content="customer name" HorizontalAlignment="Left" Margin="201,76,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,84,0,0" TextWrapping="Wrap" Text="{Binding DelailsOfOrder.CustomerName,Mode=TwoWay}" IsReadOnly="True" VerticalAlignment="Top" Width="149"/>
+        <Label Content="customer email" HorizontalAlignment="Left" Margin="201,99,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,107,0,0" TextWrapping="Wrap" Text="{Binding DelailsOfOrder.CustomerEmail,Mode=TwoWay}" IsReadOnly="True" VerticalAlignment="Top" Width="149"/>
+        <Label Content="customer adress" HorizontalAlignment="Left" Margin="196,122,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,130,0,0" TextWrapping="Wrap" Text="{Binding DelailsOfOrder.CustomerAdress,Mode=TwoWay}" IsReadOnly="True" VerticalAlignment="Top" Width="149"/>
+        <Label Content="status" HorizontalAlignment="Left" Margin="251,145,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.226,0.669"/>
+        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DelailsOfOrder.Status,Mode=TwoWay}" IsReadOnly="True" VerticalAlignment="Top" Width="149" Margin="0,153,0,0"/>
+        <Label Content="order date" HorizontalAlignment="Left" Margin="228,168,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,176,0,0" TextWrapping="Wrap" Text="{Binding DelailsOfOrder.OrderDate,Mode=TwoWay}" IsReadOnly="True" VerticalAlignment="Top" Width="149"/>
+        <Label Content="ship date" HorizontalAlignment="Left" Margin="235,191,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,199,0,0" TextWrapping="Wrap" Text="{Binding DelailsOfOrder.ShipDate,Mode=TwoWay}" IsReadOnly="True" VerticalAlignment="Top" Width="149"/>
+        <Label Content="delivery date" HorizontalAlignment="Left" Margin="214,214,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,222,0,0" TextWrapping="Wrap" Text="{Binding DelailsOfOrder.DeliveryDate,Mode=TwoWay}" IsReadOnly="True" VerticalAlignment="Top" Width="149"/>
+        <Label Content="item list" HorizontalAlignment="Left" Margin="241,236,0,0" VerticalAlignment="Top"/>
+        <!--<TextBox HorizontalAlignment="Center" Margin="0,245,0,0" TextWrapping="Wrap" Text="{Binding DelailsOfOrder.ItemList,Mode=TwoWay}" IsReadOnly="True" VerticalAlignment="Top" Width="149"/>-->
+        <Label Content="total sum" HorizontalAlignment="Left" Margin="233,260,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,268,0,0" TextWrapping="Wrap" Text="{Binding DelailsOfOrder.TotalSum,Mode=TwoWay}" IsReadOnly="True" VerticalAlignment="Top" Width="149"/>
     </Grid>
 </Window>

@@ -20,7 +20,7 @@ public class OrderForList
     public override string ToString() => $@"
     Order ID={OrderID}: 
     name: {CustomerName}, 
-   Status of order: {Status}
+    Status of order: {Status}
     amount of item: {AmountOfItem}
     Total sum:{TotalSum}
 ";

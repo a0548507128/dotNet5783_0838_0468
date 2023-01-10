@@ -22,7 +22,7 @@ namespace PL
     public partial class WOrderForList : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        public BO.Order? OrderDetails { get; set; } = new();
+        public BO.OrderForList? OrderDetails { get; set; } = new();
         #region ListOfOrderProperty
         public static readonly DependencyProperty ListOfOrder1Property = DependencyProperty.Register(nameof(ListOfOrder1),
                                                                                                               typeof(ObservableCollection<OrderForList?>),
@@ -44,7 +44,7 @@ namespace PL
         private void ListOfOrder_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (OrderDetails is not null)
-                new WAddUpdateProduct(OrderDetails.ID).ShowDialog();
+                new WOrderDetails(OrderDetails.OrderID).ShowDialog();
         }
     }
 }

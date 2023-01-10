@@ -9,7 +9,7 @@
          DataContext = "{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
 
-        <ListView  x:Name="ListOfOrder" Grid.RowSpan="2" MouseDoubleClick="ListOfOrder_MouseDoubleClick" ItemsSource="{Binding ListOfOrder1}" >
+        <ListView  x:Name="ListOfOrder" Grid.RowSpan="2" MouseDoubleClick="ListOfOrder_MouseDoubleClick" SelectedValue="{Binding OrderDetails}" ItemsSource="{Binding ListOfOrder1}" >
             <!--SelectedValue="" ItemsSource=""-->
             <ListView.View>
                 <GridView>
