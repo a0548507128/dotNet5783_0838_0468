@@ -39,7 +39,6 @@ namespace PL
 
             ProductForItem = new(bl.Product.GetProductsItem());
             InitializeComponent();
-
         }
 
         private void ProductItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -52,6 +51,11 @@ namespace PL
         {
             if (selectedCategory is not null)
                 if (bl != null) ProductForItem = new(bl.Product.GetProductsItem((x) => x?.Category.ToString() == ((Enums.ECategory)selectedCategory)!.ToString()));
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new WCart().ShowDialog();
         }
     }
 }

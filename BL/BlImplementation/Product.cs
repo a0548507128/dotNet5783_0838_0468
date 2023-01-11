@@ -241,7 +241,7 @@ internal class Product : BlApi.IProduct
                 Price = dalProduct.Price,
                 Category = (ECategory?)dalProduct.Category,
                 InStock = dalProduct.InStock,
-                AmoutInYourCart = 0
+                AmoutInYourCart = 3
             };
             return BLproduct;
         }

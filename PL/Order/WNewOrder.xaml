@@ -8,7 +8,7 @@
         Title="WNewOrder" Height="450" Width="800"
         DataContext = "{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,0,0,4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -17,19 +17,19 @@
             <Label Content="category:" HorizontalAlignment="Left" Margin="48,0,0,0" VerticalAlignment="Center" Grid.Column="0"/>
         </Grid>
         <ListView Grid.Row="1"  x:Name="ProductItem"  ItemsSource="{Binding ProductForItem}" MouseDoubleClick="ProductItem_MouseDoubleClick" SelectedValue="{Binding ProductitemDetails}">
-          
+
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <!--<Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="Button_Click"/>-->
+        <Button Content="cart" Grid.Row="2" HorizontalAlignment="Left" Margin="706,0,0,0" Padding="5" Height="28" VerticalAlignment="Center" Click="Button_Click" Width="76" />
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="500*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="181*"/>
+            <RowDefinition Height="Auto" MinHeight="42.04"/>
         </Grid.RowDefinitions>
     </Grid>
 </Window>

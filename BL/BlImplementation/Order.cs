@@ -153,9 +153,10 @@ internal class Order : BlApi.IOrder
         switch (orderTracking.Status)
         {
             case EStatus.Done:
-                ((List<BO.OrderTracking.StatusAndDate>)(orderTracking.listOfStatus)).Add(new BO.OrderTracking.StatusAndDate()
+                orderTracking.listOfStatus = new();
+                orderTracking.listOfStatus.Add(new()
                 {
-                    Date = (DateTime)o?.OrderDate,
+                    Date = (DateTime?)o?.OrderDate,
                     Status = BO.Enums.EStatus.Done
                 });
                 break;
