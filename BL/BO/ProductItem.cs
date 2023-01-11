@@ -18,10 +18,10 @@ public class ProductItem
     public int AmoutInYourCart { get; set; }
 
     public override string ToString() => $@"
-    Product item ID={ID}: {Name}, 
+    Product item ID= {ID}: {Name}, 
     category - {Category}
     Price: {Price}
     Amount in stock: {InStock}
-    Amout in your cart:{AmoutInYourCart}
+    Amout in your cart: {AmoutInYourCart}
 ";
 }

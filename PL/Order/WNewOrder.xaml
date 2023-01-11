@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="WNewOrder" Height="450" Width="800">
+        Title="WNewOrder" Height="450" Width="800"
+        DataContext = "{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-        <Label Content="my ordet" HorizontalAlignment="Left" Margin="185,42,0,0" VerticalAlignment="Top" Height="34" Width="302"/>
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <ComboBox Name="AttributeSelector" VerticalAlignment="Top" Grid.Column="1" SelectedItem="{Binding selectedCategory }" ItemsSource="{Binding Categories}" Height="32" SelectionChanged="AttributeSelector_SelectionChanged"/>
+            <Label Content="category:" HorizontalAlignment="Left" Margin="48,0,0,0" VerticalAlignment="Center" Grid.Column="0"/>
+        </Grid>
+        <ListView Grid.Row="1"  x:Name="ProductItem"  ItemsSource="{Binding ProductForItem}" MouseDoubleClick="ProductItem_MouseDoubleClick" SelectedValue="{Binding ProductitemDetails}">
+          
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!--<Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="Button_Click"/>-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
     </Grid>
 </Window>

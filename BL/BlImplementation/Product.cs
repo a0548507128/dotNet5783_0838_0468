@@ -197,8 +197,57 @@ internal class Product : BlApi.IProduct
             throw new BO.ProductNotExistsException(e.Message);
         }
     }
-
-
+    public IEnumerable<BO.ProductItem?> GetProductsItem(Func<DO.Product?, bool>? predict = null) {
+        IEnumerable<DO.Product?> dalProductsList;
+        IEnumerable<BO.ProductItem?> blProductsItem = new List<BO.ProductItem?>();
+        if (predict == null)
+        {
+            dalProductsList = dal.Product.GetAll();
+        }
+        else
+        {
+            dalProductsList = dal.Product.GetAll(x => predict(x));
+        }
+        blProductsItem = from productDal in dalProductsList
+                         where (productDal != null || predict(productDal))
+                         select new BO.ProductItem()
+                         {
+                             ID = productDal.Value.ID,
+                             Name = productDal.Value.Name,
+                             Price = productDal.Value.Price,
+                             Category = (ECategory?)productDal.Value.Category,
+                             InStock=productDal.Value.InStock,
+                            // AmoutInYourCart=
+                         };
+        return blProductsItem;
+    }
+    public BO.ProductItem GetProductItemDetails(int productItemID)
+    {
+        if (productItemID > 0)
+        {
+            DO.Product dalProduct = new DO.Product();
+            try
+            {
+                dalProduct = (DO.Product)dal.Product.Get(productItemID);
+            }
+            catch (DO.EntityNotFound e)
+            {
+                //throw new Exception(e);
+            }
+            BO.ProductItem BLproduct = new BO.ProductItem()
+            {
+                ID = dalProduct.ID,
+                Name = dalProduct.Name,
+                Price = dalProduct.Price,
+                Category = (ECategory?)dalProduct.Category,
+                InStock = dalProduct.InStock,
+                AmoutInYourCart = 0
+            };
+            return BLproduct;
+        }
+        else
+            throw new Exception();
+    }
 }
 
 

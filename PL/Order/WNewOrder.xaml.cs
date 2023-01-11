@@ -23,9 +23,12 @@ namespace PL
     public partial class WNewOrder : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
+        public System.Array Categories { get; set; } = Enum.GetValues(typeof(BO.Enums.ECategory));
+        public Enums.ECategory? selectedCategory { get; set; } = null;
         public static readonly DependencyProperty ProductForItemProperty = DependencyProperty.Register(nameof(ProductForItem),
                                                                                                              typeof(ObservableCollection<ProductItem?>),
                                                                                                      typeof(WNewOrder));
+        public BO.ProductItem? ProductitemDetails { get; set; } = new();
         public ObservableCollection<ProductItem?> ProductForItem
         {
             get { return (ObservableCollection<ProductItem?>)GetValue(ProductForItemProperty); }
@@ -34,9 +37,21 @@ namespace PL
         public WNewOrder()
         {
 
-         //   ProductForItem = new(bl.Product.GetProductDetailsManager());
+            ProductForItem = new(bl.Product.GetProductsItem());
             InitializeComponent();
 
+        }
+
+        private void ProductItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+             if (ProductitemDetails is not null)
+                new WProductItemDetails(ProductitemDetails.ID).ShowDialog();
+        }
+
+        private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (selectedCategory is not null)
+                if (bl != null) ProductForItem = new(bl.Product.GetProductsItem((x) => x?.Category.ToString() == ((Enums.ECategory)selectedCategory)!.ToString()));
         }
     }
 }

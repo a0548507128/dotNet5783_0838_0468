@@ -16,5 +16,6 @@ public interface IProduct
     public void AddProductManager(BO.Product product);
     public void DeleteProductManager(int productID);
     public void UpdateProductManager(BO.Product product);
-
+    public IEnumerable<BO.ProductItem?> GetProductsItem(Func<DO.Product?, bool>? predict = null);
+    public BO.ProductItem GetProductItemDetails(int productID);
 }
