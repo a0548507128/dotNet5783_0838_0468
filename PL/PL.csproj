@@ -14,11 +14,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="1.png" />
+    <None Remove="2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Image\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="1.png" />
+    <Resource Include="2.png" />
   </ItemGroup>
 
 </Project>
