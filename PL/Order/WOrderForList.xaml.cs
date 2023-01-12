@@ -44,7 +44,7 @@ namespace PL
         private void ListOfOrder_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (OrderDetails is not null)
-                new WOrderDetails(OrderDetails.OrderID).ShowDialog();
+                new WOrderDetails(OrderDetails.OrderID, "maneger").ShowDialog();
         }
     }
 }

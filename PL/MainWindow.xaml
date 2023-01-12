@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="630">
+        Title="MainWindow" Height="450" Width="620">
     <Grid >
         <Grid.Background>
-            <ImageBrush Stretch="Uniform" ImageSource="/1.png"/>
+            <ImageBrush Stretch="Uniform" ImageSource="/1.jpg"/>
         </Grid.Background>
         <Button Name="manager" Content="manager" HorizontalAlignment="Center" Margin="0,64,0,0" VerticalAlignment="Top" Click="Admin_Click" Width="360" Height="35" FontSize="16" BorderBrush="#FFAA772B" BorderThickness="2,2,2,2"  />
         <Button Name="NewOrder" Content="new order" HorizontalAlignment="Center" Margin="0,122,0,0" VerticalAlignment="Top"  Width="360" Height="33" Click="NewOrder_Click" FontSize="16" BorderBrush="#FFAA772B" BorderThickness="2,2,2,2"/> <!--#FF42AAC3-->

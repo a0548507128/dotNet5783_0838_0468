@@ -8,6 +8,15 @@
         Title="WCart" Height="450" Width="800"
         DataContext = "{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
+        <ListView Grid.Row="1"  x:Name="OrderItemInCart" >
+            <!--ItemsSource="{Binding ProductForItem}" MouseDoubleClick="ProductItem_MouseDoubleClick" SelectedValue="{Binding ProductitemDetails}"-->
 
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Completion of an order" HorizontalAlignment="Left" Margin="600,367,0,0" Padding="5" Height="26" VerticalAlignment="Top" Width="161" />
     </Grid>
 </Window>

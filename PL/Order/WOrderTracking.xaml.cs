@@ -54,7 +54,7 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            new WOrderDetails(OrderId).ShowDialog();
+            new WOrderDetails(OrderId, "customer").ShowDialog();
         }
     }
 }

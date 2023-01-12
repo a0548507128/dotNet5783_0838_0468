@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace PL
 {
     /// <summary>
@@ -34,9 +35,13 @@ namespace PL
             get { return (ObservableCollection<ProductItem?>)GetValue(ProductForItemProperty); }
             set { SetValue(ProductForItemProperty, value); }
         }
+        public BO.Cart newCart { get; set; } = new();
+        //public BO.ProductItem?  GropupingProducts = (from p in ProductForItem
+        //                                         group p by p.Category into catGroup
+        //                                         from pr in catGroup
+        //                                         select pr).ToList();
         public WNewOrder()
         {
-
             ProductForItem = new(bl.Product.GetProductsItem());
             InitializeComponent();
         }
@@ -44,7 +49,7 @@ namespace PL
         private void ProductItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
              if (ProductitemDetails is not null)
-                new WProductItemDetails(ProductitemDetails.ID).ShowDialog();
+                new WProductItemDetails(ProductitemDetails.ID, newCart).ShowDialog();
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

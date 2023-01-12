@@ -30,7 +30,7 @@ static internal class DataSource
             InStock = InStock
         });
     }
-    static private void AddOrder(string CustomerName, string CustomerEmail, string CustomerAdress, DateTime OrderDate, DateTime ShipDate, DateTime DeliveryrDate) {
+    static private void AddOrder(string CustomerName, string CustomerEmail, string CustomerAdress, DateTime? OrderDate, DateTime? ShipDate, DateTime? DeliveryrDate) {
         Orders.Add(new Order()
         {
             ID = Config.NumOfOrder,
@@ -81,12 +81,12 @@ static internal class DataSource
         #endregion
         #region AddOrder
         Random rnd = new Random();
-        AddOrder("Avi", "avi@gmail", "amaram gaon", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        AddOrder("Avi", "avi@gmail", "amaram gaon", DateTime.Now.AddDays(-(rnd.Next(9))), null, DateTime.MinValue);
         AddOrder("Shira", "shira137@gmail", "nachal shacham");
         AddOrder("Tamar", "tamar@gmail", "nachal micha");
         AddOrder("Netanel", "n6517@gmail", "kordovaro");
         AddOrder("Asher", "a123@gmail", "nachal shacham", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
-        AddOrder("Shira", "shira137@gmail", "nachal shacham", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
+        AddOrder("Shira", "shira137@gmail", "nachal shacham", DateTime.Now.AddDays(-(rnd.Next(9))), null, DateTime.MinValue);
         AddOrder("Avi", "avi@gmail", "amaram gaon");
         AddOrder("Netanel", "n6517@gmail", "kordovaro", DateTime.Now.AddDays(-(rnd.Next(9))), DateTime.Now, DateTime.MinValue);
         AddOrder("Asher", "a123@gmail", "nachal shacham");
