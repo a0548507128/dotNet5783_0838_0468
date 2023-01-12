@@ -14,8 +14,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Image\**" />
+    <EmbeddedResource Remove="Image\**" />
+    <None Remove="Image\**" />
+    <Page Remove="Image\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="1.jpg" />
     <None Remove="1.png" />
+    <None Remove="11.jpg" />
+    <None Remove="2.jpg" />
     <None Remove="2.png" />
+    <None Remove="3.jpg" />
+    <None Remove="4.jpg" />
+    <None Remove="5.jpg" />
+    <None Remove="6.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,12 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Image\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="1.png" />
-    <Resource Include="2.png" />
+    <Resource Include="2.jpg" />
   </ItemGroup>
 
 </Project>

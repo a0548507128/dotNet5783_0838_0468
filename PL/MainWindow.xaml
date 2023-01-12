@@ -5,15 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="630">
+    <Grid >
         <Grid.Background>
-            <ImageBrush ImageSource="/2.png" Stretch="UniformToFill"/>
+            <ImageBrush Stretch="Uniform" ImageSource="/1.png"/>
         </Grid.Background>
-
-        <Button Name="manager" Content="manager" HorizontalAlignment="Center" Margin="0,64,0,0" VerticalAlignment="Top" Click="Admin_Click" Width="360" Height="35" FontSize="16" BorderBrush="#FF42AAC3" BorderThickness="2,2,2,2" FontFamily="Segoe UI Emoji" />
-        <Button Name="NewOrder" Content="new order" HorizontalAlignment="Center" Margin="0,122,0,0" VerticalAlignment="Top"  Width="360" Height="33" Click="NewOrder_Click" FontSize="16" BorderBrush="#FF42AAC3" BorderThickness="2,2,2,2"/>
-        <Button Name="OrderTracking" Content="order tracking" HorizontalAlignment="Center" Margin="0,183,0,0" VerticalAlignment="Top" Width="360" Height="34" Click="OrderTracking_Click" FontSize="16" BorderBrush="#FF42AAC3" BorderThickness="2,2,2,2"/>
-
+        <Button Name="manager" Content="manager" HorizontalAlignment="Center" Margin="0,64,0,0" VerticalAlignment="Top" Click="Admin_Click" Width="360" Height="35" FontSize="16" BorderBrush="#FFAA772B" BorderThickness="2,2,2,2"  />
+        <Button Name="NewOrder" Content="new order" HorizontalAlignment="Center" Margin="0,122,0,0" VerticalAlignment="Top"  Width="360" Height="33" Click="NewOrder_Click" FontSize="16" BorderBrush="#FFAA772B" BorderThickness="2,2,2,2"/> <!--#FF42AAC3-->
+        <Button Name="OrderTracking" Content="order tracking" HorizontalAlignment="Center" Margin="0,183,0,0" VerticalAlignment="Top" Width="360" Height="34" Click="OrderTracking_Click" FontSize="16" BorderBrush="#FFAA772B" BorderThickness="2,2,2,2"/>
     </Grid>
 </Window>
