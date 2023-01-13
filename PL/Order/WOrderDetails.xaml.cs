@@ -83,13 +83,17 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)//ShipDate
         {
-            //DelailsOfOrder.ShipDate = DateTime.Now;
             if (bl != null) DelailsOfOrder = bl.Order.OrderShippingUpdate(DelailsOfOrder.ID);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)//DeliveryDate
         {
             if (bl != null) DelailsOfOrder = bl.Order.OrderDeliveryUpdate(DelailsOfOrder.ID);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)//show order item list
+        {
+            new WOrderItemsList(DelailsOfOrder.ItemList).ShowDialog();
         }
     }
 }

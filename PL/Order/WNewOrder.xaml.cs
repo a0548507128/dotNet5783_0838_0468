@@ -26,23 +26,35 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         public System.Array Categories { get; set; } = Enum.GetValues(typeof(BO.Enums.ECategory));
         public Enums.ECategory? selectedCategory { get; set; } = null;
+        public BO.ProductItem? ProductitemDetails { get; set; } = new();
         public static readonly DependencyProperty ProductForItemProperty = DependencyProperty.Register(nameof(ProductForItem),
                                                                                                              typeof(ObservableCollection<ProductItem?>),
                                                                                                      typeof(WNewOrder));
-        public BO.ProductItem? ProductitemDetails { get; set; } = new();
         public ObservableCollection<ProductItem?> ProductForItem
         {
             get { return (ObservableCollection<ProductItem?>)GetValue(ProductForItemProperty); }
             set { SetValue(ProductForItemProperty, value); }
         }
-        public BO.Cart newCart { get; set; } = new();
-        //public BO.ProductItem?  GropupingProducts = (from p in ProductForItem
-        //                                         group p by p.Category into catGroup
-        //                                         from pr in catGroup
-        //                                         select pr).ToList();
+
+        public BO.Cart newCart
+        {
+            get { return (BO.Cart)GetValue(nowCartProperty); }
+            set { SetValue(nowCartProperty, value); }
+        }
+        public static readonly DependencyProperty nowCartProperty = DependencyProperty.Register(nameof(newCart),
+                                                                                                        typeof(BO.Cart),
+                                                                                                       typeof(WCart));
+        // public BO.Cart newCart { get; set; } = new();
+        
+        //public List<ProductItem?> GropupingProducts = (from p in ProductForItem
+        //                                               group p by p.Category into catGroup
+        //                                               from pr in catGroup
+        //                                               select pr).ToList();
         public WNewOrder()
         {
+            newCart = new();
             ProductForItem = new(bl.Product.GetProductsItem());
+
             InitializeComponent();
         }
 
@@ -60,7 +72,8 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new WCart().ShowDialog();
+            new WCart(newCart).ShowDialog();
+
         }
     }
 }

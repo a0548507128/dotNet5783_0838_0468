@@ -14,7 +14,7 @@ internal class Cart:ICart
 
     public BO.Cart AddProduct(BO.Cart c, int productID)
     {
-        bool exist = c.ItemList.Exists(e => e?.ID == productID);
+        bool exist = c.ItemList.Exists(e => e.ID == productID);
         if (exist)
         {
             BO.OrderItem? BOI = c.ItemList.Find(e => e?.ID == productID);

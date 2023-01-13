@@ -19,8 +19,18 @@ namespace PL
     /// </summary>
     public partial class WCart : Window
     {
-        public WCart()
+        BlApi.IBl? bl = BlApi.Factory.Get();
+        public BO.Cart NowCart
         {
+            get { return (BO.Cart)GetValue(nowCartProperty); }
+            set { SetValue(nowCartProperty, value); }
+        }
+        public static readonly DependencyProperty nowCartProperty = DependencyProperty.Register(nameof(NowCart),
+                                                                                                        typeof(BO.Cart),
+                                                                                                       typeof(WCart));
+        public WCart(BO.Cart nowCart1)
+        {
+            NowCart = nowCart1;
             InitializeComponent();
         }
 

@@ -53,6 +53,7 @@ namespace PL
         {
             
             if (bl != null) bl.Cart.AddProduct(nowCart, DetailsOfProductItem.ID);
+            this.Close();
         }
     }
 }
