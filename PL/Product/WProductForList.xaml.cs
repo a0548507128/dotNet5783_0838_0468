@@ -47,37 +47,25 @@ namespace PL
         {
             ListOfProduct =new( bl.Product.GetProductsList());
             InitializeComponent();
-            //ListOfProduct1.ItemsSource = bl.Product.GetProductsList();
-            //AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.ECategory));
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (selectedCategory is not null)
             if(bl!=null) ListOfProduct = new(bl.Product.GetProductsList((x) => x?.Category.ToString() == ((Enums.ECategory)selectedCategory)!.ToString()));
-            //DO.Enums.Category selector = (DO.Enums.Category)AttributeSelector.SelectedItem;
-            //ListOfProduct1.ItemsSource = bl?.Product.GetProductsList((x) => x!.Value.Category == selector);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new WAddUpdateProduct().ShowDialog();
             if (bl != null) ListOfProduct = new(bl.Product.GetProductsList());
-          //ListOfProduct1.ItemsSource = bl?.Product.GetProductsList();
         }
 
         private void ListOfProduct1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (updateProduct is not null)
                 new WAddUpdateProduct(updateProduct.ID).ShowDialog();
-            //int id = 0;
-            //if(ListOfProduct1.SelectedItem is BO.ProductForList list)
-            //{
-            //    id=list.ID;
-            //}
-            //new WAddUpdateProduct("update", id).ShowDialog();
             if (bl != null) ListOfProduct = new(bl.Product.GetProductsList());
-            // ListOfProduct1.ItemsSource = bl?.Product.GetProductsList();
         }
     }
 }

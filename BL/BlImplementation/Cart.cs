@@ -150,7 +150,7 @@ internal class Cart:ICart
                 //}
             }
         }
-        catch (DO.EntityNotFound)
+        catch (Exception)
         {
             throw new BO.ItemInCartNotExistsAsProductException("item in cart not exists as product") { ItemInCartNotExistsAsProduct = ii.ToString() };
         }

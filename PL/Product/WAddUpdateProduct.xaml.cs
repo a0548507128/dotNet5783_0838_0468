@@ -55,10 +55,6 @@ public partial class WAddUpdateProduct : Window
         MyContent = "add";
         readOnly=false;
         InitializeComponent();
-        //if (s == "add")
-        //{
-        //    addUpdate.Content = "add";
-        //}
     }
     public WAddUpdateProduct( int i)
     {
