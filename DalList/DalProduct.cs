@@ -30,7 +30,7 @@ public class DalProduct:IProduct
         //}
         Product? p = Products.FirstOrDefault(Product => Product?.ID == IdNum);
         if (p == null)
-            throw new Exception("this product does not exist");
+            throw new EntityNotFound("this product does not exist");
         return p;
     }
     public IEnumerable<Product?> GetAll(Predicate<Product?>? predict = null)
