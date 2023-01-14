@@ -114,7 +114,7 @@ internal class Cart:ICart
         }
         // checkEmail(customerEmail);
        var ii =(from i in cart.ItemList
-               where i is not null && i.Amount<0
+               where i is not null && i.Amount>0
                select i).FirstOrDefault();
 
 

@@ -37,14 +37,29 @@ namespace PL
                                                                                                         typeof(BO.ProductItem),
                                                                                                        typeof(WProductItemDetails));
 
-
+        public bool isEnabled
+        {
+            get { return (bool)GetValue(isEnabledProperty); }
+            set { SetValue(isEnabledProperty, value); }
+        }
+        public static readonly DependencyProperty isEnabledProperty = DependencyProperty.Register(nameof(isEnabled),
+                                                                                                        typeof(bool),
+                                                                                                       typeof(WProductItemDetails));
         public WProductItemDetails(int id, BO.Cart nowCart1)
         {
             DetailsOfProductItem = new();
             NowCart = nowCart1;
             if (bl != null)
             {
-                DetailsOfProductItem = bl.Product.GetProductItemDetails(id);
+                DetailsOfProductItem = bl.Product.GetProductItemDetails(id, NowCart);
+            }
+            if (DetailsOfProductItem.InStock <= 0)
+            {
+                isEnabled = false;
+            }
+            else if(DetailsOfProductItem.InStock > 0) 
+            {
+                isEnabled = true;
             }
             InitializeComponent();
         }

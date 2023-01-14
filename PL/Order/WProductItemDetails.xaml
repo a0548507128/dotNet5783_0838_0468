@@ -20,6 +20,6 @@
         <TextBlock HorizontalAlignment="Left" Margin="289,236,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="inStock"  Text="{Binding DetailsOfProductItem.InStock,Mode=TwoWay}" />
         <Label Content="amount in your cart" HorizontalAlignment="Left" Margin="143,259,0,0" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="289,267,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="AmoutInYourCart"  Text="{Binding DetailsOfProductItem.AmoutInYourCart,Mode=TwoWay}" />
-        <Button Content="add" HorizontalAlignment="Left" Margin="673,367,0,0" Padding="5" Height="32" VerticalAlignment="Top" Width="88" Click="Button_Click" />
+        <Button Content="add" HorizontalAlignment="Left" Margin="673,367,0,0" Padding="5" Height="32" VerticalAlignment="Top" Width="88" Click="Button_Click"  IsEnabled="{Binding isEnabled}"/>
     </Grid>
 </Window>

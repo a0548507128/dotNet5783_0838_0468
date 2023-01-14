@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,9 +20,31 @@ namespace PL
     /// </summary>
     public partial class WOrderConfirmation : Window
     {
+        BlApi.IBl? bl = BlApi.Factory.Get();
+        #region cart property
+        public BO.Cart NowCart
+        {
+            get { return (BO.Cart)GetValue(nowCartProperty); }
+            set { SetValue(nowCartProperty, value); }
+        }
+        public static readonly DependencyProperty nowCartProperty = DependencyProperty.Register(nameof(NowCart),
+                                                                                                        typeof(BO.Cart),
+                                                                                                       typeof(WOrderConfirmation));
+        #endregion
+        public string CustomerName { get; set; } = "";
+        public string CustomerEmail { get; set; } = "";
+        public string CustomerAdress { get; set; } = "";
         public WOrderConfirmation(BO.Cart c)
         {
+            NowCart=c;
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           if(bl!=null) bl.Cart.OrderConfirmation(NowCart, CustomerName, CustomerEmail, CustomerAdress);
+            MessageBox.Show("The order is complete!");
+            this.Close();
         }
     }
 }

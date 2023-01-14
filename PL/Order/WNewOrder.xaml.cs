@@ -44,7 +44,7 @@ namespace PL
         public static readonly DependencyProperty nowCartProperty = DependencyProperty.Register(nameof(newCart),
                                                                                                         typeof(BO.Cart),
                                                                                                        typeof(WCart));
-        // public BO.Cart newCart { get; set; } = new();
+        
 
         public WNewOrder()
         {

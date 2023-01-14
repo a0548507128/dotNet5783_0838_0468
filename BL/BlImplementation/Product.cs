@@ -221,7 +221,7 @@ internal class Product : BlApi.IProduct
                          };
         return blProductsItem;
     }
-    public BO.ProductItem GetProductItemDetails(int productItemID)
+    public BO.ProductItem GetProductItemDetails(int productItemID, BO.Cart c)
     {
         if (productItemID > 0)
         {
@@ -234,15 +234,22 @@ internal class Product : BlApi.IProduct
             {
                 //throw new Exception(e);
             }
-            BO.ProductItem BLproduct = new BO.ProductItem()
+            var OrderItem = c.ItemList.Where(x => x.ID == dalProduct.ID).FirstOrDefault();
+            int amount=0;
+            if (OrderItem != null)
             {
-                ID = dalProduct.ID,
-                Name = dalProduct.Name,
-                Price = dalProduct.Price,
-                Category = (ECategory?)dalProduct.Category,
-                InStock = dalProduct.InStock,
-                AmoutInYourCart = 3
-            };
+                amount = OrderItem.Amount;
+            }
+                BO.ProductItem BLproduct = new BO.ProductItem()
+                {
+                    ID = dalProduct.ID,
+                    Name = dalProduct.Name,
+                    Price = dalProduct.Price,
+                    Category = (ECategory?)dalProduct.Category,
+                    InStock = dalProduct.InStock,
+                    AmoutInYourCart = amount
+                };
+            
             return BLproduct;
         }
         else
