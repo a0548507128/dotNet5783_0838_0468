@@ -14,47 +14,64 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL
+namespace PL;
+
+/// <summary>
+/// Interaction logic for WOrderTracking.xaml
+/// </summary>
+public partial class WOrderTracking : Window
 {
-    /// <summary>
-    /// Interaction logic for WOrderTracking.xaml
-    /// </summary>
-    public partial class WOrderTracking : Window
+    BlApi.IBl? bl = BlApi.Factory.Get();
+    public string message
     {
-        BlApi.IBl? bl = BlApi.Factory.Get();
-       // public Visibility IsVisible1 { get; set; }=Visibility.Collapsed;
-        public Visibility IsVisible1
-        {
-            get { return (Visibility)GetValue(IsVisible1Property); }
-            set { SetValue(IsVisible1Property, value); }
-        }
-        public static readonly DependencyProperty IsVisible1Property = DependencyProperty.Register(nameof(IsVisible1),
-                                                                                                        typeof(Visibility),
-                                                                                                       typeof(WOrderTracking));
-        public int OrderId { get; set; } = 0;
-        public BO.OrderTracking OrderTracking1
-        {
-            get { return (BO.OrderTracking)GetValue(OrderTracking1Property); }
-            set { SetValue(OrderTracking1Property, value); }
-        }
-        public static readonly DependencyProperty OrderTracking1Property = DependencyProperty.Register(nameof(OrderTracking1),
-                                                                                                        typeof(BO.OrderTracking),
-                                                                                                       typeof(WOrderTracking));
-        public WOrderTracking()
-        {
-            IsVisible1=Visibility.Collapsed;
-            InitializeComponent();
-        }
+        get { return (string)GetValue(messageProperty); }
+        set { SetValue(messageProperty, value); }
+    }
+    public static readonly DependencyProperty messageProperty = DependencyProperty.Register(nameof(message),
+                                                                                                    typeof(string),
+                                                                                                   typeof(WOrderTracking));
+    public Visibility IsVisible1
+    {
+        get { return (Visibility)GetValue(IsVisible1Property); }
+        set { SetValue(IsVisible1Property, value); }
+    }
+    public static readonly DependencyProperty IsVisible1Property = DependencyProperty.Register(nameof(IsVisible1),
+                                                                                                    typeof(Visibility),
+                                                                                                   typeof(WOrderTracking));
+    public int OrderId { get; set; } = 0;
+    public BO.OrderTracking OrderTracking1
+    {
+        get { return (BO.OrderTracking)GetValue(OrderTracking1Property); }
+        set { SetValue(OrderTracking1Property, value); }
+    }
+    public static readonly DependencyProperty OrderTracking1Property = DependencyProperty.Register(nameof(OrderTracking1),
+                                                                                                    typeof(BO.OrderTracking),
+                                                                                                   typeof(WOrderTracking));
+    public WOrderTracking()
+    {
+        message = "";
+        IsVisible1 = Visibility.Collapsed;
+        InitializeComponent();
+    }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            IsVisible1=Visibility.Visible;
-            if (bl != null) OrderTracking1 =  bl.Order.OrderTracking(OrderId);
+            if (bl != null) OrderTracking1 = bl.Order.OrderTracking(OrderId);
+            IsVisible1 = Visibility.Visible;
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        catch (OrderNotExistsException ex)
         {
-            new WOrderDetails(OrderId, "customer").ShowDialog();
+            message = ex.Message;
         }
     }
+
+    private void Button_Click_1(object sender, RoutedEventArgs e)
+    {
+        new WOrderDetails(OrderId, "customer").ShowDialog();
+    }
+
+
+  
 }

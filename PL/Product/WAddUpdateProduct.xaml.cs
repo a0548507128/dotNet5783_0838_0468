@@ -40,6 +40,14 @@ public partial class WAddUpdateProduct : Window
     public static readonly DependencyProperty UpdateAddProductProperty = DependencyProperty.Register(nameof(UpdateAddProduct),
                                                                                                     typeof(BO.Product),
                                                                                                    typeof(WAddUpdateProduct));
+    public string message
+    {
+        get { return (string)GetValue(messageProperty); }
+        set { SetValue(messageProperty, value); }
+    }
+    public static readonly DependencyProperty messageProperty = DependencyProperty.Register(nameof(message),
+                                                                                                    typeof(string),
+                                                                                                   typeof(WAddUpdateProduct));
     #endregion
     public WAddUpdateProduct()
     {
@@ -61,34 +69,13 @@ public partial class WAddUpdateProduct : Window
         }
         MyContent = "update";
         readOnly = true;
-        //Category= Enum.GetValues(typeof(BO.Enums.ECategory));
         InitializeComponent();
-
-        //id.Text = Convert.ToString(i);
-        //id.IsReadOnly = true;
-        //name.Text = ProductToUpOrAdd.Name;
-        //price.Text = Convert.ToString(ProductToUpOrAdd.Price);
-        //inStock.Text = Convert.ToString(ProductToUpOrAdd.InStock);
-        //AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.ECategory));
-        //if (s == "update")
-        //{
-        //    addUpdate.Content = "update";
-        //}
-        //BO.Product p = bl.Product.GetProductDetailsManager(i);
     }
 
     private void Button_Click_Add_update(object sender, RoutedEventArgs e)
     {
         try
         {
-            //BO.Product p = new()
-            //{
-            //    ID = int.Parse(id.Text),
-            //    Price = double.Parse(price.Text),
-            //    InStock = int.Parse(inStock.Text),
-            //    Name = name.Text,
-            //    Category = (BO.Enums.ECategory?)AttributeSelector.SelectedValue
-            //};
             if (MyContent == "add")
             {
                 bl?.Product.AddProductManager(UpdateAddProduct);
@@ -101,93 +88,28 @@ public partial class WAddUpdateProduct : Window
         }
         catch (ProductInUseException ex)
         {
-            Label myLabel = new Label()
-            {
-                Content = ex.Message,
-                Name = "emptyField"
-            };
-            Grid.SetRow(myLabel, 3);
-            MainGrid.Children.Add(myLabel);
+            message = ex.Message;
         }
         catch (NegativeIdException ex)
         {
-            Label myLabel = new Label()
-            {
-                Content = ex.Message,
-                Name="lblid"
-            };
-            Grid.SetRow(myLabel, 3); //put the label under the invalid textBox
-            MainGrid.Children.Add(myLabel);
+            message = ex.Message;
         }
         catch (EmptyNameException ex)
         {
-            Label myLabel = new Label()
-            {
-                Content = ex.Message,
-                Name = "lblname"
-            };
-            Grid.SetRow(myLabel, 3); //put the label under the invalid textBox
-            MainGrid.Children.Add(myLabel);
+            message = ex.Message;
         }
         catch (NegativePriceException ex)
         {
-            Label myLabel = new Label()
-            {
-                Content = ex.Message,
-                Name = "lblprice"
-            };
-            Grid.SetRow(myLabel, 3); //put the label under the invalid textBox
-            MainGrid.Children.Add(myLabel);
+            message = ex.Message;
         }
         catch (NegativeStockException ex)
         {
-            Label myLabel = new Label()
-            {
-                Content = ex.Message,
-                Name = "lblInStock"
-            };
-            Grid.SetRow(myLabel, 3); //put the label under the invalid textBox
-            MainGrid.Children.Add(myLabel);
+            message = ex.Message;
         }
         catch (ItemAlreadyExistsException ex)
         {
-            Label myLabel = new Label()
-            {
-                Content = ex.Message,
-                Name = "alreadyExist"
-            };
-            Grid.SetRow(myLabel, 3); //put the label under the invalid textBox
-            MainGrid.Children.Add(myLabel);
+            message = ex.Message;
         }
-        
-
-    }
-    private void removeLabel(string getterName)
-    {
-        var child1 = MainGrid.Children.OfType<Control>().Where(x => x.Name == getterName).FirstOrDefault();
-        if (child1 != null)
-            MainGrid.Children.Remove(child1);
-    }
-    private void id_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        removeLabel("lblid");
-        removeLabel("alreadyExist");
-    }
-    private void inStock_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        removeLabel("lblInStock");
-    }
-    private void price_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        removeLabel( "lblprice");
-    }
-    private void name_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        removeLabel("lblname");
-    }
-    private void empty_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        removeLabel("emptyField");
-    }
+    } 
 }
 

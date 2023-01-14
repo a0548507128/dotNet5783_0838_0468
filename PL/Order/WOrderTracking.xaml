@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         Title="WOrderTracking" Height="450" Width="800"
         DataContext = "{Binding RelativeSource={RelativeSource Self}}">
-    <Grid>
+    <Grid x:Name="oMainGrid">
         <Label Content="enter id" HorizontalAlignment="Left" Margin="335,133,0,0" VerticalAlignment="Top" Width="51"/>
         <TextBox HorizontalAlignment="Left" Margin="416,141,0,0" TextWrapping="Wrap" Text="{Binding OrderId}" VerticalAlignment="Top" Width="120"/>
         <Button Content="show status" HorizontalAlignment="Center" Margin="0,184,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,249,0,0" TextWrapping="Wrap" Text="{Binding OrderTracking1}" VerticalAlignment="Top"/>
         <Button Content="order details" HorizontalAlignment="Left" Margin="686,358,0,0" VerticalAlignment="Top" Visibility="{Binding IsVisible1}" Click="Button_Click_1" />
+        <Label Content="{Binding message}" HorizontalAlignment="Left" Margin="39,368,0,0" VerticalAlignment="Top" Height="29" Width="114"/>
     </Grid>
 </Window>

@@ -142,7 +142,7 @@ internal class Order : BlApi.IOrder
         {
             o = (DO.Order)dal.Order.Get(numOrder);
         }
-        catch (DO.EntityNotFound)
+        catch (Exception)
         {
             throw new BO.OrderNotExistsException("order not exists") { OrderNotExists = o.ToString() };
 
@@ -267,7 +267,7 @@ internal class Order : BlApi.IOrder
         orderItemList = dal.OrderItem.GetAll();
         int count = 0;
         BOorderItemList = (from item in orderItemList
-                          where (item != null)
+                          where (item != null&& item?.OrderID==id)
                          select new BO.OrderItem()
                          {
                              numInOrder = count++,
