@@ -58,15 +58,8 @@ public partial class WCart : Window, INotifyPropertyChanged
         {
             if (NowCart!.ItemList != null && bl != null)
             {
-                try
-                {
                     NowCart = bl.Cart.UpdateAmountProduct(NowCart, (element.DataContext as BO.OrderItem)!.ID, (element.DataContext as BO.OrderItem)!.Amount + 1);
                     // message = "the amount update succesfully";
-                }
-                catch
-                {
-
-                }
             }
         }
     }
@@ -85,26 +78,28 @@ public partial class WCart : Window, INotifyPropertyChanged
                    // NavigateToProductCatalog(sender, e);
                     return;
                 }
-                try
-                {
+              
                     //MessageBox.Show(NowCart?.ItemList?.First().Amount.ToString());
                     NowCart = bl.Cart.UpdateAmountProduct(NowCart, (element.DataContext as BO.OrderItem)!.ID, (element.DataContext as BO.OrderItem)!.Amount - 1);
                     // message = "the amount update succesfully";
                   //  MessageBox.Show(NowCart.ItemList.First().Amount.ToString());
-                }
-                catch
-                {
-
-                }
             }
         }
     }
     private void Button_Click_2(object sender, RoutedEventArgs e)//-delete
     {
+        var element = e.OriginalSource as FrameworkElement;
+        if (element != null && element.DataContext is BO.OrderItem)
+        {
+            var orderItem = (BO.OrderItem)element.DataContext;
 
+            NowCart = bl!.Cart.UpdateAmountProduct(NowCart!, orderItem.ID, 0);
+            
+           
+        }
     }
         private void OrderConfirmation(object sender, RoutedEventArgs e)
     {
-        new WOrderConfirmation(NowCart).ShowDialog();
+        new WOrderConfirmation(NowCart!).ShowDialog();
     }
 }
