@@ -45,11 +45,7 @@ namespace PL
                                                                                                         typeof(BO.Cart),
                                                                                                        typeof(WCart));
         // public BO.Cart newCart { get; set; } = new();
-        
-        //public List<ProductItem?> GropupingProducts = (from p in ProductForItem
-        //                                               group p by p.Category into catGroup
-        //                                               from pr in catGroup
-        //                                               select pr).ToList();
+
         public WNewOrder()
         {
             newCart = new();
@@ -74,6 +70,15 @@ namespace PL
         {
             new WCart(newCart).ShowDialog();
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var GropupingProducts = (from p in ProductForItem
+                                     group p by p.Category into catGroup
+                                     from pr in catGroup
+                                     select pr).ToList();
+            ProductForItem = new(GropupingProducts);
         }
     }
 }

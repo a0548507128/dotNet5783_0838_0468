@@ -12,7 +12,7 @@
         <Label Content="ID"  HorizontalAlignment="Left" Margin="235,91,0,0" VerticalAlignment="Top" />
         <TextBox HorizontalAlignment="Left" Margin="289,91,0,0" VerticalAlignment="Top" IsReadOnly="{Binding readOnly, Mode=TwoWay}"  TextWrapping="Wrap" Width="120" Name="id"  TextChanged="id_TextChanged" Text="{Binding UpdateAddProduct.ID,Mode=TwoWay}"/>
         <Label Content="Category" HorizontalAlignment="Left" Margin="199,183,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="289,190,0,0" VerticalAlignment="Top" Name="AttributeSelector" Grid.Column="1" Width="119" Height="19" ItemsSource="{Binding Categories, Mode=TwoWay}" />
+        <ComboBox SelectedItem="{Binding UpdateAddProduct.Category ,Mode=TwoWay}" HorizontalAlignment="Left" Margin="289,190,0,0" VerticalAlignment="Top" Name="AttributeSelector" Grid.Column="1" Width="119" Height="19" ItemsSource="{Binding Categories, Mode=TwoWay}" />
         <Label Content="Name" HorizontalAlignment="Left" Margin="215,139,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Margin="289,139,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="name" TextChanged="name_TextChanged" Text="{Binding UpdateAddProduct.Name,Mode=TwoWay}"/>
         <Label Content="Price" HorizontalAlignment="Left" Margin="221,223,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.165,0.753"/>

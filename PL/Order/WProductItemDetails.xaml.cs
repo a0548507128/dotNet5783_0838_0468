@@ -20,12 +20,12 @@ namespace PL
     public partial class WProductItemDetails : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        public BO.Cart nowCart
+        public BO.Cart NowCart
         {
             get { return (BO.Cart)GetValue(nowCartProperty); }
             set { SetValue(nowCartProperty, value); }
         }
-        public static readonly DependencyProperty nowCartProperty = DependencyProperty.Register(nameof(nowCart),
+        public static readonly DependencyProperty nowCartProperty = DependencyProperty.Register(nameof(NowCart),
                                                                                                         typeof(BO.Cart),
                                                                                                        typeof(WProductItemDetails));
         public BO.ProductItem DetailsOfProductItem
@@ -41,7 +41,7 @@ namespace PL
         public WProductItemDetails(int id, BO.Cart nowCart1)
         {
             DetailsOfProductItem = new();
-            nowCart = nowCart1;
+            NowCart = nowCart1;
             if (bl != null)
             {
                 DetailsOfProductItem = bl.Product.GetProductItemDetails(id);
@@ -52,7 +52,9 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
-            if (bl != null) bl.Cart.AddProduct(nowCart, DetailsOfProductItem.ID);
+            if (bl != null) bl.Cart.AddProduct(NowCart, DetailsOfProductItem.ID);
+            int newAmount = DetailsOfProductItem.AmoutInYourCart + 1;
+            if (bl != null) bl.Cart.UpdateAmountProduct(NowCart, DetailsOfProductItem.ID, newAmount);
             this.Close();
         }
     }

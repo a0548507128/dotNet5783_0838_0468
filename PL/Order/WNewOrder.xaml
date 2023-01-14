@@ -17,14 +17,19 @@
             <Label Content="category:" HorizontalAlignment="Left" Margin="48,0,0,0" VerticalAlignment="Center" Grid.Column="0"/>
         </Grid>
         <ListView Grid.Row="1"  x:Name="ProductItem"   MouseDoubleClick="ProductItem_MouseDoubleClick" SelectedValue="{Binding ProductitemDetails}"  ItemsSource="{Binding ProductForItem}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
+            <ListView.View >
+                <GridView >
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}" />
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" />
+                    <GridViewColumn Header="In Stock" DisplayMemberBinding="{Binding InStock}" />
+                    <GridViewColumn Header="Amout In Your Cart" DisplayMemberBinding="{Binding AmoutInYourCart}" />
                 </GridView>
             </ListView.View>
         </ListView>
         <Button Content="cart" Grid.Row="2" HorizontalAlignment="Left" Margin="706,0,0,0" Padding="5" Height="28" VerticalAlignment="Center" Click="Button_Click" Width="76" />
-
+        <Button Content="group by category" Grid.Row="2" HorizontalAlignment="Left" Margin="544,0,0,0" Padding="5" Height="28" VerticalAlignment="Center"  Width="123" Click="Button_Click_1" />
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="181*"/>

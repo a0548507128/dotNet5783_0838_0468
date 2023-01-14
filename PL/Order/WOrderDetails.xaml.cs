@@ -60,7 +60,7 @@ namespace PL
             {
                 DelailsOfOrder = bl.Order.GetOrderDetails(id);
             }
-            DelailsOfOrder.ShipDate = null;
+            //DelailsOfOrder.ShipDate = null;
             if (win == "maneger")
             {
                 if (DelailsOfOrder.ShipDate == null)
@@ -89,11 +89,6 @@ namespace PL
         private void Button_Click_1(object sender, RoutedEventArgs e)//DeliveryDate
         {
             if (bl != null) DelailsOfOrder = bl.Order.OrderDeliveryUpdate(DelailsOfOrder.ID);
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)//show order item list
-        {
-            new WOrderItemsList(DelailsOfOrder.ItemList).ShowDialog();
         }
     }
 }

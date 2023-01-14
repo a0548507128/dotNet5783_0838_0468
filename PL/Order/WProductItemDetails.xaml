@@ -9,17 +9,17 @@
         DataContext="{Binding RelativeSource={RelativeSource self}}">
     <Grid>
         <Label Content="id" HorizontalAlignment="Left" Margin="237,108,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="289,103,0,0" TextWrapping="Wrap" Text="{Binding DetailsOfProductItem.ID ,Mode=TwoWay}" IsReadOnly="True" VerticalAlignment="Top" Width="119" Height="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="289,103,0,0" TextWrapping="Wrap" Text="{Binding DetailsOfProductItem.ID ,Mode=TwoWay}"  VerticalAlignment="Top" Width="119" Height="18"/>
         <Label Content="Category" HorizontalAlignment="Left" Margin="199,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,-0.23"/>
-        <TextBox HorizontalAlignment="Left" Margin="289,170,0,0" VerticalAlignment="Top" Name="AttributeSelector" Width="120" Height="19" Text="{Binding DetailsOfProductItem.Category,Mode=TwoWay}" />
+        <TextBlock HorizontalAlignment="Left" Margin="289,170,0,0" VerticalAlignment="Top" Name="AttributeSelector" Width="120" Height="19" Text="{Binding DetailsOfProductItem.Category,Mode=TwoWay}" />
         <Label Content="Name" HorizontalAlignment="Left" Margin="215,139,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="289,139,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="name"  Text="{Binding DetailsOfProductItem.Name,Mode=TwoWay}" IsReadOnly="True"/>
+        <TextBlock HorizontalAlignment="Left" Margin="289,139,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="name"  Text="{Binding DetailsOfProductItem.Name,Mode=TwoWay}" />
         <Label Content="Price" HorizontalAlignment="Left" Margin="221,200,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.165,0.753"/>
-        <TextBox HorizontalAlignment="Left" Margin="289,204,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="price"  Text="{Binding DetailsOfProductItem.Price,Mode=TwoWay}" IsReadOnly="True"/>
+        <TextBlock HorizontalAlignment="Left" Margin="289,204,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="price"  Text="{Binding DetailsOfProductItem.Price,Mode=TwoWay}" />
         <Label Content="In Stock" HorizontalAlignment="Left" Margin="204,228,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="289,236,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="inStock"  Text="{Binding DetailsOfProductItem.InStock,Mode=TwoWay}" IsReadOnly="True"/>
+        <TextBlock HorizontalAlignment="Left" Margin="289,236,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="inStock"  Text="{Binding DetailsOfProductItem.InStock,Mode=TwoWay}" />
         <Label Content="amount in your cart" HorizontalAlignment="Left" Margin="143,259,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="289,267,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="AmoutInYourCart"  Text="{Binding DetailsOfProductItem.AmoutInYourCart,Mode=TwoWay}" IsReadOnly="True"/>
+        <TextBlock HorizontalAlignment="Left" Margin="289,267,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="AmoutInYourCart"  Text="{Binding DetailsOfProductItem.AmoutInYourCart,Mode=TwoWay}" />
         <Button Content="add" HorizontalAlignment="Left" Margin="673,367,0,0" Padding="5" Height="32" VerticalAlignment="Top" Width="88" Click="Button_Click" />
     </Grid>
 </Window>

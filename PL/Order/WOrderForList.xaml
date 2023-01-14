@@ -13,7 +13,11 @@
             <!--SelectedValue="" ItemsSource=""-->
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding OrderID}" />
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding CustomerName}"/>
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" />
+                    <GridViewColumn Header="Amount Of Item" DisplayMemberBinding="{Binding AmountOfItem}" />
+                    <GridViewColumn Header="Total Sum" DisplayMemberBinding="{Binding TotalSum}" />
                 </GridView>
             </ListView.View>
         </ListView>
