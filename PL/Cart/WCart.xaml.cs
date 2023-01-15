@@ -23,6 +23,7 @@ namespace PL;
 /// </summary>
 public partial class WCart : Window, INotifyPropertyChanged
 {
+    #region property
     BlApi.IBl? bl = BlApi.Factory.Get();
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -65,6 +66,7 @@ public partial class WCart : Window, INotifyPropertyChanged
                                                                                                     typeof(bool),
                                                                                                    typeof(WCart));
     Action<ProductItem> action;
+    #endregion
     public WCart(BO.Cart myCart, Action<ProductItem> a)
     {
         NowCart = myCart;
@@ -84,7 +86,6 @@ public partial class WCart : Window, INotifyPropertyChanged
             if (NowCart!.ItemList != null && bl != null)
             {
                 NowCart = bl.Cart.UpdateAmountProduct(NowCart, (element.DataContext as BO.OrderItem)!.ID, (element.DataContext as BO.OrderItem)!.Amount + 1);
-                // message = "the amount update succesfully";
             }
         }
         DetailsOfProductItem.ID= (element!.DataContext as BO.OrderItem)!.ID;
@@ -106,10 +107,8 @@ public partial class WCart : Window, INotifyPropertyChanged
                     DetailsOfProductItem.ID = (element!.DataContext as BO.OrderItem)!.ID;
                     DetailsOfProductItem = bl!.Product.GetProductItemDetails(DetailsOfProductItem.ID, NowCart!);
                     action(DetailsOfProductItem);
-                    // NavigateToProductCatalog(sender, e);
                     return;
                 }
-
                // MessageBox.Show(NowCart?.ItemList?.First()?.Amount.ToString());
                 NowCart = bl.Cart.UpdateAmountProduct(NowCart!, (element.DataContext as BO.OrderItem)!.ID, (element.DataContext as BO.OrderItem)!.Amount - 1);
                 // message = "the amount update succesfully";
@@ -128,7 +127,6 @@ public partial class WCart : Window, INotifyPropertyChanged
             var orderItem = (BO.OrderItem)element.DataContext;
 
             NowCart = bl!.Cart.UpdateAmountProduct(NowCart!, orderItem.ID, 0);
-
 
             DetailsOfProductItem.ID = orderItem.ID;
             DetailsOfProductItem = bl!.Product.GetProductItemDetails(DetailsOfProductItem.ID, NowCart!);

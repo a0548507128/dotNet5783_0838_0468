@@ -20,6 +20,7 @@ namespace PL
     /// </summary>
     public partial class WProductItemDetails : Window
     {
+        #region property
         BlApi.IBl? bl = BlApi.Factory.Get();
         public BO.Cart NowCart
         {
@@ -48,6 +49,7 @@ namespace PL
                                                                                                        typeof(WProductItemDetails));
 
         Action<ProductItem> action;
+        #endregion
         public WProductItemDetails(int id, BO.Cart nowCart1, Action<ProductItem> a)
         {
             DetailsOfProductItem = new();

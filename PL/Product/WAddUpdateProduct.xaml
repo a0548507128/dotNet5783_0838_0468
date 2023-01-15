@@ -7,8 +7,11 @@
         mc:Ignorable="d"
         Title="AddProduct" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource self}}">
-
+    
     <Grid Name="MainGrid">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Product/3.jpg" Stretch="Uniform"/>
+        </Grid.Background>
         <Label Content="ID"  HorizontalAlignment="Left" Margin="235,91,0,0" VerticalAlignment="Top" />
         <TextBox HorizontalAlignment="Left" Margin="289,91,0,0" VerticalAlignment="Top" IsReadOnly="{Binding readOnly, Mode=TwoWay}"  TextWrapping="Wrap" Width="120" Name="id" Text="{Binding UpdateAddProduct.ID,Mode=TwoWay}" TextChanged="TextBox_TextChanged"/>
         <Label Content="Category" HorizontalAlignment="Left" Margin="199,183,0,0" VerticalAlignment="Top"/>

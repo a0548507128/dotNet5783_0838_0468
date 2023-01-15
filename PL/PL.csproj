@@ -30,6 +30,8 @@
     <None Remove="4.jpg" />
     <None Remove="5.jpg" />
     <None Remove="6.jpg" />
+    <None Remove="Product\3.jpg" />
+    <None Remove="Product\4.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +41,8 @@
   <ItemGroup>
     <Resource Include="1.jpg" />
     <Resource Include="2.jpg" />
+    <Resource Include="Product\3.jpg" />
+    <Resource Include="Product\4.jpg" />
   </ItemGroup>
 
 </Project>

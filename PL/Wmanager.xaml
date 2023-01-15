@@ -6,8 +6,11 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Wmanager" Height="450" Width="800"
-        Background="LightBlue">
+       >
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Product/3.jpg" Stretch="Uniform"/>
+        </Grid.Background>
         <Button Name="ProductList" Content="Product List" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" Width="360" Height="35" Click="ProductList_Click"/>
         <Button Name="OrderList" Content="Order List" HorizontalAlignment="Center" VerticalAlignment="Top" Width="360" Height="35" Margin="0,130,0,0" Click="OrderList_Click" />
     </Grid>

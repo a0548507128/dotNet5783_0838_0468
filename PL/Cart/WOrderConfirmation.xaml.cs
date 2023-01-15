@@ -22,8 +22,10 @@ namespace PL
     /// </summary>
     public partial class WOrderConfirmation : Window
     {
-        BlApi.IBl? bl = BlApi.Factory.Get();
+
         #region cart property
+        BlApi.IBl? bl = BlApi.Factory.Get();
+
         public BO.Cart NowCart
         {
             get { return (BO.Cart)GetValue(nowCartProperty); }
@@ -40,10 +42,11 @@ namespace PL
         public static readonly DependencyProperty messageProperty = DependencyProperty.Register(nameof(message),
                                                                                                         typeof(string),
                                                                                                        typeof(WOrderConfirmation));
-        #endregion
         public string? CustomerName { get; set; } = null;
         public string? CustomerEmail { get; set; } = null;
         public string? CustomerAdress { get; set; } = null;
+        #endregion
+
         public WOrderConfirmation(BO.Cart c)
         {
             NowCart=c;

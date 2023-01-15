@@ -8,7 +8,10 @@
         Title="WCart" Height="450" Width="800"
         DataContext = "{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-        <ListView Grid.Row="1"  x:Name="OrderItemInCart" ItemsSource="{Binding NowCart.ItemList, Mode=TwoWay}" >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Product/3.jpg" Stretch="Uniform"/>
+        </Grid.Background>
+        <ListView Grid.Row="1"  x:Name="OrderItemInCart" ItemsSource="{Binding NowCart.ItemList, Mode=TwoWay}" Background="{x:Null}">
             <ListView.View>  
                 <GridView>
                     <GridViewColumn/>

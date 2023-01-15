@@ -161,35 +161,38 @@ internal class Order : BlApi.IOrder
                 });
                 break;
             case EStatus.Sent:
-                ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
+                orderTracking.listOfStatus = new();
+                orderTracking.listOfStatus.Add(new()
                 {
-                    Date = (DateTime)o?.OrderDate,
+                    Date = (DateTime?)o?.OrderDate,
                     Status = BO.Enums.EStatus.Done
                 });
-                ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
+                orderTracking.listOfStatus = new();
+                orderTracking.listOfStatus.Add(new()
                 {
-                    Date = (DateTime)o?.ShipDate,
+                    Date = (DateTime?)o?.ShipDate,
                     Status = BO.Enums.EStatus.Sent
-
                 });
                 break;
+
             case EStatus.Provided:
-                ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
+                orderTracking.listOfStatus = new();
+                orderTracking.listOfStatus.Add(new()
                 {
-                    Date = (DateTime)o?.OrderDate,
+                    Date = (DateTime?)o?.OrderDate,
                     Status = BO.Enums.EStatus.Done
                 });
-                ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
+                orderTracking.listOfStatus = new();
+                orderTracking.listOfStatus.Add(new()
                 {
-                    Date = (DateTime)o?.ShipDate,
+                    Date = (DateTime?)o?.ShipDate,
                     Status = BO.Enums.EStatus.Sent
-
                 });
-                ((List<BO.OrderTracking.StatusAndDate>)orderTracking.listOfStatus).Add(new BO.OrderTracking.StatusAndDate()
+                orderTracking.listOfStatus = new();
+                orderTracking.listOfStatus.Add(new()
                 {
-                    Date = (DateTime)o?.DeliveryrDate,
+                    Date = (DateTime?)o?.DeliveryrDate,
                     Status = BO.Enums.EStatus.Provided
-
                 });
                 break;
         }

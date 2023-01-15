@@ -8,8 +8,10 @@
         Title="WOrderForList" Height="450" Width="800"
          DataContext = "{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-
-        <ListView  x:Name="ListOfOrder" Grid.RowSpan="2" MouseDoubleClick="ListOfOrder_MouseDoubleClick" SelectedValue="{Binding OrderDetails}" ItemsSource="{Binding ListOfOrder1}" >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Product/3.jpg" Stretch="Uniform"/>
+        </Grid.Background>
+        <ListView  x:Name="ListOfOrder" Grid.RowSpan="2" MouseDoubleClick="ListOfOrder_MouseDoubleClick" SelectedValue="{Binding OrderDetails}" ItemsSource="{Binding ListOfOrder1}" Background="{x:Null}">
             <!--SelectedValue="" ItemsSource=""-->
             <ListView.View>
                 <GridView>

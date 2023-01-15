@@ -23,6 +23,7 @@ namespace PL
     
     public partial class WNewOrder : Window
     {
+        #region property
         BlApi.IBl? bl = BlApi.Factory.Get();
         public System.Array Categories { get; set; } = Enum.GetValues(typeof(BO.Enums.ECategory));
         public Enums.ECategory? selectedCategory { get; set; } = null;
@@ -44,8 +45,8 @@ namespace PL
         public static readonly DependencyProperty nowCartProperty = DependencyProperty.Register(nameof(newCart),
                                                                                                         typeof(BO.Cart),
                                                                                                        typeof(WCart));
-        
 
+        #endregion
         public WNewOrder()
         {
             newCart = new();

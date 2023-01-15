@@ -21,6 +21,7 @@ namespace PL
     /// </summary>
     public partial class WOrderForList : Window
     {
+        #region property
         BlApi.IBl? bl = BlApi.Factory.Get();
         public BO.OrderForList? OrderDetails { get; set; } = new();
         #region ListOfOrderProperty
@@ -34,7 +35,7 @@ namespace PL
         }
 
         #endregion
-
+        #endregion
         public WOrderForList()
         {
             ListOfOrder1 = new(bl.Order.GetOrderList());

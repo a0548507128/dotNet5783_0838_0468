@@ -8,6 +8,9 @@
         Title="WNewOrder" Height="450" Width="800"      
         DataContext = "{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Product/3.jpg" Stretch="Uniform"/>
+        </Grid.Background>
         <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,0,0,4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -16,7 +19,7 @@
             <ComboBox Name="AttributeSelector" VerticalAlignment="Top" Grid.Column="1" SelectedItem="{Binding selectedCategory }" ItemsSource="{Binding Categories}" Height="32" SelectionChanged="AttributeSelector_SelectionChanged"/>
             <Label Content="category:" HorizontalAlignment="Left" Margin="48,0,0,0" VerticalAlignment="Center" Grid.Column="0"/>
         </Grid>
-        <ListView Grid.Row="1"  x:Name="ProductItem"   MouseDoubleClick="ProductItem_MouseDoubleClick" SelectedValue="{Binding ProductitemDetails}"  ItemsSource="{Binding ProductForItem}">
+        <ListView Grid.Row="1"  x:Name="ProductItem"   MouseDoubleClick="ProductItem_MouseDoubleClick" SelectedValue="{Binding ProductitemDetails}"  ItemsSource="{Binding ProductForItem}" Background="{x:Null}">
             <ListView.View >
                 <GridView >
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}" />

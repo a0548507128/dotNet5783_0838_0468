@@ -21,6 +21,7 @@ namespace PL;
 /// </summary>
 public partial class WOrderTracking : Window
 {
+    #region property
     BlApi.IBl? bl = BlApi.Factory.Get();
     public string message
     {
@@ -39,6 +40,7 @@ public partial class WOrderTracking : Window
                                                                                                     typeof(Visibility),
                                                                                                    typeof(WOrderTracking));
     public int OrderId { get; set; } = 0;
+    #endregion
     public BO.OrderTracking OrderTracking1
     {
         get { return (BO.OrderTracking)GetValue(OrderTracking1Property); }
