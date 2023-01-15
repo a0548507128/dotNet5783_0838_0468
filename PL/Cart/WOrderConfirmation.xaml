@@ -10,12 +10,12 @@
     <Grid>
         <Label Content="enter your details:" HorizontalAlignment="Left" Margin="228,80,0,0" VerticalAlignment="Top" FontSize="14" Width="149"/>
         <Label Content="name" HorizontalAlignment="Left" Margin="255,109,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="400,117,0,0" TextWrapping="Wrap" Text="{Binding CustomerName}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="400,117,0,0" TextWrapping="Wrap" Text="{Binding CustomerName}" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
         <Label Content="email" HorizontalAlignment="Left" Margin="256,135,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Margin="400,143,0,0" TextWrapping="Wrap" Text="{Binding CustomerEmail}" VerticalAlignment="Top" Width="120"/>
         <Label Content="adress" HorizontalAlignment="Left" Margin="251,163,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="400,171,0,0" TextWrapping="Wrap" Text="{Binding CustomerAdress}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="400,171,0,0" TextWrapping="Wrap" Text="{Binding CustomerAdress}" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
         <Button Content="confirm" HorizontalAlignment="Left" Margin="621,317,0,0" VerticalAlignment="Top" Click="confirm_Click"/>
-
+        <Label Content="{Binding message}" HorizontalAlignment="Left" Margin="39,368,0,0" VerticalAlignment="Top" Height="29" Width="114"/>
     </Grid>
 </Window>

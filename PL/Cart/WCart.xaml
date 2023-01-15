@@ -36,6 +36,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Completion of an order" HorizontalAlignment="Left" Margin="600,367,0,0" Padding="5" Height="26" VerticalAlignment="Top" Width="161" Click="OrderConfirmation" />
+        <Button Content="Completion of an order" HorizontalAlignment="Left" Margin="600,367,0,0" Padding="5" Height="26" VerticalAlignment="Top" Width="161" Click="OrderConfirmation" IsEnabled="{Binding isEnabled}"/>
     </Grid>
 </Window>

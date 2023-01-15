@@ -107,11 +107,11 @@ internal class Cart:ICart
 
         if (customerName is null)
         {
-            throw new BO.NameIsNullException("name is null") { NameIsNull = customerName.ToString() };
+            throw new NameIsNullException("name is null");
         }
         if (customerAdress is null)
         {
-            throw new BO.AdressIsNullException("adress is null") { AdressIsNull = customerAdress.ToString() };
+            throw new AdressIsNullException("adress is null");
         }
         // checkEmail(customerEmail);
        var ii =(from i in cart.ItemList
@@ -176,28 +176,28 @@ internal class Cart:ICart
             int orderID = dal.Order.Add(o);
             try
             {
-                var addOrderItem = cart.ItemList
-                    .Where(orderToAdd => orderToAdd is not null)
-                    .Select(orderToAdd => dal.OrderItem.Add(new DO.OrderItem()
+                //var addOrderItem = cart.ItemList
+                //    .Where(orderToAdd => orderToAdd is not null);
+                //addOrderItem.Select(orderToAdd => dal.OrderItem.Add(new DO.OrderItem()
+                //{
+                //  ID = 0,
+                //  ProductID = orderToAdd.ID,
+                //  OrderID = orderID,
+                //     Price = orderToAdd.Price,
+                //     Amount = orderToAdd.Amount
+                // }));
+                foreach (var item in cart.ItemList)
+                {
+                    dal.OrderItem.Add(new DO.OrderItem()
                     {
                         ID = 0,
-                        ProductID = orderToAdd.ID,
+                        ProductID = item.ID,
                         OrderID = orderID,
-                        Price = orderToAdd.Price,
-                        Amount = orderToAdd.Amount
-                    }));
-                //foreach (var item in cart.ItemList)
-                //{
-                //    dal.OrderItem.Add(new DO.OrderItem()
-                //    {
-                //        ID = 0,
-                //        ProductID = item.ID,
-                //        OrderID = orderID,
-                //        Price = item.Price,
-                //        Amount = item.Amount
-                //    });
+                        Price = item.Price,
+                        Amount = item.Amount
+                    });
 
-                //}
+                }
             }
             catch (DO.DuplicateID)
             {

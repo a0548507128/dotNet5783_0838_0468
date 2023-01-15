@@ -248,8 +248,8 @@ internal class Order : BlApi.IOrder
         //}
         var items = orderItemList.Where(item => item != null && item.Value.OrderID==id);
         int sum = items.Count();
-        if (sum == 0)
-            throw new Exception();
+        //if (sum == 0)
+            //throw new Exception();
         return sum;
 
     }

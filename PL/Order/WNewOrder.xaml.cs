@@ -54,11 +54,15 @@ namespace PL
             InitializeComponent();
         }
 
+        private void updateList(ProductItem p)
+        {
+           var item= ProductForItem.FirstOrDefault(item => item!.ID == p.ID);
+            ProductForItem[ProductForItem.IndexOf(item)] = p;
+        }
         private void ProductItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
              if (ProductitemDetails is not null)
-                new WProductItemDetails(ProductitemDetails.ID, newCart).ShowDialog();
-            ProductForItem = new(bl!.Product.GetProductsItem());
+                new WProductItemDetails(ProductitemDetails.ID, newCart, updateList).ShowDialog();
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,8 +73,8 @@ namespace PL
 
         private void To_Cart_Click(object sender, RoutedEventArgs e)
         {
-            new WCart(newCart).ShowDialog();
-            ProductForItem = new(bl!.Product.GetProductsItem());
+            new WCart(newCart, updateList).ShowDialog();
+            //ProductForItem = new(bl!.Product.GetProductsItem());
         }
 
         private void Group_Category_Click(object sender, RoutedEventArgs e)

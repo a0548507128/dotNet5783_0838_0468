@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -31,10 +32,18 @@ namespace PL
         public static readonly DependencyProperty nowCartProperty = DependencyProperty.Register(nameof(NowCart),
                                                                                                         typeof(BO.Cart),
                                                                                                        typeof(WOrderConfirmation));
+        public string message
+        {
+            get { return (string)GetValue(messageProperty); }
+            set { SetValue(messageProperty, value); }
+        }
+        public static readonly DependencyProperty messageProperty = DependencyProperty.Register(nameof(message),
+                                                                                                        typeof(string),
+                                                                                                       typeof(WOrderConfirmation));
         #endregion
-        public string CustomerName { get; set; } = "";
-        public string CustomerEmail { get; set; } = "";
-        public string CustomerAdress { get; set; } = "";
+        public string? CustomerName { get; set; } = null;
+        public string? CustomerEmail { get; set; } = null;
+        public string? CustomerAdress { get; set; } = null;
         public WOrderConfirmation(BO.Cart c)
         {
             NowCart=c;
@@ -43,16 +52,29 @@ namespace PL
 
         private void confirm_Click(object sender, RoutedEventArgs e)
         {
-            bl!.Cart.OrderConfirmation(NowCart, CustomerName, CustomerEmail, CustomerAdress);
-            MessageBox.Show("The order is complete!");
-            Close();
-            //NowCart = new();
-            //var WCart = Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.Name == "{PL.WCart}");
+            try
+            {
+                bl!.Cart.OrderConfirmation(NowCart, CustomerName!, CustomerEmail!, CustomerAdress!);
+                MessageBox.Show("The order is complete!");
+                Close();
+            }
+            catch(BO.NameIsNullException ex)
+            {
+                message=ex.Message;
+            }
+            catch(BO.AdressIsNullException ex)
+            {
+                message = ex.Message;
+            }
+            catch(Exception ex)
+            {
+                message = ex.Message;
+            }
+        }
 
-            //if (WCart != null)
-            //{
-            //    WCart.Close();
-            //}
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            message = "";
         }
     }
 }

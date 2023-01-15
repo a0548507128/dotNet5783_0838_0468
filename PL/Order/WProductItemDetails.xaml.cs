@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,9 @@ namespace PL
         public static readonly DependencyProperty isEnabledProperty = DependencyProperty.Register(nameof(isEnabled),
                                                                                                         typeof(bool),
                                                                                                        typeof(WProductItemDetails));
-        public WProductItemDetails(int id, BO.Cart nowCart1)
+
+        Action<ProductItem> action;
+        public WProductItemDetails(int id, BO.Cart nowCart1, Action<ProductItem> a)
         {
             DetailsOfProductItem = new();
             NowCart = nowCart1;
@@ -59,6 +62,7 @@ namespace PL
                 isEnabled = true;
             }
             InitializeComponent();
+            action = a;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -66,6 +70,8 @@ namespace PL
             NowCart= bl!.Cart.AddProduct(NowCart, DetailsOfProductItem.ID);
             //int newAmount = DetailsOfProductItem.AmoutInYourCart + 1;
             //bl!.Cart.UpdateAmountProduct(NowCart, DetailsOfProductItem.ID, newAmount);
+            DetailsOfProductItem = bl!.Product.GetProductItemDetails(DetailsOfProductItem.ID, NowCart);
+            action(DetailsOfProductItem);
             Close();
         }
     }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BO;
+using DalApi;
+using DO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -44,10 +47,32 @@ public partial class WCart : Window, INotifyPropertyChanged
     //public static readonly DependencyProperty nowCartProperty = DependencyProperty.Register(nameof(NowCart),
     //                                                                                                typeof(BO.Cart),
     //                                                                                               typeof(WCart));
-    public WCart(BO.Cart myCart)
+    public BO.ProductItem DetailsOfProductItem
+    {
+        get { return (BO.ProductItem)GetValue(DetailsOfProductItemProperty); }
+        set { SetValue(DetailsOfProductItemProperty, value); }
+    }
+    public static readonly DependencyProperty DetailsOfProductItemProperty = DependencyProperty.Register(nameof(DetailsOfProductItem),
+                                                                                                    typeof(BO.ProductItem),
+                                                                                                   typeof(WCart));
+
+    public bool isEnabled
+    {
+        get { return (bool)GetValue(isEnabledProperty); }
+        set { SetValue(isEnabledProperty, value); }
+    }
+    public static readonly DependencyProperty isEnabledProperty = DependencyProperty.Register(nameof(isEnabled),
+                                                                                                    typeof(bool),
+                                                                                                   typeof(WCart));
+    Action<ProductItem> action;
+    public WCart(BO.Cart myCart, Action<ProductItem> a)
     {
         NowCart = myCart;
+        DetailsOfProductItem = new();
+        if (NowCart?.ItemList?.Count == 0) isEnabled = false;
+        else if(NowCart?.ItemList?.Count != 0) isEnabled = true;
         InitializeComponent();
+        action = a;
     }
 
     private void plus_Click(object sender, RoutedEventArgs e)//+
@@ -62,6 +87,9 @@ public partial class WCart : Window, INotifyPropertyChanged
                 // message = "the amount update succesfully";
             }
         }
+        DetailsOfProductItem.ID= (element!.DataContext as BO.OrderItem)!.ID;
+        DetailsOfProductItem = bl!.Product.GetProductItemDetails(DetailsOfProductItem.ID, NowCart!);
+        action(DetailsOfProductItem);
     }
     private void minus_Click(object sender, RoutedEventArgs e)//-
     {
@@ -75,16 +103,22 @@ public partial class WCart : Window, INotifyPropertyChanged
                 {
                     NowCart.ItemList.RemoveAll(item => item?.ID == (element.DataContext as BO.OrderItem)!.ID);
                     MessageBox.Show("the order item removed");
+                    DetailsOfProductItem.ID = (element!.DataContext as BO.OrderItem)!.ID;
+                    DetailsOfProductItem = bl!.Product.GetProductItemDetails(DetailsOfProductItem.ID, NowCart!);
+                    action(DetailsOfProductItem);
                     // NavigateToProductCatalog(sender, e);
                     return;
                 }
 
-                MessageBox.Show(NowCart?.ItemList?.First()?.Amount.ToString());
+               // MessageBox.Show(NowCart?.ItemList?.First()?.Amount.ToString());
                 NowCart = bl.Cart.UpdateAmountProduct(NowCart!, (element.DataContext as BO.OrderItem)!.ID, (element.DataContext as BO.OrderItem)!.Amount - 1);
                 // message = "the amount update succesfully";
-                MessageBox.Show(NowCart?.ItemList?.First()?.Amount.ToString());
+                //MessageBox.Show(NowCart?.ItemList?.First()?.Amount.ToString());
             }
         }
+        DetailsOfProductItem.ID = (element!.DataContext as BO.OrderItem)!.ID;
+        DetailsOfProductItem = bl!.Product.GetProductItemDetails(DetailsOfProductItem.ID, NowCart!);
+        action(DetailsOfProductItem);
     }
     private void delete_product_Click(object sender, RoutedEventArgs e)//-delete
     {
@@ -96,11 +130,15 @@ public partial class WCart : Window, INotifyPropertyChanged
             NowCart = bl!.Cart.UpdateAmountProduct(NowCart!, orderItem.ID, 0);
 
 
+            DetailsOfProductItem.ID = orderItem.ID;
+            DetailsOfProductItem = bl!.Product.GetProductItemDetails(DetailsOfProductItem.ID, NowCart!);
+            action(DetailsOfProductItem);
         }
     }
     private void OrderConfirmation(object sender, RoutedEventArgs e)
     {
-        new WOrderConfirmation(NowCart!).ShowDialog();
+        
+            new WOrderConfirmation(NowCart!).ShowDialog();
         //NowCart= null;
     }
 }
