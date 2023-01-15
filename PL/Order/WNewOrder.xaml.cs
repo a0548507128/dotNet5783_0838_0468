@@ -66,13 +66,13 @@ namespace PL
                 if (bl != null) ProductForItem = new(bl.Product.GetProductsItem((x) => x?.Category.ToString() == ((Enums.ECategory)selectedCategory)!.ToString()));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void To_Cart_Click(object sender, RoutedEventArgs e)
         {
             new WCart(newCart).ShowDialog();
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Group_Category_Click(object sender, RoutedEventArgs e)
         {
             var GropupingProducts = (from p in ProductForItem
                                      group p by p.Category into catGroup

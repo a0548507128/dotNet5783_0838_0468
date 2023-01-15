@@ -28,8 +28,8 @@
         <!--<Button Content="get item list" HorizontalAlignment="Left" Margin="326,243,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>-->
         <Label Content="total sum" HorizontalAlignment="Left" Margin="233,260,0,0" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Right" Margin="0,268,326,0" TextWrapping="Wrap" Text="{Binding DelailsOfOrder.TotalSum,Mode=TwoWay}"  VerticalAlignment="Top" Width="148"/>
-        <Button Content="update" HorizontalAlignment="Left" Margin="497,197,0,0" VerticalAlignment="Top" Visibility="{Binding IsVisibleShipDate}" Click="Button_Click"/>
-        <Button Content="update" HorizontalAlignment="Left" Margin="497,221,0,0" VerticalAlignment="Top" Visibility="{Binding IsVisibleDeliveryDate}" Click="Button_Click_1" />
+        <Button Content="update" HorizontalAlignment="Left" Margin="497,197,0,0" VerticalAlignment="Top" Visibility="{Binding IsVisibleShipDate}" Click="Update_ShipDate_Click"/>
+        <Button Content="update" HorizontalAlignment="Left" Margin="497,221,0,0" VerticalAlignment="Top" Visibility="{Binding IsVisibleDeliveryDate}" Click="Update_DeliveryDate_Click" />
         <ListView ItemsSource="{Binding DelailsOfOrder.ItemList, Mode=TwoWay}" Margin="420,250,66,34"  >
             <ListView.View >
                 <GridView >

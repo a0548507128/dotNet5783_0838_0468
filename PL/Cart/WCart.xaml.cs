@@ -32,7 +32,7 @@ public partial class WCart : Window, INotifyPropertyChanged
         {
             Cart = value;
             if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs("Cart"));
+                PropertyChanged(this, new PropertyChangedEventArgs(nameof(NowCart)));
         }
     }
 
@@ -50,7 +50,7 @@ public partial class WCart : Window, INotifyPropertyChanged
         InitializeComponent();
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)//+
+    private void plus_Click(object sender, RoutedEventArgs e)//+
     {
         var element = e.OriginalSource as FrameworkElement;
 
@@ -58,12 +58,12 @@ public partial class WCart : Window, INotifyPropertyChanged
         {
             if (NowCart!.ItemList != null && bl != null)
             {
-                    NowCart = bl.Cart.UpdateAmountProduct(NowCart, (element.DataContext as BO.OrderItem)!.ID, (element.DataContext as BO.OrderItem)!.Amount + 1);
-                    // message = "the amount update succesfully";
+                NowCart = bl.Cart.UpdateAmountProduct(NowCart, (element.DataContext as BO.OrderItem)!.ID, (element.DataContext as BO.OrderItem)!.Amount + 1);
+                // message = "the amount update succesfully";
             }
         }
     }
-    private void Button_Click_1(object sender, RoutedEventArgs e)//-
+    private void minus_Click(object sender, RoutedEventArgs e)//-
     {
         var element = e.OriginalSource as FrameworkElement;
 
@@ -75,18 +75,18 @@ public partial class WCart : Window, INotifyPropertyChanged
                 {
                     NowCart.ItemList.RemoveAll(item => item?.ID == (element.DataContext as BO.OrderItem)!.ID);
                     MessageBox.Show("the order item removed");
-                   // NavigateToProductCatalog(sender, e);
+                    // NavigateToProductCatalog(sender, e);
                     return;
                 }
-              
-                    //MessageBox.Show(NowCart?.ItemList?.First().Amount.ToString());
-                    NowCart = bl.Cart.UpdateAmountProduct(NowCart, (element.DataContext as BO.OrderItem)!.ID, (element.DataContext as BO.OrderItem)!.Amount - 1);
-                    // message = "the amount update succesfully";
-                  //  MessageBox.Show(NowCart.ItemList.First().Amount.ToString());
+
+                MessageBox.Show(NowCart?.ItemList?.First()?.Amount.ToString());
+                NowCart = bl.Cart.UpdateAmountProduct(NowCart!, (element.DataContext as BO.OrderItem)!.ID, (element.DataContext as BO.OrderItem)!.Amount - 1);
+                // message = "the amount update succesfully";
+                MessageBox.Show(NowCart?.ItemList?.First()?.Amount.ToString());
             }
         }
     }
-    private void Button_Click_2(object sender, RoutedEventArgs e)//-delete
+    private void delete_product_Click(object sender, RoutedEventArgs e)//-delete
     {
         var element = e.OriginalSource as FrameworkElement;
         if (element != null && element.DataContext is BO.OrderItem)
@@ -94,11 +94,11 @@ public partial class WCart : Window, INotifyPropertyChanged
             var orderItem = (BO.OrderItem)element.DataContext;
 
             NowCart = bl!.Cart.UpdateAmountProduct(NowCart!, orderItem.ID, 0);
-            
-           
+
+
         }
     }
-        private void OrderConfirmation(object sender, RoutedEventArgs e)
+    private void OrderConfirmation(object sender, RoutedEventArgs e)
     {
         new WOrderConfirmation(NowCart!).ShowDialog();
     }

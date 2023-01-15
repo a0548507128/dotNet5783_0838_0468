@@ -40,9 +40,9 @@ namespace PL
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void confirm_Click(object sender, RoutedEventArgs e)
         {
-           if(bl!=null) bl.Cart.OrderConfirmation(NowCart, CustomerName, CustomerEmail, CustomerAdress);
+            bl!.Cart.OrderConfirmation(NowCart, CustomerName, CustomerEmail, CustomerAdress);
             MessageBox.Show("The order is complete!");
             this.Close();
         }

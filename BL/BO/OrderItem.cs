@@ -7,14 +7,14 @@ namespace BO;
 public class OrderItem: INotifyPropertyChanged
 {
    // public int numInOrder { get; set; }//אתחול ב-0 ואז ליסט.קאונט
-    private int productId;
-    public int numInOrder
+    private int numInOrder;
+    public int NumInOrder
     {
-        get { return productId; }
+        get { return numInOrder; }
         set
         {
-            productId = value;
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("numInOrder"));
+            numInOrder = value;
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(nameof(NumInOrder)));
         }
     }
     //public int ID { get; set; }
@@ -25,7 +25,7 @@ public class OrderItem: INotifyPropertyChanged
         set
         {
             id = value;
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("ID"));
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(nameof(ID)));
         }
     }
     //public string? Name { get; set; }
@@ -36,7 +36,7 @@ public class OrderItem: INotifyPropertyChanged
         set
         {
             name = value;
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(nameof(Name)));
         }
     }
     //public double Price { get; set; }
@@ -47,7 +47,7 @@ public class OrderItem: INotifyPropertyChanged
         set
         {
             price = value;
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Price"));
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(nameof(Price)));
         }
     }
 
@@ -59,30 +59,30 @@ public class OrderItem: INotifyPropertyChanged
         set
         {
             amount = value;
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Amount"));
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(nameof(Amount)));
         }
     }
 
    // public double sumItem { get; set; }
-    private double totalPrice;
-    public double sumItem
+    private double sumItem;
+    public double SumItem
     {
-        get { return totalPrice; }
+        get { return sumItem; }
         set
         {
-            totalPrice = value;
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("sumItem"));
+            sumItem = value;
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(nameof(SumItem)));
         }
     }
 
 
     public event PropertyChangedEventHandler? PropertyChanged;
     public override string ToString() => $@"
-    item number={numInOrder}
+    item number={NumInOrder}
     Order Item ID={ID}
     name={Name}:
     Price: {Price}
     Amount : {Amount}
-    sum item={sumItem}
+    sum item={SumItem}
 ";
 }

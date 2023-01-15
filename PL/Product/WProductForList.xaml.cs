@@ -52,20 +52,20 @@ namespace PL
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (selectedCategory is not null)
-            if(bl!=null) ListOfProduct = new(bl.Product.GetProductsList((x) => x?.Category.ToString() == ((Enums.ECategory)selectedCategory)!.ToString()));
+            ListOfProduct = new(bl!.Product.GetProductsList((x) => x?.Category.ToString() == ((Enums.ECategory)selectedCategory)!.ToString()));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Add_New_Click(object sender, RoutedEventArgs e)
         {
             new WAddUpdateProduct().ShowDialog();
-            if (bl != null) ListOfProduct = new(bl.Product.GetProductsList());
+           ListOfProduct = new(bl!.Product.GetProductsList());
         }
 
         private void ListOfProduct1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (updateProduct is not null)
                 new WAddUpdateProduct(updateProduct.ID).ShowDialog();
-            if (bl != null) ListOfProduct = new(bl.Product.GetProductsList());
+            ListOfProduct = new(bl!.Product.GetProductsList());
         }
     }
 }

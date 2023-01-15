@@ -28,8 +28,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="cart" Grid.Row="2" HorizontalAlignment="Left" Margin="706,0,0,0" Padding="5" Height="28" VerticalAlignment="Center" Click="Button_Click" Width="76" />
-        <Button Content="group by category" Grid.Row="2" HorizontalAlignment="Left" Margin="544,0,0,0" Padding="5" Height="28" VerticalAlignment="Center"  Width="123" Click="Button_Click_1" />
+        <Button Content="cart" Grid.Row="2" HorizontalAlignment="Left" Margin="706,0,0,0" Padding="5" Height="28" VerticalAlignment="Center" Click="To_Cart_Click" Width="76" />
+        <Button Content="group by category" Grid.Row="2" HorizontalAlignment="Left" Margin="544,0,0,0" Padding="5" Height="28" VerticalAlignment="Center"  Width="123" Click="Group_Category_Click" />
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="181*"/>

@@ -28,7 +28,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="Button_Click"/>
+        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="Add_New_Click"/>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>

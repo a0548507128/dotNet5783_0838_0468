@@ -54,7 +54,7 @@ public partial class WOrderTracking : Window
         InitializeComponent();
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void Show_Status_Click(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -67,7 +67,7 @@ public partial class WOrderTracking : Window
         }
     }
 
-    private void Button_Click_1(object sender, RoutedEventArgs e)
+    private void Order_Details_Click(object sender, RoutedEventArgs e)
     {
         new WOrderDetails(OrderId, "customer").ShowDialog();
     }

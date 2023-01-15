@@ -270,12 +270,12 @@ internal class Order : BlApi.IOrder
                           where (item != null&& item?.OrderID==id)
                          select new BO.OrderItem()
                          {
-                             numInOrder = count++,
+                             NumInOrder = count++,
                              ID = item.Value.ID,
                              Name = getOrderItemName(item.Value.ProductID),
                              Price = item.Value.Price,
                              Amount = item.Value.Amount,
-                             sumItem = item.Value.Price * item.Value.Amount
+                             SumItem = item.Value.Price * item.Value.Amount
                          }).ToList();
         //foreach (var item in orderItemList)
         //{

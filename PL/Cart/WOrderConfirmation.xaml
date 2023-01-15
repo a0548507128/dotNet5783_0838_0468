@@ -15,7 +15,7 @@
         <TextBox HorizontalAlignment="Left" Margin="400,143,0,0" TextWrapping="Wrap" Text="{Binding CustomerEmail}" VerticalAlignment="Top" Width="120"/>
         <Label Content="adress" HorizontalAlignment="Left" Margin="251,163,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Margin="400,171,0,0" TextWrapping="Wrap" Text="{Binding CustomerAdress}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="confirm" HorizontalAlignment="Left" Margin="621,317,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="confirm" HorizontalAlignment="Left" Margin="621,317,0,0" VerticalAlignment="Top" Click="confirm_Click"/>
 
     </Grid>
 </Window>

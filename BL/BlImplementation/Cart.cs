@@ -22,7 +22,7 @@ internal class Cart:ICart
             if (BOI?.Amount < DP?.InStock)
             {
                 BOI.Amount++;
-                BOI.sumItem += BOI.Price;
+                BOI.SumItem += BOI.Price;
                 c.TotalSum += BOI.Price;
                 return c;
             }
@@ -41,12 +41,12 @@ internal class Cart:ICart
                    
                     c.ItemList.Add(new BO.OrderItem()
                     {
-                        numInOrder = c.ItemList.Count + 1,
+                        NumInOrder = c.ItemList.Count + 1,
                         ID = DP.ID,
                         Name = DP.Name,
                         Price = DP.Price,
                         Amount = 1,
-                        sumItem = DP.Price
+                        SumItem = DP.Price
 
                     });
                     c.TotalSum += DP.Price;
@@ -78,7 +78,7 @@ internal class Cart:ICart
         }
         else if (newAmount == 0)
         {
-            cart.TotalSum -= BOI.sumItem;
+            cart.TotalSum -= BOI.SumItem;
             cart.ItemList.RemoveAll(e => e?.ID == productID);
         }
         else if (BOI?.Amount < newAmount)
@@ -92,7 +92,7 @@ internal class Cart:ICart
         {
             int difference = BOI.Amount - newAmount;
             BOI.Amount = newAmount;
-            BOI.sumItem -= (difference * BOI.Price);
+            BOI.SumItem -= (difference * BOI.Price);
             cart.TotalSum -= (difference * BOI.Price);
         }
         //BOI.Amount== amount
