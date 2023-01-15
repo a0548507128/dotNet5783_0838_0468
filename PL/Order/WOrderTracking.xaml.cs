@@ -72,6 +72,8 @@ public partial class WOrderTracking : Window
         new WOrderDetails(OrderId, "customer").ShowDialog();
     }
 
-
-  
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        message = "";
+    }
 }

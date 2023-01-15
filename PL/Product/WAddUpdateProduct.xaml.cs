@@ -106,6 +106,11 @@ public partial class WAddUpdateProduct : Window
         {
             message = ex.Message;
         }
-    } 
+    }
+
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        message = "";
+    }
 }
 

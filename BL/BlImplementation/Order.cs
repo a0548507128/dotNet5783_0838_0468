@@ -218,13 +218,23 @@ internal class Order : BlApi.IOrder
     }
     public EStatus CheckStatus(DateTime? OrderDate, DateTime? ShipDate, DateTime? DeliveryDate)
     {
-        DateTime today = DateTime.Now;
-        if (today.Equals(OrderDate) && today.Equals(ShipDate) && today.Equals(DeliveryDate))
-            return EStatus.Provided;
-        else if (today.Equals(OrderDate) && today.Equals(ShipDate))
-            return EStatus.Sent;
-        else
+        //DateTime today = DateTime.Now;
+        //if (today.Equals(OrderDate) && today.Equals(ShipDate) && today.Equals(DeliveryDate))
+        //    return EStatus.Provided;
+        //else if (today.Equals(OrderDate) && today.Equals(ShipDate))
+        //    return EStatus.Sent;
+        //else 
+        //    return EStatus.Done;
+        if (DeliveryDate == null && ShipDate == null)
+        {
             return EStatus.Done;
+        }
+        else if(DeliveryDate==null&& ShipDate != null)
+        {
+            return EStatus.Sent;
+        }
+        else
+         return EStatus.Provided;
     }
     public int GetAmountItems(int id)
     {
@@ -236,7 +246,8 @@ internal class Order : BlApi.IOrder
         //    if (item != null)
         //        sum = item.Value.Amount+1;
         //}
-        int sum = (orderItemList.FirstOrDefault(item => item != null)?.Amount+1) ?? 0;
+        var items = orderItemList.Where(item => item != null && item.Value.OrderID==id);
+        int sum = items.Count();
         if (sum == 0)
             throw new Exception();
         return sum;
@@ -246,12 +257,15 @@ internal class Order : BlApi.IOrder
     {
         IEnumerable<DO.OrderItem?> orderItemList = new List<DO.OrderItem?>();
         orderItemList = dal.OrderItem.GetAll();
-        double sum = 0;
-        var newSum = orderItemList.Where(oi => oi != null).Sum(x => (x?.Price ?? 0) * (x?.Amount ?? 0));
+        var items = orderItemList.Where(item => item != null && item.Value.OrderID == id);
+        double totalPrice = items.Sum(x => x.Value.Amount * x.Value.Price);
+        //double sum = 0;
+        //var newSum = orderItemList.Where(oi => oi != null&&oi.Value.ID==id).Sum(x => (x?.Price ?? 0) * (x?.Amount ?? 0));
+       
         //(orderItemList
         //.Where(item => item.Equals(true))
         //.Select(item => sum = sum + item.Value.Price * item.Value.Amount)).First();
-        return newSum;
+        return totalPrice;
         //foreach (var item in orderItemList)
         //{
         //    if (item != null)
@@ -267,16 +281,16 @@ internal class Order : BlApi.IOrder
         orderItemList = dal.OrderItem.GetAll();
         int count = 0;
         BOorderItemList = (from item in orderItemList
-                          where (item != null&& item?.OrderID==id)
-                         select new BO.OrderItem()
-                         {
-                             NumInOrder = count++,
-                             ID = item.Value.ID,
-                             Name = getOrderItemName(item.Value.ProductID),
-                             Price = item.Value.Price,
-                             Amount = item.Value.Amount,
-                             SumItem = item.Value.Price * item.Value.Amount
-                         }).ToList();
+                           where (item != null && item?.OrderID == id)
+                           select new BO.OrderItem()
+                           {
+                               NumInOrder = count++,
+                               ID = item.Value.ID,
+                               Name = getOrderItemName(item.Value.ProductID),
+                               Price = item.Value.Price,
+                               Amount = item.Value.Amount,
+                               SumItem = item.Value.Price * item.Value.Amount
+                           }).ToList();
         //foreach (var item in orderItemList)
         //{
         //    BOorderItemList.Add(new BO.OrderItem()

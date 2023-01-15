@@ -58,18 +58,19 @@ namespace PL
         {
              if (ProductitemDetails is not null)
                 new WProductItemDetails(ProductitemDetails.ID, newCart).ShowDialog();
+            ProductForItem = new(bl!.Product.GetProductsItem());
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (selectedCategory is not null)
-                if (bl != null) ProductForItem = new(bl.Product.GetProductsItem((x) => x?.Category.ToString() == ((Enums.ECategory)selectedCategory)!.ToString()));
+                 ProductForItem = new(bl!.Product.GetProductsItem((x) => x?.Category.ToString() == ((Enums.ECategory)selectedCategory)!.ToString()));
         }
 
         private void To_Cart_Click(object sender, RoutedEventArgs e)
         {
             new WCart(newCart).ShowDialog();
-
+            ProductForItem = new(bl!.Product.GetProductsItem());
         }
 
         private void Group_Category_Click(object sender, RoutedEventArgs e)

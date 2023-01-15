@@ -83,12 +83,12 @@ namespace PL
 
         private void Update_ShipDate_Click(object sender, RoutedEventArgs e)//ShipDate
         {
-            if (bl != null) DelailsOfOrder = bl.Order.OrderShippingUpdate(DelailsOfOrder.ID);
+            DelailsOfOrder = bl!.Order.OrderShippingUpdate(DelailsOfOrder.ID);
         }
 
         private void Update_DeliveryDate_Click(object sender, RoutedEventArgs e)//DeliveryDate
         {
-            if (bl != null) DelailsOfOrder = bl.Order.OrderDeliveryUpdate(DelailsOfOrder.ID);
+             DelailsOfOrder = bl!.Order.OrderDeliveryUpdate(DelailsOfOrder.ID);
         }
     }
 }

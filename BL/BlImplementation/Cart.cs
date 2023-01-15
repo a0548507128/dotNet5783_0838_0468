@@ -50,6 +50,7 @@ internal class Cart:ICart
 
                     });
                     c.TotalSum += DP.Price;
+                    
                     return c;
                 }
                 else

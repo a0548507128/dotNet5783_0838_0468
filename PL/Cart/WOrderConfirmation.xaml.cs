@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace PL
 {
     /// <summary>
@@ -44,7 +45,14 @@ namespace PL
         {
             bl!.Cart.OrderConfirmation(NowCart, CustomerName, CustomerEmail, CustomerAdress);
             MessageBox.Show("The order is complete!");
-            this.Close();
+            Close();
+            //NowCart = new();
+            //var WCart = Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.Name == "{PL.WCart}");
+
+            //if (WCart != null)
+            //{
+            //    WCart.Close();
+            //}
         }
     }
 }

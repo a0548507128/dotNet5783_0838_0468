@@ -101,5 +101,6 @@ public partial class WCart : Window, INotifyPropertyChanged
     private void OrderConfirmation(object sender, RoutedEventArgs e)
     {
         new WOrderConfirmation(NowCart!).ShowDialog();
+        //NowCart= null;
     }
 }

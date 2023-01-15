@@ -49,10 +49,7 @@ namespace PL
         {
             DetailsOfProductItem = new();
             NowCart = nowCart1;
-            if (bl != null)
-            {
-                DetailsOfProductItem = bl.Product.GetProductItemDetails(id, NowCart);
-            }
+            DetailsOfProductItem = bl!.Product.GetProductItemDetails(id, NowCart);
             if (DetailsOfProductItem.InStock <= 0)
             {
                 isEnabled = false;
@@ -66,11 +63,10 @@ namespace PL
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (bl != null) bl.Cart.AddProduct(NowCart, DetailsOfProductItem.ID);
-            int newAmount = DetailsOfProductItem.AmoutInYourCart + 1;
-            if (bl != null) bl.Cart.UpdateAmountProduct(NowCart, DetailsOfProductItem.ID, newAmount);
-            this.Close();
+            NowCart= bl!.Cart.AddProduct(NowCart, DetailsOfProductItem.ID);
+            //int newAmount = DetailsOfProductItem.AmoutInYourCart + 1;
+            //bl!.Cart.UpdateAmountProduct(NowCart, DetailsOfProductItem.ID, newAmount);
+            Close();
         }
     }
 }

@@ -36,7 +36,7 @@
                     <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" />
                     <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount}" />
-                    <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding sumItem}" />
+                    <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding SumItem}" />
                 </GridView>
             </ListView.View>
         </ListView>
