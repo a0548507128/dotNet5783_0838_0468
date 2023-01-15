@@ -22,7 +22,7 @@
         <TextBox HorizontalAlignment="Left" Margin="289,231,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="price"  Text="{Binding UpdateAddProduct.Price,Mode=TwoWay}" TextChanged="TextBox_TextChanged"/>
         <Label Content="In Stock" HorizontalAlignment="Left" Margin="204,263,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Margin="289,271,0,0" VerticalAlignment="Top" TextWrapping="Wrap"  Width="120" Name="inStock"  Text="{Binding UpdateAddProduct.InStock,Mode=TwoWay}"/>
-        <Button Content="{Binding Source={x:Static local:WAddUpdateProduct.MyContent}}" Grid.Row="1" HorizontalAlignment="Left" Margin="666,5,0,10" Padding="5" Width="85" Click="Button_Click_Add_update"  Name="addUpdate" />
+        <Button Content="{Binding Source={x:Static local:WAddUpdateProduct.MyContent}}" Grid.Row="1" HorizontalAlignment="Left" Margin="666,5,0,10" Padding="5" Width="85" Click="Button_Click_Add_update"  Name="addUpdate" FontSize="16" BorderBrush="#FFAA772B" BorderThickness="2,2,2,2"/>
         <Label Content="{Binding message}" HorizontalAlignment="Left" Margin="41,5,0,0" VerticalAlignment="Top" Height="35" Width="215" Grid.Row="1"/>
         <Grid.RowDefinitions>
             <RowDefinition Height="351*"/>

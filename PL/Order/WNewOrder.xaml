@@ -31,12 +31,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="cart" Grid.Row="2" HorizontalAlignment="Left" Margin="706,0,0,0" Padding="5" Height="28" VerticalAlignment="Center" Click="To_Cart_Click" Width="76" />
-        <Button Content="group by category" Grid.Row="2" HorizontalAlignment="Left" Margin="544,0,0,0" Padding="5" Height="28" VerticalAlignment="Center"  Width="123" Click="Group_Category_Click" />
+        <Button Content="cart" Grid.Row="2" HorizontalAlignment="Left" Margin="706,0,0,0" Padding="5" Height="39" VerticalAlignment="Center" Click="To_Cart_Click" Width="76" FontSize="16" BorderBrush="#FFAA772B" BorderThickness="2,2,2,2"/>
+        <Button Content="group by category" Grid.Row="2" HorizontalAlignment="Left" Margin="504,0,0,0" Padding="5" Height="39" VerticalAlignment="Center"  Width="163" Click="Group_Category_Click" FontSize="16" BorderBrush="#FFAA772B" BorderThickness="2,2,2,2"/>
         <Grid.RowDefinitions>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="181*"/>
-            <RowDefinition Height="Auto" MinHeight="42.04"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="Auto" MinHeight="59.04"/>
         </Grid.RowDefinitions>
     </Grid>
 </Window>

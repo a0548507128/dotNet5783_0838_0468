@@ -11,7 +11,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Product/3.jpg" Stretch="Uniform"/>
         </Grid.Background>
-        <Button Name="ProductList" Content="Product List" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" Width="360" Height="35" Click="ProductList_Click"/>
-        <Button Name="OrderList" Content="Order List" HorizontalAlignment="Center" VerticalAlignment="Top" Width="360" Height="35" Margin="0,130,0,0" Click="OrderList_Click" />
+        <Button Name="ProductList" Content="Product List" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" Width="360" Height="35" Click="ProductList_Click" FontSize="16" BorderBrush="#FFAA772B" BorderThickness="2,2,2,2"/>
+        <Button Name="OrderList" Content="Order List" HorizontalAlignment="Center" VerticalAlignment="Top" Width="360" Height="35" Margin="0,130,0,0" Click="OrderList_Click" FontSize="16" BorderBrush="#FFAA772B" BorderThickness="2,2,2,2"/>
     </Grid>
 </Window>

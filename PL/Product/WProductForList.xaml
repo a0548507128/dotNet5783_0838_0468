@@ -36,7 +36,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="667,5,0,5" Padding="5" Click="Add_New_Click" Grid.ColumnSpan="2"/>
+        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="618,0,0,10" Padding="5" Click="Add_New_Click" Grid.ColumnSpan="2" FontSize="16" BorderBrush="#FFAA772B" BorderThickness="2,2,2,2"/>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
