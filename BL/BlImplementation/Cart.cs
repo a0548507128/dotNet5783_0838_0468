@@ -2,6 +2,7 @@
 using BlApi;
 using BO;
 using DalApi;
+using DO;
 using System.Linq;
 using System.Runtime.Intrinsics.Arm;
 using static BO.Enums;
@@ -14,7 +15,7 @@ internal class Cart:ICart
 
     public BO.Cart AddProduct(BO.Cart c, int productID)
     {
-        bool exist = c.ItemList.Exists(e => e.ID == productID);
+        bool exist = c.ItemList!.Exists(e => e!.ID == productID);
         if (exist)
         {
             BO.OrderItem? BOI = c.ItemList.Find(e => e?.ID == productID);
@@ -35,7 +36,7 @@ internal class Cart:ICart
         {
             try
             {
-                DO.Product DP = (DO.Product)dal.Product.Get(productID);
+                DO.Product DP = (DO.Product)dal!.Product.Get(productID)!;
                 if (DP.InStock > 0)
                 {
                    
@@ -67,12 +68,12 @@ internal class Cart:ICart
     }
     public BO.Cart UpdateAmountProduct(BO.Cart cart, int productID, int newAmount) 
     {
-        bool exist = cart.ItemList.Exists(e => e?.ID == productID);
+        bool exist = cart.ItemList!.Exists(e => e?.ID == productID);
         if (!exist)
         {
             throw new BO.ItemNotInCartException("item not in cart") { ItemNotInCart = productID.ToString() };
         }
-        BO.OrderItem BOI = cart.ItemList.Find(e => e.ID == productID);
+        BO.OrderItem BOI = cart.ItemList.Find(e => e!.ID == productID)!;
         if (newAmount < 0)
         {
             throw new BO.NegativeAmountException("negative amount") { NegativeAmount = productID.ToString() };
@@ -89,19 +90,17 @@ internal class Cart:ICart
                 AddProduct(cart, productID);
             }
         }
-        else if (BOI.Amount > newAmount)
+        else if (BOI!.Amount > newAmount)
         {
             int difference = BOI.Amount - newAmount;
             BOI.Amount = newAmount;
             BOI.SumItem -= (difference * BOI.Price);
             cart.TotalSum -= (difference * BOI.Price);
         }
-        //BOI.Amount== amount
-        //amount didnt change
         return cart;
 
     }
-    public void OrderConfirmation(BO.Cart cart, string customerName, string customerEmail, string customerAdress) 
+    public int OrderConfirmation(BO.Cart cart, string customerName, string customerEmail, string customerAdress) 
     {
         #region check correct data
 
@@ -113,17 +112,12 @@ internal class Cart:ICart
         {
             throw new AdressIsNullException("adress is null");
         }
-        // checkEmail(customerEmail);
        var ii =(from i in cart.ItemList
                where i is not null && i.Amount>0
                select i).FirstOrDefault();
-
-
-        //foreach (var item in cart.ItemList)
-        //{
         try
         {
-            DO.Product DP = (DO.Product)dal.Product.Get(ii.ID);
+            DO.Product DP = (DO.Product)dal!.Product.Get(ii!.ID)!;
             if ((from i in cart.ItemList
                  where i is not null && i.Amount < 0
                  select i).FirstOrDefault() is not null)
@@ -138,28 +132,17 @@ internal class Cart:ICart
                 {
                     throw new BO.NotEnoughInStockException("Not enough in stock") { NotEnoughInStock = ii.Amount.ToString() };
                 }
-                //if (item.Amount < 0)
-                //{
-                //    throw new BO.NegativeAmountException("negative amount")
-                //    {
-                //        NegativeAmount = item.Amount.ToString()
-                //    };
-                //}
-                //if (item.Amount > DP.InStock)
-                //{
-                //    throw new BO.NotEnoughInStockException("Not enough in stock") { NotEnoughInStock = item.Amount.ToString() };
-                //}
             }
         }
         catch (Exception)
         {
-            throw new BO.ItemInCartNotExistsAsProductException("item in cart not exists as product") { ItemInCartNotExistsAsProduct = ii.ToString() };
+            throw new BO.ItemInCartNotExistsAsProductException("item in cart not exists as product") { ItemInCartNotExistsAsProduct = ii!.ToString() };
         }
-        
+
 
         #endregion
 
-
+        
         DO.Order o = new DO.Order()
         {
             ID = 0,
@@ -167,36 +150,24 @@ internal class Cart:ICart
             CustomerAdress = customerAdress,
             CustomerEmail = customerEmail,
             OrderDate = DateTime.Now,
-            ShipDate = DateTime.MinValue,
-            DeliveryrDate = DateTime.MinValue,
+            ShipDate = null,
+            DeliveryrDate = null,
         };
+        int orderID = dal.Order.Add(o);
         try
-        {
-
-            int orderID = dal.Order.Add(o);
+        {  
             try
             {
-                //var addOrderItem = cart.ItemList
-                //    .Where(orderToAdd => orderToAdd is not null);
-                //addOrderItem.Select(orderToAdd => dal.OrderItem.Add(new DO.OrderItem()
-                //{
-                //  ID = 0,
-                //  ProductID = orderToAdd.ID,
-                //  OrderID = orderID,
-                //     Price = orderToAdd.Price,
-                //     Amount = orderToAdd.Amount
-                // }));
-                foreach (var item in cart.ItemList)
+                foreach (var item in cart.ItemList!)
                 {
                     dal.OrderItem.Add(new DO.OrderItem()
                     {
                         ID = 0,
-                        ProductID = item.ID,
+                        ProductID = item!.ID,
                         OrderID = orderID,
                         Price = item.Price,
                         Amount = item.Amount
                     });
-
                 }
             }
             catch (DO.DuplicateID)
@@ -212,7 +183,7 @@ internal class Cart:ICart
         {
             foreach (var item in cart.ItemList)
             {
-                DO.Product p = (DO.Product)dal.Product.Get(item.ID);
+                DO.Product p = (DO.Product)dal.Product.Get(item!.ID)!;
                 p.InStock -= item.Amount;
                 dal.Product.Update(p);
             }
@@ -222,6 +193,6 @@ internal class Cart:ICart
 
             throw new BO.FieldToGetProductException("order not exists") { FieldToGetProduct = o.ToString() };
         }
-
+        return orderID;
     }
 }

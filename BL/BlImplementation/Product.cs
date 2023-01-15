@@ -21,11 +21,11 @@ internal class Product : BlApi.IProduct
         IEnumerable<BO.ProductForList?> blProductsList= new List<BO.ProductForList?>();
         if(predict== null)
         {
-            dalProductsList = dal.Product.GetAll();
+            dalProductsList = dal!.Product.GetAll();
         }
         else
         {
-            dalProductsList = dal.Product.GetAll(x=>predict(x));
+            dalProductsList = dal!.Product.GetAll(x=>predict(x));
         }
         //foreach (var productDal in dalProductsList)
         //{
@@ -41,7 +41,7 @@ internal class Product : BlApi.IProduct
         //    }
         //}
         blProductsList = from productDal in dalProductsList
-                        where (productDal != null|| predict(productDal))
+                        where (productDal != null|| predict!(productDal))
                         select new BO.ProductForList()
                         {
                             ID = productDal.Value.ID,
@@ -58,11 +58,11 @@ internal class Product : BlApi.IProduct
             DO.Product dalProduct = new DO.Product();
             try
             {
-                dalProduct = (DO.Product)dal.Product.Get(productID);
+                dalProduct = (DO.Product)dal!.Product.Get(productID)!;
             }
-            catch (DO.EntityNotFound e)
+            catch (DO.EntityNotFound )
             {
-                //throw new Exception(e);
+                throw new Exception();
             }
             BO.Product BLproduct = new BO.Product()
             {
@@ -84,11 +84,11 @@ internal class Product : BlApi.IProduct
             DO.Product productDal = new DO.Product();
             try
             {
-                productDal = (DO.Product)dal.Product.Get(productID);
+                productDal = (DO.Product)dal!.Product.Get(productID)!;
             }
-            catch (DO.EntityNotFound e)
+            catch (DO.EntityNotFound )
             {
-                //throw new Exception(e);
+                throw new Exception();
             }
            
             //int amountInCart = 0;
@@ -141,7 +141,7 @@ internal class Product : BlApi.IProduct
         };
         try
         {
-            dal.Product.Add(dalProduct);
+            dal!.Product.Add(dalProduct);
         }
         catch (DO.DuplicateID e)
         {
@@ -150,7 +150,7 @@ internal class Product : BlApi.IProduct
     }
     public void DeleteProductManager(int productID)
     {
-        IEnumerable<DO.OrderItem?> ordersItemList = dal.OrderItem.GetAll();
+        IEnumerable<DO.OrderItem?> ordersItemList = dal!.OrderItem.GetAll();
         foreach (var orderItem in ordersItemList)
         {
             if(orderItem!=null)
@@ -161,9 +161,9 @@ internal class Product : BlApi.IProduct
         {
             dal.Product.Delete(productID);
         }
-        catch (DO.EntityNotFound e)
+        catch (DO.EntityNotFound )
         {
-            //throw new Exception();
+            throw new Exception();
         }
     }
     public void UpdateProductManager(BO.Product product)
@@ -190,7 +190,7 @@ internal class Product : BlApi.IProduct
 
         try
         {
-            dal.Product.Update(productDal);
+            dal!.Product.Update(productDal);
         }
         catch (DO.EntityNotFound e)
         {
@@ -202,14 +202,14 @@ internal class Product : BlApi.IProduct
         IEnumerable<BO.ProductItem?> blProductsItem = new List<BO.ProductItem?>();
         if (predict == null)
         {
-            dalProductsList = dal.Product.GetAll();
+            dalProductsList = dal!.Product.GetAll();
         }
         else
         {
-            dalProductsList = dal.Product.GetAll(x => predict(x));
+            dalProductsList = dal!.Product.GetAll(x => predict(x));
         }
         blProductsItem = from productDal in dalProductsList
-                         where (productDal != null || predict(productDal))
+                         where (productDal != null || predict!(productDal))
                          select new BO.ProductItem()
                          {
                              ID = productDal.Value.ID,
@@ -228,13 +228,13 @@ internal class Product : BlApi.IProduct
             DO.Product dalProduct = new DO.Product();
             try
             {
-                dalProduct = (DO.Product)dal.Product.Get(productItemID);
+                dalProduct = (DO.Product)dal!.Product.Get(productItemID)!;
             }
-            catch (DO.EntityNotFound e)
+            catch (DO.EntityNotFound )
             {
-                //throw new Exception(e);
+                throw new Exception();
             }
-            var OrderItem = c.ItemList.Where(x => x.ID == dalProduct.ID).FirstOrDefault();
+            var OrderItem = c.ItemList!.Where(x => x!.ID == dalProduct.ID).FirstOrDefault();
             int amount=0;
             if (OrderItem != null)
             {

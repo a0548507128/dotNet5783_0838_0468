@@ -12,5 +12,5 @@ public interface ICart
 {
     public BO.Cart AddProduct(BO.Cart c, int productID);
     public BO.Cart UpdateAmountProduct(BO.Cart c, int productID, int newAmount);
-    public void OrderConfirmation(BO.Cart c, string customerName, string customerEmail, string customerAdress);
+    public int OrderConfirmation(BO.Cart c, string customerName, string customerEmail, string customerAdress);
 }

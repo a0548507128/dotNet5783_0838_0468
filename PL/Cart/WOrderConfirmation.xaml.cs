@@ -57,8 +57,10 @@ namespace PL
         {
             try
             {
-                bl!.Cart.OrderConfirmation(NowCart, CustomerName!, CustomerEmail!, CustomerAdress!);
-                MessageBox.Show("The order is complete!");
+               string i= bl!.Cart.OrderConfirmation(NowCart, CustomerName!, CustomerEmail!, CustomerAdress!).ToString();
+
+                MessageBox.Show("The order is complete!",i);
+               // NowCart = new();
                 Close();
             }
             catch(BO.NameIsNullException ex)

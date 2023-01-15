@@ -137,6 +137,6 @@ public partial class WCart : Window, INotifyPropertyChanged
     {
         
             new WOrderConfirmation(NowCart!).ShowDialog();
-        //NowCart= null;
+          
     }
 }

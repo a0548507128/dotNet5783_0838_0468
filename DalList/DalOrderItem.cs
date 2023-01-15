@@ -16,12 +16,6 @@ internal class DalOrderItem:IOrderItem
     }
     public OrderItem? Get(int IdNum)
     {
-
-        //foreach (OrderItem? o in OrderItems)
-        //{
-        //    if (o?.ID == IdNum)
-        //        return o;
-        //}
         OrderItem? o = OrderItems.FirstOrDefault(OrderItem => OrderItem?.ID == IdNum);
         if (o == null)
             throw new Exception("this order-item does not exist");
@@ -42,11 +36,6 @@ internal class DalOrderItem:IOrderItem
     }
     public OrderItem? getOrderItemByPIDOID(int pid,int oid)
     {
-        //foreach(OrderItem? o in OrderItems)
-        //{
-        //    if(o?.ProductID==pid&&o?.OrderID==o?.OrderID)
-        //        return o;
-        //}
         OrderItem? o = OrderItems.FirstOrDefault(OrderItem => OrderItem?.ProductID == pid&& OrderItem?.OrderID == oid);
         if (o == null)
             throw new Exception("this orderitem doesn't exist");
@@ -56,11 +45,6 @@ internal class DalOrderItem:IOrderItem
     {
         int j = 0;
         List<OrderItem?> allOrderItems = new List<OrderItem?>();
-        //foreach (OrderItem? o in OrderItems)
-        //{
-        //    if (o?.OrderID == oid)
-        //        allOrderItems[j++] = o;
-        //}
         var v = from o in OrderItems
                 where o?.OrderID == oid
                 select allOrderItems[j++] = o;
@@ -71,18 +55,7 @@ internal class DalOrderItem:IOrderItem
     {
         OrderItems.Remove((OrderItems.FirstOrDefault(item => item?.ID == IdNum))
            ?? throw new Exception("this order-item doesn't exist"));
-
-        //for (int i = 0; i < OrderItems.Count; i++)
-        //{
-        //    if (OrderItems[i]?.ID == IdNum)
-        //    {
-        //        OrderItems.RemoveAt(IdNum);
-        //        return;
-        //    }
-        //}
-        //throw new Exception("this order-item doesn't exist");
     }
-
     public int Update(OrderItem upOrderItem)
     {
         for (int i = 0; i < OrderItems.Count; i++)

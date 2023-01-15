@@ -10,7 +10,6 @@ public class DalProduct:IProduct
 {
     public int Add(Product _p)
     {
-        //_p.ID = Config.NumOfProduct;
         try 
         {
             Get(_p.ID);
@@ -23,11 +22,6 @@ public class DalProduct:IProduct
     }
     public Product? Get(int IdNum)
     {
-        //foreach (Product? p in Products)
-        //{
-        //    if (p?.ID == IdNum)
-        //        return p;
-        //}
         Product? p = Products.FirstOrDefault(Product => Product?.ID == IdNum);
         if (p == null)
             throw new EntityNotFound("this product does not exist");
@@ -53,16 +47,6 @@ public class DalProduct:IProduct
     {
         Products.Remove((Products.FirstOrDefault(item => item?.ID == IdNum))
             ?? throw new Exception("this item doesn't exist"));
-
-        //for (int i = 0; i < Products.Count; i++)
-        //{
-        //    if (Products[i]?.ID == IdNum)
-        //    {
-        //        Products.RemoveAt(IdNum);
-        //        return;
-        //    }
-        //}
-        //throw new Exception("this item doesn't exist");
     }
     public int Update(Product upProduct)
     {

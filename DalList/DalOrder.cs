@@ -15,11 +15,6 @@ internal class DalOrder:IOrder
     }
     public Order? Get(int IdNum)
     {
-            //foreach (Order? o in Orders)
-            //{
-            //    if (o?.ID == IdNum)
-            //        return o;
-            //}'
             Order? o = Orders.FirstOrDefault(Order => Order?.ID == IdNum);
             if (o == null)
                 throw new Exception("this order does not exist");
@@ -43,15 +38,6 @@ internal class DalOrder:IOrder
     {
         Orders.Remove((Orders.FirstOrDefault(item => item?.ID == IdNum))
            ?? throw new Exception("this order doesn't exist"));
-        //for (int i = 0; i < Orders.Count; i++)
-        //{
-        //    if (Orders[i]?.ID == IdNum)
-        //    {
-        //        Orders.RemoveAt(IdNum);
-        //        return;
-        //    }
-        //}
-        //throw new Exception("this order doesn't exist");
     }
     public int Update(Order upOrder)
     {
