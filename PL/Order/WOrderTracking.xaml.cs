@@ -60,8 +60,11 @@ public partial class WOrderTracking : Window
     {
         try
         {
-            if (bl != null) OrderTracking1 = bl.Order.OrderTracking(OrderId);
-            IsVisible1 = Visibility.Visible;
+            if (bl != null)
+            {
+                OrderTracking1 = bl.Order.OrderTracking(OrderId);
+                IsVisible1 = Visibility.Visible;
+            }
         }
         catch (OrderNotExistsException ex)
         {

@@ -1,12 +1,14 @@
 ﻿using DalApi;
 using DO;
+using System;
+using System.Xml.Linq;
 using static Dal.DataSource;
 
 namespace Dal;
 
 internal class DalOrder:IOrder
 {
-
+    //XmlOrder xmlOrder = new();
     public int Add(Order _o)
     {
         _o.ID = Config.NumOfOrder;

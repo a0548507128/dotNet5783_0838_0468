@@ -34,13 +34,13 @@ internal class DalOrderItem:IOrderItem
         }
         return _allOrderItems;
     }
-    public OrderItem? getOrderItemByPIDOID(int pid,int oid)
-    {
-        OrderItem? o = OrderItems.FirstOrDefault(OrderItem => OrderItem?.ProductID == pid&& OrderItem?.OrderID == oid);
-        if (o == null)
-            throw new Exception("this orderitem doesn't exist");
-        return o;
-    }
+    //public OrderItem? getOrderItemByPIDOID(int pid,int oid)
+    //{
+    //    OrderItem? o = OrderItems.FirstOrDefault(OrderItem => OrderItem?.ProductID == pid&& OrderItem?.OrderID == oid);
+    //    if (o == null)
+    //        throw new Exception("this orderitem doesn't exist");
+    //    return o;
+    //}
     public List<OrderItem?> getOrderItemByOrder(int oid)
     {
         int j = 0;

@@ -1,4 +1,4 @@
-﻿
+﻿using System.Xml.Linq;
 using DO;
 
 using static DO.Enums;
@@ -7,18 +7,18 @@ namespace Dal;
 
 static internal class DataSource
 {
-    public static void Debug() { }
-    static DataSource()
-    {
-        s_Initialize();
-    }
+    //public static void Debug() { }
+    //static DataSource()
+    //{
+    //    s_Initialize();
+    //}
 
     #region arrays of entities
     static internal readonly Random rand = new Random();
 
-    static internal List<Product?> Products = new List<Product?>();
-    static internal List<Order?> Orders = new List<Order?>();
-    static internal List<OrderItem?> OrderItems = new List<OrderItem?>();
+    static internal List<Product?> Products = new();
+    static internal List<Order?> Orders = new();
+    static internal List<OrderItem?> OrderItems = new();
 
     static private void AddProduct(string Name, double Price, Category Category, int InStock){
         Products.Add(new Product()
@@ -39,7 +39,7 @@ static internal class DataSource
             CustomerAdress = CustomerAdress,
             OrderDate = OrderDate,
             ShipDate = ShipDate,
-            DeliveryrDate = DeliveryrDate
+            DeliveryDate = DeliveryrDate
         });
 
     }

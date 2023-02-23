@@ -151,7 +151,7 @@ internal class Cart:ICart
             CustomerEmail = customerEmail,
             OrderDate = DateTime.Now,
             ShipDate = null,
-            DeliveryrDate = null,
+            DeliveryDate = null,
         };
         int orderID = dal.Order.Add(o);
         try

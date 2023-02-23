@@ -19,7 +19,7 @@ internal class Order : BlApi.IOrder
                         {
                             OrderID = order.ID,
                             CustomerName = order.CustomerName,
-                            Status = CheckStatus(order.OrderDate, order.ShipDate, order.DeliveryrDate),
+                            Status = CheckStatus(order.OrderDate, order.ShipDate, order.DeliveryDate),
                             AmountOfItem = GetAmountItems(order.ID),
                             TotalSum = CheckTotalSum(order.ID)
                         };
@@ -62,7 +62,7 @@ internal class Order : BlApi.IOrder
         }
         try
         {
-            if (CheckStatus(o.OrderDate, o.ShipDate, o.DeliveryrDate) == EStatus.Done)
+            if (CheckStatus(o.OrderDate, o.ShipDate, o.DeliveryDate) == EStatus.Done)
             {
                 o.ShipDate = DateTime.Now;
                 try
@@ -95,9 +95,9 @@ internal class Order : BlApi.IOrder
         }
         try
         {
-            if (CheckStatus(o.OrderDate, o.ShipDate, o.DeliveryrDate) == BO.Enums.EStatus.Sent)
+            if (CheckStatus(o.OrderDate, o.ShipDate, o.DeliveryDate) == BO.Enums.EStatus.Sent)
             {
-                o.DeliveryrDate = DateTime.Now;
+                o.DeliveryDate = DateTime.Now;
                 try
                 {
                     dal.Order.Update(o);
@@ -122,7 +122,7 @@ internal class Order : BlApi.IOrder
         DO.Order? o = new DO.Order();
         try
         {
-            o = (DO.Order)dal!.Order.Get(numOrder)!;
+            o = dal!.Order.Get(numOrder)!;
         }
         catch (Exception)
         {
@@ -131,15 +131,15 @@ internal class Order : BlApi.IOrder
         }
         BO.OrderTracking orderTracking = new BO.OrderTracking();
         orderTracking.ID = numOrder;
-        orderTracking.Status = CheckStatus(o?.OrderDate, o?.ShipDate, o?.DeliveryrDate);
+        orderTracking.Status = CheckStatus(o?.OrderDate, o?.ShipDate, o?.DeliveryDate);
         switch (orderTracking.Status)
         {
             case EStatus.Done:
                 orderTracking.listOfStatus = new();
                 orderTracking.listOfStatus.Add(new()
                 {
-                    Date = (DateTime?)o?.OrderDate,
-                    Status = BO.Enums.EStatus.Done
+                    Date = o?.OrderDate,
+                    Status = EStatus.Done
                 });
                 break;
             case EStatus.Sent:
@@ -173,7 +173,7 @@ internal class Order : BlApi.IOrder
                 orderTracking.listOfStatus = new();
                 orderTracking.listOfStatus.Add(new()
                 {
-                    Date = (DateTime?)o?.DeliveryrDate,
+                    Date = (DateTime?)o?.DeliveryDate,
                     Status = BO.Enums.EStatus.Provided
                 });
                 break;
@@ -190,10 +190,10 @@ internal class Order : BlApi.IOrder
             CustomerName = o.CustomerName,
             CustomerEmail = o.CustomerEmail,
             CustomerAdress = o.CustomerAdress,
-            Status = CheckStatus(o.OrderDate, o.ShipDate, o.DeliveryrDate),
+            Status = CheckStatus(o.OrderDate, o.ShipDate, o.DeliveryDate),
             OrderDate = o.OrderDate,
             ShipDate = o.ShipDate,
-            DeliveryDate = o.DeliveryrDate,
+            DeliveryDate = o.DeliveryDate,
             ItemList = GetAllItemsToOrder(o.ID),
             TotalSum = CheckTotalSum(o.ID)
 
