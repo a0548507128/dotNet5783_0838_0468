@@ -4,6 +4,7 @@ using BO;
 using DalApi;
 using DO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics.Arm;
 using static BO.Enums;
 
@@ -13,6 +14,7 @@ internal class Cart:ICart
 {
     DalApi.IDal? dal = DalApi.Factory.Get();
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Cart AddProduct(BO.Cart c, int productID)
     {
         bool exist = c.ItemList!.Exists(e => e!.ID == productID);
@@ -66,6 +68,8 @@ internal class Cart:ICart
             }
         }
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Cart UpdateAmountProduct(BO.Cart cart, int productID, int newAmount) 
     {
         bool exist = cart.ItemList!.Exists(e => e?.ID == productID);
@@ -100,6 +104,8 @@ internal class Cart:ICart
         return cart;
 
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int OrderConfirmation(BO.Cart cart, string customerName, string customerEmail, string customerAdress) 
     {
         #region check correct data

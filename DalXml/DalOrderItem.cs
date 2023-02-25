@@ -9,11 +9,14 @@ namespace Dal;
 using DalApi;
 using DO;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
 internal class DalOrderItem : IOrderItem
 {
     string OrderItemPath = @"OrderItem.xml";
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(OrderItem IdAdd)
     {
         List<OrderItem?> ListOrderItem = XMLTools.LoadSerializer<OrderItem>(OrderItemPath);
@@ -31,6 +34,7 @@ internal class DalOrderItem : IOrderItem
         return IdAdd.ID;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int IdDelete)
     {
         List<OrderItem?> ListOrderItem = XMLTools.LoadSerializer<OrderItem>(OrderItemPath);
@@ -47,6 +51,7 @@ internal class DalOrderItem : IOrderItem
         XMLTools.SaveSerializer(ListOrderItem, OrderItemPath);
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public OrderItem? Get(int IdGet)
     {
         List<OrderItem?> ListOrderItem = XMLTools.LoadSerializer<OrderItem>(OrderItemPath);
@@ -58,6 +63,7 @@ internal class DalOrderItem : IOrderItem
         //    throw new DO.BadPersonIdException(id, $"bad student id: {id}");
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<DO.OrderItem?> GetAll(Predicate<DO.OrderItem?>? predict = null)
     {
         List<OrderItem?> ListOrderItem = XMLTools.LoadSerializer<OrderItem>(OrderItemPath);
@@ -75,7 +81,7 @@ internal class DalOrderItem : IOrderItem
     //{
     //    throw new NotImplementedException();
     //}
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Update(OrderItem IdUpdate)
     {
         List<OrderItem?> ListOrderItem = XMLTools.LoadSerializer<OrderItem>(OrderItemPath);

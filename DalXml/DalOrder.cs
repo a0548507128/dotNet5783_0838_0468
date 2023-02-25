@@ -13,6 +13,8 @@ namespace Dal;
 internal class DalOrder : IOrder
 {
     string OrderPath = @"Order.xml";
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(Order IdAdd)
     {
         
@@ -38,6 +40,8 @@ internal class DalOrder : IOrder
         XMLTools.SaveElement(OrdersRoot, OrderPath);
         return IdAdd.ID;
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int IdDelete)
     {
         XElement OrderRoot = XMLTools.LoadElement(OrderPath);
@@ -56,6 +60,7 @@ internal class DalOrder : IOrder
             throw new Exception("this order doesn't exist");
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Order? Get(int IdGet)
     {
         XElement OrdersRoot = XMLTools.LoadElement(OrderPath);
@@ -79,7 +84,7 @@ internal class DalOrder : IOrder
         return o;
     }
 
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Order?> GetAll(Predicate<Order?>? predict = null)
     {
         XElement OrdersRoot = XMLTools.LoadElement(OrderPath);
@@ -119,6 +124,7 @@ internal class DalOrder : IOrder
         }
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Update(Order IdUpdate)
     {
         XElement OrdersRoot = XMLTools.LoadElement(OrderPath);

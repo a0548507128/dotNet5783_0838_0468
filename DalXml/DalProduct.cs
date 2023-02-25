@@ -3,6 +3,7 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,9 @@ namespace Dal;
 internal class DalProduct : IProduct
 {
     readonly string ProductPath = @"Product.xml";
-    public int Add(DO.Product IdAdd)
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
+    public int Add(Product IdAdd)
     {
         List<Product?> ListProduct = XMLTools.LoadSerializer<Product>(ProductPath);
         //if (ListProduct.FirstOrDefault(e => e?.Name == IdAdd.Name && e?.Price == IdAdd.Price && e?.Category == _p.Category && e?.InStock == _p.InStock) is not null)
@@ -24,6 +27,7 @@ internal class DalProduct : IProduct
         return IdAdd.ID;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int IdDelete)
     {
         List<DO.Product?> ListProduct = XMLTools.LoadSerializer<Product>(ProductPath);
@@ -47,7 +51,9 @@ internal class DalProduct : IProduct
           //  throw new RequestedItemNotFoundException("product not exists,can not do delete") { RequestedItemNotFound = _num.ToString() };
         }
     }
-    public DO.Product? Get(int IdGet)
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
+    public Product? Get(int IdGet)
     {
         List<Product?> ListProduct = XMLTools.LoadSerializer<Product>(ProductPath);
         //if (ListProduct == null)
@@ -70,7 +76,8 @@ internal class DalProduct : IProduct
         }
     }
 
-    public IEnumerable<DO.Product?> GetAll(Predicate<DO.Product?>? predict = null)
+    [MethodImpl(MethodImplOptions.Synchronized)]
+    public IEnumerable<Product?> GetAll(Predicate<DO.Product?>? predict = null)
     {
 
         List<Product?> ListProduct = XMLTools.LoadSerializer<Product>(ProductPath);
@@ -103,6 +110,7 @@ internal class DalProduct : IProduct
         }
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Update(DO.Product IdUpdate)
     {
         if (IdUpdate.Name == null || IdUpdate.Category == null)

@@ -1,19 +1,22 @@
 ﻿using DalApi;
 using DO;
 using System;
+using System.Runtime.CompilerServices;
 using static Dal.DataSource;
 
 namespace Dal;
 
 internal class DalOrderItem:IOrderItem
 {
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(OrderItem _o)
     {
         _o.ID = Config.NumOfOrderItem;
         OrderItems.Add(_o);
         return _o.ID;
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public OrderItem? Get(int IdNum)
     {
         OrderItem? o = OrderItems.FirstOrDefault(OrderItem => OrderItem?.ID == IdNum);
@@ -21,6 +24,8 @@ internal class DalOrderItem:IOrderItem
             throw new Exception("this order-item does not exist");
         return o;
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<OrderItem?> GetAll(Predicate<OrderItem?>? predict = null)
     { 
         List<OrderItem?> _allOrderItems = new();
@@ -41,6 +46,7 @@ internal class DalOrderItem:IOrderItem
     //        throw new Exception("this orderitem doesn't exist");
     //    return o;
     //}
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public List<OrderItem?> getOrderItemByOrder(int oid)
     {
         int j = 0;
@@ -51,11 +57,15 @@ internal class DalOrderItem:IOrderItem
 
         return allOrderItems;
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int IdNum)
     {
         OrderItems.Remove((OrderItems.FirstOrDefault(item => item?.ID == IdNum))
            ?? throw new Exception("this order-item doesn't exist"));
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Update(OrderItem upOrderItem)
     {
         for (int i = 0; i < OrderItems.Count; i++)

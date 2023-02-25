@@ -21,7 +21,7 @@ public class Order
     public DateTime? DeliveryDate { get; set; }
     public List<OrderItem?>? ItemList { get; set; }
     public double TotalSum { get; set; }
-
+    public Order? SelectingAnOrderForTreatment { get; set; }
     public override string ToString()=>
         $@"
         Order ID={ID}: {CustomerName}, 

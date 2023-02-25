@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using BlApi;
@@ -14,7 +15,9 @@ namespace BlImplementation;
 
 internal class Product : BlApi.IProduct
 {
-    DalApi.IDal? dal = DalApi.Factory.Get();
+    IDal? dal = DalApi.Factory.Get();
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.ProductForList?> GetProductsList(Func<DO.Product?, bool>? predict = null)
     {
         IEnumerable<DO.Product?> dalProductsList;
@@ -51,6 +54,8 @@ internal class Product : BlApi.IProduct
                         };
         return blProductsList;
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Product GetProductDetailsManager(int productID)
     {
         if (productID > 0)
@@ -77,6 +82,8 @@ internal class Product : BlApi.IProduct
         else
             throw new Exception();
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.ProductItem GetProductDetailsCustomer(int productID, BO.Cart c)
     {
         if (productID > 0)
@@ -118,6 +125,8 @@ internal class Product : BlApi.IProduct
         else
             throw new Exception();
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void AddProductManager(BO.Product product)
     {
         if (product?.ID == null || product?.Price == null || product?.InStock == null)
@@ -148,6 +157,8 @@ internal class Product : BlApi.IProduct
             throw new ItemAlreadyExistsException(e.Message);
         }
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void DeleteProductManager(int productID)
     {
         IEnumerable<DO.OrderItem?> ordersItemList = dal!.OrderItem.GetAll();
@@ -166,6 +177,8 @@ internal class Product : BlApi.IProduct
             throw new Exception();
         }
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void UpdateProductManager(BO.Product product)
     {
         if (product?.ID == null || product?.Price == null || product?.InStock == null)
@@ -197,6 +210,8 @@ internal class Product : BlApi.IProduct
             throw new BO.ProductNotExistsException(e.Message);
         }
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.ProductItem?> GetProductsItem(Func<DO.Product?, bool>? predict = null) {
         IEnumerable<DO.Product?> dalProductsList;
         IEnumerable<BO.ProductItem?> blProductsItem = new List<BO.ProductItem?>();
@@ -221,6 +236,8 @@ internal class Product : BlApi.IProduct
                          };
         return blProductsItem;
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.ProductItem GetProductItemDetails(int productItemID, BO.Cart c)
     {
         if (productItemID > 0)

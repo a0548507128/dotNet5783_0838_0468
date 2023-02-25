@@ -6,7 +6,61 @@
     <CustomerEmail>qqq</CustomerEmail>
     <CustomerAdress>www</CustomerAdress>
     <OrderDate>25/02/2023 21:46:49</OrderDate>
-    <ShipDate />
-    <DeliveryDate />
+    <ShipDate>26/02/2023 00:06:10</ShipDate>
+    <DeliveryDate>26/02/2023 00:32:48</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>2</ID>
+    <CustomerName>rrrr</CustomerName>
+    <CustomerEmail>www</CustomerEmail>
+    <CustomerAdress>rrr</CustomerAdress>
+    <OrderDate>26/02/2023 00:34:00</OrderDate>
+    <ShipDate>26/02/2023 00:34:19</ShipDate>
+    <DeliveryDate>26/02/2023 00:34:24</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>3</ID>
+    <CustomerName>עעע</CustomerName>
+    <CustomerEmail>ייי</CustomerEmail>
+    <CustomerAdress>ייי</CustomerAdress>
+    <OrderDate>26/02/2023 00:43:55</OrderDate>
+    <ShipDate>26/02/2023 00:44:03</ShipDate>
+    <DeliveryDate>26/02/2023 00:44:07</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>4</ID>
+    <CustomerName>אטאטא</CustomerName>
+    <CustomerEmail>445</CustomerEmail>
+    <CustomerAdress>קקר</CustomerAdress>
+    <OrderDate>26/02/2023 00:51:16</OrderDate>
+    <ShipDate>26/02/2023 00:51:26</ShipDate>
+    <DeliveryDate>26/02/2023 00:51:29</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>5</ID>
+    <CustomerName>קקא</CustomerName>
+    <CustomerEmail>רקרק</CustomerEmail>
+    <CustomerAdress>קרקר</CustomerAdress>
+    <OrderDate>26/02/2023 00:53:29</OrderDate>
+    <ShipDate>26/02/2023 00:53:37</ShipDate>
+    <DeliveryDate>26/02/2023 00:53:39</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>6</ID>
+    <CustomerName>ממ</CustomerName>
+    <CustomerEmail>יי</CustomerEmail>
+    <CustomerAdress>קרקרק</CustomerAdress>
+    <OrderDate>26/02/2023 00:55:04</OrderDate>
+    <ShipDate>26/02/2023 00:55:14</ShipDate>
+    <DeliveryDate>26/02/2023 00:55:19</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>7</ID>
+    <CustomerName>מממ</CustomerName>
+    <CustomerEmail>י</CustomerEmail>
+    <CustomerAdress>יייי</CustomerAdress>
+    <OrderDate>26/02/2023 00:56:25</OrderDate>
+    <ShipDate>26/02/2023 00:56:33</ShipDate>
+    <DeliveryDate>26/02/2023 00:56:36</DeliveryDate>
   </Order>
 </ArrayOfOrder>

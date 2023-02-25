@@ -3,11 +3,13 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.CompilerServices;
 
 namespace Dal;
 using static DataSource;
 public class DalProduct:IProduct
 {
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(Product _p)
     {
         try 
@@ -20,6 +22,8 @@ public class DalProduct:IProduct
         }
         return _p.ID;
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Product? Get(int IdNum)
     {
         Product? p = Products.FirstOrDefault(Product => Product?.ID == IdNum);
@@ -27,6 +31,8 @@ public class DalProduct:IProduct
             throw new EntityNotFound("this product does not exist");
         return p;
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Product?> GetAll(Predicate<Product?>? predict = null)
     {
         List<Product?> _allProducts = new List<Product?>();
@@ -43,11 +49,15 @@ public class DalProduct:IProduct
         return _allProducts;
 
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int IdNum)
     {
         Products.Remove((Products.FirstOrDefault(item => item?.ID == IdNum))
             ?? throw new Exception("this item doesn't exist"));
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Update(Product upProduct)
     {
         for (int i = 0; i < Products.Count; i++)

@@ -14,5 +14,5 @@ public interface IOrder
     public BO.Order OrderShippingUpdate(int numOrder);//for manager
     public BO.Order OrderDeliveryUpdate(int numOrder);//for manager
     public BO.OrderTracking OrderTracking(int numOrder);//for manager
-
+    int? SelectingAnOrderForTreatment();
 }

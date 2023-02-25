@@ -1,4 +1,5 @@
-﻿using BO;
+﻿using BlImplementation;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,31 +16,36 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 
-namespace PL
+namespace PL;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    BlApi.IBl bl = BlApi.Factory.Get();
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void Admin_Click(object sender, RoutedEventArgs e)
-        {
-            new Wmanager().Show();
-        }
+    private void Admin_Click(object sender, RoutedEventArgs e)
+    {
+        new Wmanager().Show();
+    }
 
-        private void OrderTracking_Click(object sender, RoutedEventArgs e)
-        {
-            new WOrderTracking().Show();
-        }
+    private void OrderTracking_Click(object sender, RoutedEventArgs e)
+    {
+        new WOrderTracking().Show();
+    }
 
-        private void NewOrder_Click(object sender, RoutedEventArgs e)
-        {
-            new WNewOrder().Show();
-        }
+    private void NewOrder_Click(object sender, RoutedEventArgs e)
+    {
+        new WNewOrder().Show();
+    }
+    private void simulation(object sender, RoutedEventArgs e)
+    {
+        Window sim = new wSimulator(bl);
+        sim.Show();
     }
 }

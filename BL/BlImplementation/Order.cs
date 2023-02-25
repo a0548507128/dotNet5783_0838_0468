@@ -1,5 +1,7 @@
 ﻿
+using BO;
 using DalApi;
+using System.Runtime.CompilerServices;
 using static BO.Enums;
 
 namespace BlImplementation;
@@ -8,6 +10,7 @@ internal class Order : BlApi.IOrder
 {
     DalApi.IDal? dal = DalApi.Factory.Get();
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.OrderForList?> GetOrderList(Func<DO.Order?, bool>? predict = null)
     {
         IEnumerable<DO.Order?> orderList = new List<DO.Order?>();
@@ -26,6 +29,8 @@ internal class Order : BlApi.IOrder
 
         return ordersForList;
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order GetOrderDetails(int id)
     {
         if (id <= 0)
@@ -49,6 +54,8 @@ internal class Order : BlApi.IOrder
 
         }
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order OrderShippingUpdate(int numOrder)
     {
         DO.Order o = new DO.Order();
@@ -81,6 +88,8 @@ internal class Order : BlApi.IOrder
         }
         return DOorderToBOorder(o); ;
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order OrderDeliveryUpdate(int numOrder)
     {
         DO.Order o = new DO.Order();
@@ -117,6 +126,8 @@ internal class Order : BlApi.IOrder
         return DOorderToBOorder(o); ;
 
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.OrderTracking OrderTracking(int numOrder)
     {
         DO.Order? o = new DO.Order();
@@ -181,6 +192,37 @@ internal class Order : BlApi.IOrder
         return orderTracking;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
+    public int? SelectingAnOrderForTreatment()
+    {
+        DateTime minDate = DateTime.Now;
+        int? orderId = null;
+        List<OrderForList>? orderList = GetOrderList().ToList()!;
+        orderList?.ForEach(o =>
+
+        {
+            switch (o.Status)
+            {
+                case EStatus.Done:
+                    if (GetOrderDetails(o.OrderID).OrderDate < minDate)
+                    {
+                        orderId = o.OrderID;
+                        minDate = (DateTime)GetOrderDetails(o.OrderID).OrderDate!;
+                    }
+                    break;
+                case EStatus.Sent:
+                    if (GetOrderDetails(o.OrderID).ShipDate < minDate)
+                    {
+                        orderId = o.OrderID;
+                        minDate = (DateTime)GetOrderDetails(o.OrderID).ShipDate!;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+        return orderId;
+    }
     #region ezer
     public BO.Order DOorderToBOorder(DO.Order o)
     {
@@ -261,5 +303,5 @@ internal class Order : BlApi.IOrder
     }
     #endregion
 
-
+    
 }
