@@ -122,7 +122,7 @@ internal class Order : BlApi.IOrder
         DO.Order? o = new DO.Order();
         try
         {
-            o = dal!.Order.Get(numOrder)!;
+            o= dal!.Order.Get(numOrder)!;
         }
         catch (Exception)
         {

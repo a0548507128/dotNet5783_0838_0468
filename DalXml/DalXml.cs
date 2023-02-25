@@ -18,7 +18,7 @@ namespace Dal
         #endregion
 
 
-        public IOrder Order { get; } = new Dal.XmlOrder();
+        public IOrder Order { get; } = new Dal.DalOrder();
 
         public IOrderItem OrderItem { get; } = new Dal.DalOrderItem();
 

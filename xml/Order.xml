@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ID>
-    <ID>2</ID>
-    <CustomerName>hgh</CustomerName>
-    <CustomerEmail>gggj</CustomerEmail>
-    <CustomerAdress>ggj</CustomerAdress>
-    <OrderDate>24/02/2023 00:12:00</OrderDate>
+  <Order>
+    <ID>1</ID>
+    <CustomerName>aaaa</CustomerName>
+    <CustomerEmail>qqq</CustomerEmail>
+    <CustomerAdress>www</CustomerAdress>
+    <OrderDate>25/02/2023 21:46:49</OrderDate>
     <ShipDate />
     <DeliveryDate />
-  </ID>
+  </Order>
 </ArrayOfOrder>

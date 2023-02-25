@@ -1,10 +1,1 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<Product>
-		<ID>100006</ID>
-		<Name>yt</Name>
-		<Price>65</Price>
-		<Category>Rodents</Category>
-		<InStock>64</InStock>
-	</Product>
-</ArrayOfProduct>
+﻿<?xml version="1.0" encoding="utf-8"?><ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Product><ID>100005</ID><Name>Russian blue cat</Name><Price>1200</Price><Category>CatsAndDogs</Category><InStock>40</InStock></Product><Product><ID>100006</ID><Name>gold fish</Name><Price>10</Price><Category>Fish</Category><InStock>29</InStock></Product><Product><ID>100007</ID><Name>fighting fish</Name><Price>17</Price><Category>Fish</Category><InStock>0</InStock></Product><Product><ID>100008</ID><Name>Cockatiel parrot</Name><Price>110</Price><Category>Birds</Category><InStock>11</InStock></Product><Product><ID>100009</ID><Name>Jaco parrot</Name><Price>3000</Price><Category>Birds</Category><InStock>5</InStock></Product><Product><ID>100004</ID><Name>poodle dog</Name><Price>9500</Price><Category>CatsAndDogs</Category><InStock>15</InStock></Product><Product><ID>100003</ID><Name>turtle</Name><Price>15</Price><Category>Reptiles</Category><InStock>19</InStock></Product></ArrayOfProduct>

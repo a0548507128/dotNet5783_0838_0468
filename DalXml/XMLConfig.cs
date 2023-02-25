@@ -14,7 +14,7 @@ public class XMLConfig
     {
         XElement config = XMLTools.LoadElement(@"Config.xml");
         int id = (int)config.Element("_numOfOrder")!;
-        //id++;
+        id++;
         config.Element("_numOfOrder")!.SetValue(id);
         XMLTools.SaveElement(config, @"Config.xml");
         return id;
@@ -23,7 +23,7 @@ public class XMLConfig
     {
         XElement config = XMLTools.LoadElement(@"Config.xml");
         int id = (int)config.Element("_numOfOrderItem")!;
-        //id++;
+        id++;
         config.Element("_numOfOrderItem")!.SetValue(id);
         XMLTools.SaveElement(config, @"Config.xml");
         return id;
@@ -32,7 +32,7 @@ public class XMLConfig
     {
         XElement config = XMLTools.LoadElement(@"Config.xml");
         int id = (int)config.Element("_numOfProduct")!;
-       // id++;
+        id++;
         config.Element("_numOfProduct")!.SetValue(id);
         XMLTools.SaveElement(config, @"Config.xml");
         return id;

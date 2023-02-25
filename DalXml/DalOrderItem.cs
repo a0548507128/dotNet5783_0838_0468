@@ -24,8 +24,8 @@ internal class DalOrderItem : IOrderItem
 
             //if (GetPerson(IdAdd.ID) == null)
             //    throw new DO.BadPersonIdException(IdAdd.ID, "Missing person ID");
-
-            ListOrderItem.Add(IdAdd);
+            IdAdd.ID = XMLConfig.getOrderItemId();
+        ListOrderItem.Add(IdAdd);
 
         XMLTools.SaveSerializer(ListOrderItem, OrderItemPath);
         return IdAdd.ID;
