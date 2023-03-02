@@ -17,16 +17,8 @@ internal class DalOrder : IOrder
     [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(Order IdAdd)
     {
-        
         XElement? OrdersRoot = XMLTools.LoadElement(OrderPath);
         IdAdd.ID = XMLConfig.getOrderId();
-        //XElement? ord = (from o in OrdersRoot.Elements()
-        //                 where int.Parse(o.Element("ID")!.Value) == IdAdd.ID
-        //                 select o).FirstOrDefault();
-
-        //if (ord != null)
-        //    throw new DO.BadPersonIdException(IdAdd.ID, "Duplicate person ID");
-
         XElement? OrderElement = new("Order", 
                               new XElement("ID", IdAdd.ID.ToString()),
                               new XElement("CustomerName", IdAdd.CustomerName),
@@ -79,7 +71,7 @@ internal class DalOrder : IOrder
                     }
                 ).FirstOrDefault();
 
-        if (o == null)
+        if (o?.ID == 0)
             throw new Exception("this order does not exist");
         return o;
     }

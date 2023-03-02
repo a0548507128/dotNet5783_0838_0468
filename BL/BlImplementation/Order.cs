@@ -137,7 +137,7 @@ internal class Order : BlApi.IOrder
         }
         catch (Exception)
         {
-            throw new BO.OrderNotExistsException("order not exists") { OrderNotExists = o.ToString()! };
+            throw new OrderNotExistsException("order not exists") { OrderNotExists = o.ToString()! };
 
         }
         BO.OrderTracking orderTracking = new BO.OrderTracking();
@@ -223,6 +223,7 @@ internal class Order : BlApi.IOrder
         });
         return orderId;
     }
+
     #region ezer
     public BO.Order DOorderToBOorder(DO.Order o)
     {

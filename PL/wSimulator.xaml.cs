@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using static Simulator.Simulator;
 using System.Windows.Threading;
 
@@ -30,7 +20,7 @@ namespace PL
         string? nextStatus;
         string? previousStatus;
         BackgroundWorker? worker;
-        Tuple<BO.Order, int, string, string>? dcT;
+        Tuple<BO.Order, int, string, string>? dataContextT;
         //====== disable the option of closing the window =======
         private const int GWL_STYLE = -16;
         private const int WS_SYSMENU = 0x80000;
@@ -47,8 +37,8 @@ namespace PL
         DoubleAnimation? doubleanimation;
         ProgressBar? ProgressBar;
         //=======countdown timer variables
-        DispatcherTimer? _timer;
-        TimeSpan _time;
+        DispatcherTimer? timer;
+        TimeSpan time;
         //=======
         public wSimulator(BlApi.IBl Bl)
         {
@@ -60,16 +50,16 @@ namespace PL
 
         void countDownTimer(int sec)
         {
-            _time = TimeSpan.FromSeconds(sec);
+            time = TimeSpan.FromSeconds(sec);
 
-            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                tbTime.Text = _time.ToString("c");
-                if (_time == TimeSpan.Zero) _timer?.Stop();
-                _time = _time.Add(TimeSpan.FromSeconds(-1));
+                tbTime.Text = time.ToString("c");
+                if (time == TimeSpan.Zero) timer?.Stop();
+                time = time.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
 
-            _timer.Start();
+            timer.Start();
         }
         void ProgressBarStart(int sec)
         {
@@ -95,16 +85,15 @@ namespace PL
             worker.ProgressChanged += TimerProgressChanged!;
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
-            //Simulator.Simulator.StartSimulator();
             stopWatch.Restart();
             isTimerRun = true;
             worker.RunWorkerAsync();
         }
         void TimerDoWork(object sender, DoWorkEventArgs e)
         {
-            Simulator.Simulator.ProgressChange += changeOrder!;
-            Simulator.Simulator.StopSimulator += Stop!;
-            Simulator.Simulator.run();
+            ProgressChange += changeOrder!;
+            StopSimulator += Stop!;
+            run();
             while (isTimerRun)
             {
                 worker?.ReportProgress(1);
@@ -117,18 +106,17 @@ namespace PL
                 return;
 
             Details? details = e as Details;
-            this.previousStatus = (details?.order.ShipDate == null) ? BO.Enums.EStatus.Done.ToString() : BO.Enums.EStatus.Sent.ToString();
-            this.nextStatus = (details?.order.ShipDate == null) ? BO.Enums.EStatus.Sent.ToString() : BO.Enums.EStatus.Provided.ToString();
-            dcT = new Tuple<BO.Order, int, string, string>(details!.order, details.seconds / 1000, previousStatus, nextStatus);
+            previousStatus = (details?.order.ShipDate == null) ? BO.Enums.EStatus.Done.ToString() : BO.Enums.EStatus.Sent.ToString();
+            nextStatus = (details?.order.ShipDate == null) ? BO.Enums.EStatus.Sent.ToString() : BO.Enums.EStatus.Provided.ToString();
+            dataContextT = new Tuple<BO.Order, int, string, string>(details!.order, details.seconds / 1000, previousStatus, nextStatus);
             if (!CheckAccess())
             {
                 Dispatcher.BeginInvoke(changeOrder, sender, e);
             }
             else
             {
-                DataContext = dcT;
+                DataContext = dataContextT;
                 countDownTimer(details.seconds / 1000);
-
                 ProgressBarStart(details.seconds / 1000);
             }
         }
@@ -157,14 +145,9 @@ namespace PL
         }
         public void Stop(object sender, EventArgs e)
         {
-            Simulator.Simulator.ProgressChange -= changeOrder!;
-            Simulator.Simulator.StopSimulator -= Stop!;
-            /*   while (!CheckAccess())
-             {
-                 Dispatcher.BeginInvoke(Stop, sender, e);
-             }
-             MessageBox.Show("successfully finish updating all orders");
-             this.Close();*/
+            ProgressChange -= changeOrder!;
+            StopSimulator -= Stop!;
+            
             if (!CheckAccess())
             {
                 Dispatcher.BeginInvoke(Stop, sender, e);

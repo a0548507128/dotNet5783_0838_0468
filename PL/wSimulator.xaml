@@ -3,13 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="wSimulator" Height="450" Width="800">
     <Grid>
-        <Button Content="Stop Simulation"  Height="35" Margin="641,0,0,434" VerticalAlignment="Bottom" Width="135" Click="StopSimulatorBTN_Click"/>
+        <Button Content="Stop Simulation"  Height="44" Margin="22,0,643,300" VerticalAlignment="Bottom" Width="135" Click="StopSimulatorBTN_Click" RenderTransformOrigin="0.485,0.638"/>
         <TextBlock x:Name="SimulatorTXTB" Text="00:00:00" HorizontalAlignment="Left" Height="80" Margin="22,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230" FontSize="48" FontFamily="adam" FontWeight="Bold"/>
-        <Grid Margin="0,55,0,34">
+        <Grid Margin="0,50,0,39">
             <Grid.RowDefinitions>
                 <RowDefinition Height="46*"/>
                 <RowDefinition Height="112*"/>

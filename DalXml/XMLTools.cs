@@ -30,7 +30,7 @@ public static class XMLTools
         }
         catch (Exception ex)
         {
-            //throw new DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {filePath}", ex);
+            throw new Exception($"fail to create xml file: {path}", ex);
         }
     }
 
@@ -46,14 +46,12 @@ public static class XMLTools
                 list = (List<T?>?)x.Deserialize(file)!;
                 file.Close();
                 return list;
-                //return (List<T?>)x.Deserialize(file)!;
             }
             else
                 return new List<T?>();
         }
         catch (Exception ex)
         {
-            //throw new DO.XMLFileLoadCreateException(path, $"fail to load xml file: {path}", ex);
             throw new Exception($"fail to load xml file: {path}", ex);
         }
     }
@@ -68,7 +66,7 @@ public static class XMLTools
         }
         catch (Exception ex)
         {
-          //  throw new DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {filePath}", ex);
+            throw new Exception($"fail to create xml file: {filePath}", ex);
         }
     }
 
@@ -89,7 +87,6 @@ public static class XMLTools
         }
         catch (Exception ex)
         {
-            //throw new DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {filePath}", ex);
             throw new Exception(filePath, ex);
         }
     }

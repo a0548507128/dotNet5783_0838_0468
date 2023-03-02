@@ -2,65 +2,110 @@
 <ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Order>
     <ID>1</ID>
-    <CustomerName>aaaa</CustomerName>
-    <CustomerEmail>qqq</CustomerEmail>
-    <CustomerAdress>www</CustomerAdress>
-    <OrderDate>25/02/2023 21:46:49</OrderDate>
-    <ShipDate>26/02/2023 00:06:10</ShipDate>
-    <DeliveryDate>26/02/2023 00:32:48</DeliveryDate>
+    <CustomerName>shira</CustomerName>
+    <CustomerEmail>shira@gmail.com </CustomerEmail>
+    <CustomerAdress>nachal shacham</CustomerAdress>
+    <OrderDate>26/02/2023 14:53:54</OrderDate>
+    <ShipDate>26/02/2023 14:56:22</ShipDate>
+    <DeliveryDate></DeliveryDate>
   </Order>
   <Order>
     <ID>2</ID>
-    <CustomerName>rrrr</CustomerName>
-    <CustomerEmail>www</CustomerEmail>
-    <CustomerAdress>rrr</CustomerAdress>
-    <OrderDate>26/02/2023 00:34:00</OrderDate>
-    <ShipDate>26/02/2023 00:34:19</ShipDate>
-    <DeliveryDate>26/02/2023 00:34:24</DeliveryDate>
+    <CustomerName>avigail</CustomerName>
+    <CustomerEmail>avigail@gmail.com</CustomerEmail>
+    <CustomerAdress>kordovero</CustomerAdress>
+    <OrderDate>26/02/2023 14:54:54</OrderDate>
+    <ShipDate />
+    <DeliveryDate />
   </Order>
   <Order>
     <ID>3</ID>
-    <CustomerName>עעע</CustomerName>
-    <CustomerEmail>ייי</CustomerEmail>
-    <CustomerAdress>ייי</CustomerAdress>
-    <OrderDate>26/02/2023 00:43:55</OrderDate>
-    <ShipDate>26/02/2023 00:44:03</ShipDate>
-    <DeliveryDate>26/02/2023 00:44:07</DeliveryDate>
+    <CustomerName>yossi</CustomerName>
+    <CustomerEmail>yossi@gmail.com</CustomerEmail>
+    <CustomerAdress>buksboim</CustomerAdress>
+    <OrderDate>26/02/2023 14:56:07</OrderDate>
+    <ShipDate />
+    <DeliveryDate />
   </Order>
   <Order>
     <ID>4</ID>
-    <CustomerName>אטאטא</CustomerName>
-    <CustomerEmail>445</CustomerEmail>
-    <CustomerAdress>קקר</CustomerAdress>
-    <OrderDate>26/02/2023 00:51:16</OrderDate>
-    <ShipDate>26/02/2023 00:51:26</ShipDate>
-    <DeliveryDate>26/02/2023 00:51:29</DeliveryDate>
+    <CustomerName>chaim</CustomerName>
+    <CustomerEmail>chaim@gmail.com </CustomerEmail>
+    <CustomerAdress>jerusalem</CustomerAdress>
+    <OrderDate>26/02/2023 15:14:53</OrderDate>
+    <ShipDate />
+    <DeliveryDate />
   </Order>
   <Order>
     <ID>5</ID>
-    <CustomerName>קקא</CustomerName>
-    <CustomerEmail>רקרק</CustomerEmail>
-    <CustomerAdress>קרקר</CustomerAdress>
-    <OrderDate>26/02/2023 00:53:29</OrderDate>
-    <ShipDate>26/02/2023 00:53:37</ShipDate>
-    <DeliveryDate>26/02/2023 00:53:39</DeliveryDate>
+    <CustomerName>asher cohen</CustomerName>
+    <CustomerEmail>asher45@gmail.com</CustomerEmail>
+    <CustomerAdress>ben kisma</CustomerAdress>
+    <OrderDate>26/02/2023 15:16:01</OrderDate>
+    <ShipDate />
+    <DeliveryDate />
   </Order>
   <Order>
     <ID>6</ID>
-    <CustomerName>ממ</CustomerName>
-    <CustomerEmail>יי</CustomerEmail>
-    <CustomerAdress>קרקרק</CustomerAdress>
-    <OrderDate>26/02/2023 00:55:04</OrderDate>
-    <ShipDate>26/02/2023 00:55:14</ShipDate>
-    <DeliveryDate>26/02/2023 00:55:19</DeliveryDate>
+    <CustomerName>sara miryam tzabach</CustomerName>
+    <CustomerEmail>sara@gmail.com </CustomerEmail>
+    <CustomerAdress>nachal ayalon</CustomerAdress>
+    <OrderDate>26/02/2023 15:17:41</OrderDate>
+    <ShipDate />
+    <DeliveryDate />
   </Order>
   <Order>
     <ID>7</ID>
-    <CustomerName>מממ</CustomerName>
-    <CustomerEmail>י</CustomerEmail>
-    <CustomerAdress>יייי</CustomerAdress>
-    <OrderDate>26/02/2023 00:56:25</OrderDate>
-    <ShipDate>26/02/2023 00:56:33</ShipDate>
-    <DeliveryDate>26/02/2023 00:56:36</DeliveryDate>
+    <CustomerName>chani levi</CustomerName>
+    <CustomerEmail>chani@gmail.com</CustomerEmail>
+    <CustomerAdress>buksboim 12</CustomerAdress>
+    <OrderDate>26/02/2023 15:19:02</OrderDate>
+    <ShipDate>26/02/2023 15:23:43</ShipDate>
+    <DeliveryDate>26/02/2023 15:23:44</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>8</ID>
+    <CustomerName>ayala rov</CustomerName>
+    <CustomerEmail>rovayala@gmail.com </CustomerEmail>
+    <CustomerAdress>givat shaul</CustomerAdress>
+    <OrderDate>26/02/2023 15:20:43</OrderDate>
+    <ShipDate />
+    <DeliveryDate />
+  </Order>
+  <Order>
+    <ID>9</ID>
+    <CustomerName>yossef biton</CustomerName>
+    <CustomerEmail>yossef@gmail.com</CustomerEmail>
+    <CustomerAdress>uria 7\6</CustomerAdress>
+    <OrderDate>26/02/2023 15:21:59</OrderDate>
+    <ShipDate />
+    <DeliveryDate />
+  </Order>
+  <Order>
+    <ID>10</ID>
+    <CustomerName>naama kain</CustomerName>
+    <CustomerEmail>naama3@gmail.com</CustomerEmail>
+    <CustomerAdress>har nof</CustomerAdress>
+    <OrderDate>26/02/2023 15:23:27</OrderDate>
+    <ShipDate />
+    <DeliveryDate />
+  </Order>
+  <Order>
+    <ID>7</ID>
+    <CustomerName>wew</CustomerName>
+    <CustomerEmail>ss</CustomerEmail>
+    <CustomerAdress>fdfd</CustomerAdress>
+    <OrderDate>26/02/2023 17:39:03</OrderDate>
+    <ShipDate />
+    <DeliveryDate />
+  </Order>
+  <Order>
+    <ID>8</ID>
+    <CustomerName>rtrt</CustomerName>
+    <CustomerEmail>ghg</CustomerEmail>
+    <CustomerAdress>hh</CustomerAdress>
+    <OrderDate>26/02/2023 17:40:20</OrderDate>
+    <ShipDate />
+    <DeliveryDate />
   </Order>
 </ArrayOfOrder>
